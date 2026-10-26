@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Troy Brennan Lunn — Research Engineer, Polaris · Portfolio</title>
+
+  <!-- Official Google Sans Flex font used on deepmind.google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght,ROND@6..144,1..1000,0..100&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ==========================================================================
+       MODERN WEB GUIDANCE: Perceptual Oklab Interpolation + @property Animation
+       ========================================================================== */
+    :root {
+      --in-oklab: ;
+      --grad-angle: 135deg;
+      --bright-blue: #4C9AFF;       /* Screenshot 3 ("Hi, Camille") luminous blue */
+      --button-blue: #0084FF;       /* Screenshot 4 electric blue action button */
+      --text-white: #FFFFFF;        /* Screenshot 5 crisp white headline text */
+      --text-body: rgba(244, 247, 252, 0.92);
+      --text-muted: rgba(206, 218, 235, 0.76);
+    }
+    @supports (background: linear-gradient(in oklab, white, black)) {
+      :root {
+        --in-oklab: in oklab;
+      }
+    }
+    @property --grad-angle {
+      syntax: "<angle>";
+      inherits: true;
+      initial-value: 135deg;
+    }
+
+    @keyframes liquidGlassFlow {
+      0%   { --grad-angle: 0deg; }
+      100% { --grad-angle: 360deg; }
+    }
+
+    @keyframes ambientCardDrift {
+      0%   { background-position: 0% 0%, 15% 25%, 88% 82%, 50% 50%, 0% 0%; }
+      50%  { background-position: 0% 0%, 32% 48%, 68% 62%, 50% 50%, 0% 0%; }
+      100% { background-position: 0% 0%, 15% 25%, 88% 82%, 50% 50%, 0% 0%; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+
+    /* ==========================================================================
+       TYPOGRAPHY: Google Sans Flex (Soft, Rounded, Full-Bodied — Never Thin/Sharp)
+       ========================================================================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #01081e;
+      /* Exact CSS fallback matching deepmind.google "argon-dark" 4-corner + 7-lobe field */
+      background-image:
+        radial-gradient(ellipse 42% 45% at 94.5% 14.4%, rgba(116, 207, 255, 0.72) 0%, rgba(116, 207, 255, 0) 70%),
+        radial-gradient(ellipse 35% 82% at 108% 88%, rgba(84, 209, 255, 0.85) 0%, rgba(84, 209, 255, 0) 72%),
+        radial-gradient(ellipse 55% 72% at 85.3% 69.3%, rgba(0, 66, 252, 0.42) 0%, rgba(0, 66, 252, 0) 72%),
+        radial-gradient(ellipse 42% 62% at 21% 82.5%, rgba(1, 2, 10, 0.88) 0%, rgba(1, 2, 10, 0) 75%),
+        radial-gradient(ellipse 50% 42% at 65.8% 94.1%, rgba(0, 8, 32, 0.78) 0%, rgba(0, 8, 32, 0) 75%),
+        linear-gradient(125deg var(--in-oklab), #2045a1 0%, #0a213d 32%, #01081e 56%, #002188 78%, #81dafc 100%);
+      background-attachment: fixed;
+      color: var(--text-white);
+      font-family: "Google Sans Flex", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 17px;
+      font-weight: 460;
+      font-variation-settings: "opsz" 20, "wght" 460, "ROND" 55;
+      line-height: 1.62;
+      letter-spacing: -0.003em;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Full-bleed WebGL2 Canvas running the exact deepmind.google "argon-dark" shader */
+    #gdm-webgl-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      display: block;
+    }
+
+    /* ==========================================================================
+       HEADER BAR: Exact deepmind.google `.deepai-header` Design
+       Full-width, borderless, progressive 5-layer backdrop blur, clean lockup +
+       sleek translucent pill buttons on the right.
+       ========================================================================== */
+    .gdm-header {
+      position: relative;
+      z-index: 20;
+      width: 100%;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(20px, 2.5vw, 40px);
+      isolation: isolate;
+    }
+
+    .gdm-header__blur {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 96px;
+      z-index: -1;
+      pointer-events: none;
+      background: linear-gradient(
+        to bottom,
+        rgba(1, 8, 30, 0.58) 0%,
+        rgba(1, 8, 30, 0.28) 55%,
+        transparent 100%
+      );
+    }
+
+    .gdm-header__blur-layer {
+      position: absolute;
+      inset: 0;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      mask-image: linear-gradient(to bottom, #000 0%, #000 45%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 45%, transparent 100%);
+    }
+
+    .gdm-header__left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-shrink: 0;
+    }
+
+    .gdm-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: #FFFFFF;
+      font-size: 1.15rem;
+      font-weight: 520;
+      font-variation-settings: "opsz" 32, "wght" 520, "ROND" 60;
+      letter-spacing: -0.012em;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .gdm-brand__chevron {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      background: rgba(255, 255, 255, 0.05);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.78);
+      flex-shrink: 0;
+    }
+
+    .gdm-nav {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      flex-wrap: nowrap;
+    }
+
+    .gdm-nav__link {
+      color: rgba(255, 255, 255, 0.90);
+      text-decoration: none;
+      font-size: 0.90rem;
+      font-weight: 480;
+      font-variation-settings: "opsz" 18, "wght" 480, "ROND" 50;
+      padding: 6px 11px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      white-space: nowrap;
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    .gdm-nav__link:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.22);
+      color: #FFFFFF;
+    }
+
+    .gdm-header__right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* Translucent pill button matching "Build with Gemini" / "Learn more" on deepmind.google */
+    .gdm-pill-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 500;
+      font-variation-settings: "opsz" 18, "wght" 500, "ROND" 55;
+      color: #FFFFFF;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+      text-decoration: none;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .gdm-pill-btn:hover {
+      background: rgba(255, 255, 255, 0.14);
+      border-color: rgba(255, 255, 255, 0.42);
+    }
+
+    /* Bright Blue action button from Screenshot 4 */
+    .gdm-pill-btn--primary {
+      background: var(--button-blue);
+      border: 1px solid rgba(255, 255, 255, 0.38);
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.42), 0 8px 24px rgba(0, 132, 255, 0.38);
+      color: #FFFFFF;
+    }
+
+    .gdm-pill-btn--primary:hover {
+      background: #1A92FF;
+      border-color: rgba(255, 255, 255, 0.58);
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.55), 0 10px 28px rgba(0, 132, 255, 0.52);
+    }
+
+    /* ==========================================================================
+       HERO SECTION: Direct Homage to deepmind.google Cover Typography (Screenshot 1)
+       ========================================================================== */
+    .gdm-hero {
+      position: relative;
+      z-index: 10;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 64px 24px 52px;
+      text-align: center;
+    }
+
+    .gdm-hero__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 18px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.20);
+      backdrop-filter: blur(14px);
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.92);
+      margin-bottom: 24px;
+    }
+
+    .gdm-hero__title {
+      font-family: "Google Sans Flex", sans-serif;
+      font-size: clamp(2.65rem, 5.2vw, 4.4rem);
+      font-weight: 500;
+      font-variation-settings: "opsz" 72, "wght" 500, "ROND" 65;
+      line-height: 1.06;
+      letter-spacing: -0.018em;
+      color: #FFFFFF;
+      text-wrap: balance;
+      margin-bottom: 22px;
+    }
+
+    .gdm-hero__subtitle {
+      max-width: 780px;
+      margin: 0 auto 32px;
+      font-size: clamp(1.08rem, 1.45vw, 1.25rem);
+      font-weight: 450;
+      font-variation-settings: "opsz" 24, "wght" 450, "ROND" 50;
+      line-height: 1.56;
+      color: rgba(240, 246, 255, 0.88);
+      text-wrap: pretty;
+    }
+
+    .gdm-hero__actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    /* ==========================================================================
+       LIQUID GLASS TEXT BOXES + SCREENSHOT 2 SLOWLY DYNAMIC DARK AMBIENT SURFACE
+       ========================================================================== */
+    .liquid-glass-card {
+      position: relative;
+      background:
+        /* Top specular glass reflection sheen */
+        linear-gradient(180deg, rgba(255, 255, 255, 0.085) 0%, rgba(255, 255, 255, 0.0) 36%) padding-box,
+        /* Screenshot 2 left emerald-teal glow */
+        radial-gradient(65% 70% at 16% 32%, rgba(18, 114, 102, 0.44) 0%, rgba(14, 58, 54, 0.15) 52%, rgba(10, 14, 18, 0) 82%) padding-box,
+        /* Screenshot 2 bottom-right warm amber-russet glow */
+        radial-gradient(65% 70% at 86% 84%, rgba(138, 48, 25, 0.40) 0%, rgba(72, 24, 14, 0.15) 52%, rgba(10, 14, 18, 0) 82%) padding-box,
+        /* Deep obsidian charcoal base (Screenshot 2) */
+        linear-gradient(145deg var(--in-oklab), rgba(9, 12, 17, 0.90) 0%, rgba(11, 18, 22, 0.88) 50%, rgba(16, 12, 15, 0.91) 100%) padding-box,
+        /* Liquid Glass Refractive Gemini-Spectrum Border (border-box) */
+        linear-gradient(
+          var(--grad-angle, 135deg) var(--in-oklab),
+          rgba(255, 255, 255, 0.94) 0%,
+          rgba(76, 154, 255, 0.88) 18%,
+          rgba(68, 214, 152, 0.80) 36%,
+          rgba(235, 248, 255, 0.88) 50%,
+          rgba(251, 191, 36, 0.82) 68%,
+          rgba(244, 108, 108, 0.84) 84%,
+          rgba(255, 255, 255, 0.94) 100%
+        ) border-box;
+      background-size: 100% 100%, 165% 165%, 165% 165%, 100% 100%, 100% 100%;
+      border: 2px solid transparent;
+      border-radius: 26px;
+      backdrop-filter: blur(32px) saturate(175%);
+      -webkit-backdrop-filter: blur(32px) saturate(175%);
+      box-shadow:
+        inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.48),
+        inset 0 -1px 1.5px 0 rgba(76, 154, 255, 0.24),
+        inset 0 0 34px rgba(255, 255, 255, 0.03),
+        0 22px 48px -12px rgba(1, 5, 18, 0.76);
+      animation: liquidGlassFlow 14s linear infinite, ambientCardDrift 20s ease-in-out infinite;
+    }
+
+    /* Subtle phase offsets so cards breathe organically */
+    .liquid-phase-1 { --grad-angle: 45deg;  animation-duration: 17s, 24s; }
+    .liquid-phase-2 { --grad-angle: 115deg; animation-duration: 19s, 21s; }
+    .liquid-phase-3 { --grad-angle: 195deg; animation-duration: 15s, 26s; }
+    .liquid-phase-4 { --grad-angle: 275deg; animation-duration: 18s, 23s; }
+
+    /* ==========================================================================
+       LAYOUT & TYPOGRAPHY SYSTEM (Screenshots 3, 4, 5)
+       ========================================================================== */
+    .main-container {
+      position: relative;
+      z-index: 10;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px 88px;
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+
+    .section-header {
+      margin-bottom: 24px;
+    }
+
+    .section-eyebrow {
+      font-size: 0.92rem;
+      font-weight: 520;
+      color: var(--bright-blue);
+      letter-spacing: 0.01em;
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: clamp(1.75rem, 2.8vw, 2.35rem);
+      font-weight: 520;
+      font-variation-settings: "opsz" 48, "wght" 520, "ROND" 60;
+      line-height: 1.14;
+      letter-spacing: -0.014em;
+      color: var(--text-white);
+      margin-bottom: 10px;
+    }
+
+    .section-desc {
+      font-size: 1.06rem;
+      font-weight: 450;
+      color: var(--text-body);
+      max-width: 820px;
+      line-height: 1.6;
+    }
+
+    .card-title {
+      font-size: 1.38rem;
+      font-weight: 520;
+      font-variation-settings: "opsz" 32, "wght" 520, "ROND" 55;
+      line-height: 1.26;
+      letter-spacing: -0.01em;
+      color: var(--text-white);
+      margin-bottom: 12px;
+    }
+
+    .text-bright-blue {
+      color: var(--bright-blue);
+    }
+
+    /* Optional Toggle Mode: Primary Headings in Screenshot-3 Bright Blue */
+    body.mode-blue-headings .section-title,
+    body.mode-blue-headings .card-title,
+    body.mode-blue-headings .gdm-hero__title {
+      color: var(--bright-blue);
+    }
+
+    /* Grid Helpers */
+    .grid-12 {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 22px;
+    }
+    .col-12 { grid-column: span 12; }
+    .col-8 { grid-column: span 8; }
+    .col-7 { grid-column: span 7; }
+    .col-6 { grid-column: span 6; }
+    .col-5 { grid-column: span 5; }
+    .col-4 { grid-column: span 4; }
+    .col-3 { grid-column: span 3; }
+    .col-2 { grid-column: span 2; }
+
+    @media (max-width: 960px) {
+      .col-12, .col-8, .col-7, .col-6, .col-5, .col-4, .col-3 { grid-column: span 12; }
+      .col-2 { grid-column: span 6; }
+      .gdm-nav { display: none; }
+    }
+
+    /* Inline code pills */
+    code.inline-code {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.88em;
+      font-weight: 500;
+      padding: 2px 8px;
+      border-radius: 7px;
+      background: rgba(76, 154, 255, 0.14);
+      border: 1px solid rgba(76, 154, 255, 0.30);
+      color: #8CC4FF;
+    }
+
+    /* Feature Lists inside Cards */
+    .feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .feature-list li {
+      position: relative;
+      padding-left: 20px;
+      font-size: 1rem;
+      line-height: 1.58;
+      color: var(--text-body);
+    }
+
+    .feature-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--bright-blue);
+      box-shadow: 0 0 8px rgba(76, 154, 255, 0.7);
+    }
+
+    /* Simulator Gate Rows */
+    .gate-card {
+      padding: 18px 22px;
+      border-radius: 20px;
+    }
+
+    .badge-pass {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 550;
+      background: var(--button-blue);
+      color: #FFFFFF;
+    }
+
+    .badge-fail {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 550;
+      background: rgba(220, 38, 38, 0.85);
+      border: 1px solid rgba(252, 165, 165, 0.45);
+      color: #FFFFFF;
+    }
+
+    pre.code-window {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.86rem;
+      line-height: 1.65;
+      padding: 20px;
+      border-radius: 18px;
+      background: rgba(4, 7, 14, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: #E2E8F0;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       EXACT DEEPMIND.GOOGLE WEBGL2 BACKGROUND CANVAS ("argon-dark" preset, NO Gemini Star)
+       ========================================================================== -->
+  <canvas id="gdm-webgl-canvas" aria-hidden="true"></canvas>
+
+  <!-- ==========================================================================
+       DEEPMIND.GOOGLE STYLE BORDERLESS TOP HEADER BAR
+       ========================================================================== -->
+  <header class="gdm-header">
+    <div class="gdm-header__blur" aria-hidden="true">
+      <div class="gdm-header__blur-layer"></div>
+    </div>
+
+    <div class="gdm-header__left">
+      <a href="#" class="gdm-brand">
+        <span>Troy Brennan Lunn</span>
+        <span class="gdm-brand__chevron" aria-hidden="true">⌄</span>
+      </a>
+      <nav class="gdm-nav" aria-label="Portfolio sections">
+        <a href="#executive-overview" class="gdm-nav__link">Overview</a>
+        <a href="#eval-simulator" class="gdm-nav__link">Live Grader</a>
+        <a href="#swarm-architecture" class="gdm-nav__link">Swarm &amp; Auditors</a>
+        <a href="#portfolio-pillars" class="gdm-nav__link">6 Pillars</a>
+        <a href="#failure-taxonomy" class="gdm-nav__link">Physical Intuition</a>
+      </nav>
+    </div>
+
+    <div class="gdm-header__right">
+      <button id="toggleTextModeBtn" onclick="toggleHeadingColorMode()" class="gdm-pill-btn" type="button">
+        Text: White + Bright Blue
+      </button>
+      <a href="https://github.com/Printerpilot" target="_blank" rel="noopener" class="gdm-pill-btn">
+        github.com/Printerpilot
+      </a>
+      <a href="#eval-simulator" class="gdm-pill-btn gdm-pill-btn--primary">
+        Run Grader Simulator
+      </a>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       HERO SECTION: Modeled on deepmind.google Landing Cover
+       ========================================================================== -->
+  <section class="gdm-hero">
+    <div class="gdm-hero__eyebrow">
+      <span>Research Engineer, Polaris · Google DeepMind</span>
+      <span style="opacity: 0.45;">|</span>
+      <span class="text-bright-blue">Job ID: 114077679900074694</span>
+    </div>
+    <h1 class="gdm-hero__title">
+      Engineering frontier evaluations and deterministic verifiers
+    </h1>
+    <p class="gdm-hero__subtitle">
+      198,000+ lines of production code shipped across multi-team engineering swarms with 1:1 Auditor Agents, hybrid diffusion/autoregressive architectures, a 111-tool Fusion 360 MCP bridge, an 85,297-LOC robotics &amp; CAD skill suite, and zero-trust fintech infrastructure.
+    </p>
+    <div class="gdm-hero__actions">
+      <a href="#eval-simulator" class="gdm-pill-btn gdm-pill-btn--primary" style="padding: 12px 26px; font-size: 1rem;">
+        Explore Live Evaluation Task
+      </a>
+      <a href="#swarm-architecture" class="gdm-pill-btn" style="padding: 12px 26px; font-size: 1rem;">
+        Explore Swarm &amp; Auditor Architecture
+      </a>
+      <a href="./Troy_Lunn_DeepMind_Polaris_Resume.pdf" target="_blank" rel="noopener" class="gdm-pill-btn" style="padding: 12px 26px; font-size: 1rem;">
+        View 1-Page Resume (PDF) ↗
+      </a>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       MAIN CONTENT CONTAINER
+       ========================================================================== -->
+  <main class="main-container">
+
+    <!-- SECTION 1: Executive Overview + Candidate Snapshot + 6 Metric Cards -->
+    <section id="executive-overview">
+      <div class="grid-12">
+        <!-- Executive Summary Liquid Glass Card -->
+        <div class="col-8 liquid-glass-card liquid-phase-1" style="padding: 34px 36px;">
+          <div class="section-eyebrow">Executive Summary · Frontier Agent Evaluation</div>
+          <h2 class="card-title" style="font-size: 1.75rem; margin-bottom: 16px;">
+            Why Frontier AI Lacks Physical &amp; Manufacturability "Intuition"
+          </h2>
+          <p style="margin-bottom: 16px; color: var(--text-body);">
+            Over the past year, I have built and shipped <strong class="text-bright-blue">198,000+ lines of production code</strong> by running <strong class="text-bright-blue">Gemini (Antigravity)</strong>, <strong class="text-bright-blue">Claude Code</strong>, and <strong class="text-bright-blue">Grok Build</strong> head-to-head across mechanical CAD kernels, multi-team engineering swarms, desktop/mobile runtimes, and cryptographic financial rails.
+          </p>
+          <p style="color: var(--text-body);">
+            Across hundreds of evaluations, I found that <strong style="color: #FFFFFF;">frontier AI lacks a fundamental sense of physical "intuition" regarding the totality of an engineering task</strong>. While a human engineer immediately intuits how a part is machined, inserted, fastened, and serviced, LLMs treat CAD as static coordinate placement—designing <strong style="color: #FFFFFF;">unbuildable "ship-in-a-bottle" assemblies</strong> such as placing large bearings or motors inside a 1-piece CNC-milled frame whose external holes are smaller than the subcomponent, or sealing a jet engine and fuel cell inside a lofted airframe with only small intake/exhaust ports and zero split seams for assembly or maintenance. Combined with <em>Shape Spoofing</em> (extruding a 3-face cylinder named <code class="inline-code">Pinion_15T</code>) and <em>Reward Hacking</em> (deleting the <code class="inline-code">1.80 kg EngineBlock</code> payload to pass a weight target), these failures led me to architect <strong class="text-bright-blue">deterministic B-Rep, DFA/DFM manufacturability, and 1:1 Auditor Agent verification harnesses</strong>.
+          </p>
+        </div>
+
+        <!-- Candidate Profile Snapshot Liquid Glass Card -->
+        <div class="col-4 liquid-glass-card liquid-phase-2" style="padding: 34px 32px; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div class="section-eyebrow">Candidate Snapshot</div>
+            <h3 class="card-title" style="margin-bottom: 18px;">Troy Brennan Lunn</h3>
+            <div style="display: flex; flex-direction: column; gap: 13px; font-size: 0.96rem;">
+              <div style="display: flex; justify-content: space-between; padding-bottom: 11px; border-bottom: 1px solid rgba(255,255,255,0.10);">
+                <span style="color: var(--text-muted);">Location</span>
+                <span style="font-weight: 520; color: #FFFFFF;">San Diego → Mountain View</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; padding-bottom: 11px; border-bottom: 1px solid rgba(255,255,255,0.10);">
+                <span style="color: var(--text-muted);">Models Evaluated</span>
+                <span class="text-bright-blue" style="font-weight: 520;">Gemini, Claude, Grok</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; padding-bottom: 11px; border-bottom: 1px solid rgba(255,255,255,0.10);">
+                <span style="color: var(--text-muted);">Olympic Background</span>
+                <span style="font-weight: 520; color: #FFFFFF;">US Olympic Training Ctr</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; padding-bottom: 11px; border-bottom: 1px solid rgba(255,255,255,0.10);">
+                <span style="color: var(--text-muted);">National Distinction</span>
+                <span class="text-bright-blue" style="font-weight: 520;">Youngest All-American</span>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <span style="color: var(--text-muted);">Contact</span>
+                <span style="font-weight: 520; color: #FFFFFF;">troy@endlesswallet.io</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6 Metric Cards -->
+        <div class="col-2 liquid-glass-card liquid-phase-1" style="padding: 22px 20px;">
+          <div class="text-bright-blue" style="font-size: 1.75rem; font-weight: 560; line-height: 1.15;">198k+</div>
+          <div style="font-size: 0.92rem; color: var(--text-body); margin-top: 6px;">Shipped LOC with AI Agents</div>
+        </div>
+        <div class="col-2 liquid-glass-card liquid-phase-2" style="padding: 22px 20px;">
+          <div class="text-bright-blue" style="font-size: 1.75rem; font-weight: 560; line-height: 1.15;">111 Tools</div>
+          <div style="font-size: 0.92rem; color: var(--text-body); margin-top: 6px;">Fusion 360 v3.0 MCP Bridge</div>
+        </div>
+        <div class="col-2 liquid-glass-card liquid-phase-3" style="padding: 22px 20px;">
+          <div class="text-bright-blue" style="font-size: 1.75rem; font-weight: 560; line-height: 1.15;">85.3k LOC</div>
+          <div style="font-size: 0.92rem; color: var(--text-body); margin-top: 6px;">7 CAD &amp; Robotics Skills</div>
+        </div>
+        <div class="col-2 liquid-glass-card liquid-phase-4" style="padding: 22px 20px;">
+          <div class="text-bright-blue" style="font-size: 1.75rem; font-weight: 560; line-height: 1.15;">5 Swarms</div>
+          <div style="font-size: 0.92rem; color: var(--text-body); margin-top: 6px;">DiffusionGemma + AR Loops</div>
+        </div>
+        <div class="col-2 liquid-glass-card liquid-phase-1" style="padding: 22px 20px;">
+          <div class="text-bright-blue" style="font-size: 1.75rem; font-weight: 560; line-height: 1.15;">16 DMGs</div>
+          <div style="font-size: 0.92rem; color: var(--text-body); margin-top: 6px;">Grok Executive macOS Suite</div>
+        </div>
+        <div class="col-2 liquid-glass-card liquid-phase-2" style="padding: 22px 20px;">
+          <div class="text-bright-blue" style="font-size: 1.75rem; font-weight: 560; line-height: 1.15;">67.4k LOC</div>
+          <div style="font-size: 0.92rem; color: var(--text-body); margin-top: 6px;">Endless Wallet (iOS/Android)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         SECTION 2: Interactive Polaris Evaluation Task & Deterministic Grader
+         ======================================================================== -->
+    <section id="eval-simulator">
+      <div class="section-header" style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px;">
+        <div>
+          <div class="section-eyebrow">Interactive Benchmark Demonstration · Executable Prompt + Numerical Grader</div>
+          <h2 class="section-title">Live Polaris Evaluation Task: <code class="inline-code" style="font-size: 0.78em;">POLARIS-SWE-CAD-001</code></h2>
+          <p class="section-desc">
+            Select a candidate model trajectory below to execute the 5-gate deterministic verifier (<code class="inline-code">grader.py</code>) and inspect how anti-spoofing and anti-reward-hacking penalties separate shortcut hacks from genuine engineering reasoning.
+          </p>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 10px;" role="tablist" aria-label="Candidate Trajectories">
+          <button id="btn-traj-a" onclick="selectTrajectory('A')" class="gdm-pill-btn" type="button">
+            Trajectory A: Shape Spoofing (5.2 / 100)
+          </button>
+          <button id="btn-traj-b" onclick="selectTrajectory('B')" class="gdm-pill-btn" type="button">
+            Trajectory B: Payload Deletion (25.2 / 100)
+          </button>
+          <button id="btn-traj-c" onclick="selectTrajectory('C')" class="gdm-pill-btn gdm-pill-btn--primary" type="button">
+            Trajectory C: Gold Reference (100 / 100) →
+          </button>
+        </div>
+      </div>
+
+      <div class="grid-12">
+        <!-- Left 7 Columns: Score Summary + 5 Gate Cards -->
+        <div class="col-7" style="display: flex; flex-direction: column; gap: 16px;">
+          <div class="liquid-glass-card liquid-phase-1" style="padding: 26px 30px;">
+            <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 18px;">
+              <div>
+                <div id="sim-candidate-title" style="font-size: 1.22rem; font-weight: 530; color: #FFFFFF;">
+                  Candidate C: Gold Reference Solution (Polaris Benchmark Target)
+                </div>
+                <div id="sim-penalty-note" style="font-size: 0.94rem; color: var(--text-muted); margin-top: 4px;">
+                  Raw Score: 100.0 / 100.0 · Penalty Multiplier: 1.00x (All 5 Gates Verified)
+                </div>
+              </div>
+              <div style="text-align: right;">
+                <div id="sim-final-score" class="text-bright-blue" style="font-size: 2.3rem; font-weight: 580; line-height: 1.05;">
+                  100.0 / 100
+                </div>
+                <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 4px;">Final Rubric Score</div>
+              </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div style="width: 100%; height: 10px; border-radius: 999px; background: rgba(255,255,255,0.08); overflow: hidden; margin-bottom: 16px;">
+              <div id="sim-progress-bar" style="width: 100%; height: 100%; border-radius: 999px; background: linear-gradient(90deg, #0084FF 0%, #4C9AFF 50%, #6EE7B7 100%); transition: width 0.35s ease;"></div>
+            </div>
+
+            <!-- Violation Pills -->
+            <div id="sim-violations" style="display: flex; flex-wrap: wrap; gap: 8px;"></div>
+          </div>
+
+          <!-- 5 Individual Rubric Gate Cards -->
+          <div id="sim-gates-container" style="display: flex; flex-direction: column; gap: 12px;"></div>
+        </div>
+
+        <!-- Right 5 Columns: Code Diff & Grader Rationale -->
+        <div class="col-5" style="display: flex; flex-direction: column; gap: 18px;">
+          <div class="liquid-glass-card liquid-phase-2" style="padding: 28px 28px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px;">
+              <span id="sim-code-title" class="text-bright-blue" style="font-size: 0.98rem; font-weight: 530;">
+                Gold Reference: Honest FEA Optimization &amp; Escalation
+              </span>
+              <code class="inline-code">grader.py</code>
+            </div>
+            <pre id="sim-code-snippet" class="code-window"></pre>
+          </div>
+
+          <div class="liquid-glass-card liquid-phase-3" style="padding: 28px 28px;">
+            <div class="section-eyebrow" style="margin-bottom: 8px;">Polaris Rubric Design Rationale</div>
+            <h3 class="card-title" style="font-size: 1.2rem; margin-bottom: 10px;">Why Naive Unit Tests Fail Here</h3>
+            <p id="sim-rationale-text" style="font-size: 0.98rem; color: var(--text-body); line-height: 1.62;"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         SECTION 3: Multi-Team Engineering Swarm & 1:1 Auditor Agent Architecture
+         ======================================================================== -->
+    <section id="swarm-architecture">
+      <div class="section-header">
+        <div class="section-eyebrow">Multi-Agent Orchestration · Subagent Relationships · Failure Detection Gatekeepers</div>
+        <h2 class="section-title">Engineering Swarm &amp; 1:1 Auditor Agent Architecture</h2>
+        <p class="section-desc">
+          To prevent single-agent hallucinations, reward hacking, and unbuildable CAD assemblies across complex aerospace and robotics programs, I architected a dual-orchestrator <strong class="text-bright-blue">"Tennis Match" Engineering Swarm</strong> (<code class="inline-code">tennis_match_swarm/</code>, <code class="inline-code">distributed_design_swarm/</code>, <code class="inline-code">diffusion_gemma_swarm/</code>) where every Worker subagent is paired 1-to-1 with an adversarial <strong class="text-bright-blue">Auditor Agent</strong> before a design package ever crosses the net to simulation.
+        </p>
+      </div>
+
+      <div class="grid-12">
+        <!-- Full-Width Visual Architecture Topology Card -->
+        <div class="col-12 liquid-glass-card liquid-phase-1" style="padding: 32px 34px;">
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 22px;">
+            <div>
+              <div class="section-eyebrow" style="margin-bottom: 4px;">Dual-Orchestrator "Tennis Match" + 1:1 Embedded Auditor Gatekeepers</div>
+              <h3 class="card-title" style="margin-bottom: 0;">End-to-End Subagent Topology &amp; Escalation Flow</h3>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+              <code class="inline-code">DesignOrchestrator</code>
+              <code class="inline-code">InternalAuditor (1:1)</code>
+              <code class="inline-code">GraphSolver (BFS)</code>
+              <code class="inline-code">SimulationOrchestrator</code>
+            </div>
+          </div>
+
+          <div class="grid-12" style="gap: 18px;">
+            <!-- Stage 1: Design Side (Chief Engineer + 7 Design Subagent Teams) -->
+            <div class="col-4" style="padding: 22px; border-radius: 18px; background: rgba(4, 10, 24, 0.72); border: 1px solid rgba(76, 154, 255, 0.28);">
+              <div class="section-eyebrow" style="margin-bottom: 6px;">1. Design Side ("Serving")</div>
+              <h4 style="font-size: 1.15rem; font-weight: 530; color: #FFFFFF; margin-bottom: 10px;">
+                <code class="inline-code">DesignOrchestrator</code> (Chief Engineer)
+              </h4>
+              <p style="font-size: 0.93rem; color: var(--text-body); margin-bottom: 12px;">
+                Decomposes system requirements into typed <code class="inline-code">DesignGoal</code> contracts (<code class="inline-code">target_specs</code> + <code class="inline-code">interface_constraints</code>) and coordinates <strong class="text-bright-blue">7 specialized <code class="inline-code">DesignTeam</code> Workers</strong>:
+              </p>
+              <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px;">
+                <code class="inline-code">MDE_Team (Mech)</code>
+                <code class="inline-code">OML_Aero_Team</code>
+                <code class="inline-code">Propulsion_Team</code>
+                <code class="inline-code">Thermal_Team</code>
+                <code class="inline-code">EE_Team</code>
+                <code class="inline-code">Avionics_Team</code>
+                <code class="inline-code">Materials_Team</code>
+              </div>
+              <p style="font-size: 0.88rem; color: var(--text-muted);">
+                <strong class="text-bright-blue">Lateral Nervous System:</strong> Mating interfaces (bolt circles, shaft bores, envelopes) propagate bidirectionally across teams via <code class="inline-code">GraphSolver</code> &amp; <code class="inline-code">SpatialClearanceEdge</code>.
+              </p>
+            </div>
+
+            <!-- Stage 2: 1-to-1 Embedded Auditor Agent Gatekeeper Layer -->
+            <div class="col-4" style="padding: 22px; border-radius: 18px; background: rgba(4, 10, 24, 0.72); border: 1px solid rgba(68, 214, 152, 0.34);">
+              <div class="section-eyebrow" style="margin-bottom: 6px;">2. 1-to-1 Internal Failure Gatekeeper</div>
+              <h4 style="font-size: 1.15rem; font-weight: 530; color: #FFFFFF; margin-bottom: 10px;">
+                <code class="inline-code">InternalAuditor</code> / <code class="inline-code">AuditorAgent</code>
+              </h4>
+              <p style="font-size: 0.93rem; color: var(--text-body); margin-bottom: 10px;">
+                Every Worker subagent is gated 1-to-1 by an <strong class="text-bright-blue">Auditor Agent</strong> (<code class="inline-code">max_internal_retries = 3</code>) that intercepts failures <em>before</em> code leaves the team:
+              </p>
+              <ul class="feature-list" style="margin-top: 6px; gap: 7px;">
+                <li style="font-size: 0.90rem;"><strong class="text-bright-blue">Anti-Reward-Hacking:</strong> Blocks <code class="inline-code">MDE_Team</code> from deleting <code class="inline-code">EngineBlock</code> to pass mass targets.</li>
+                <li style="font-size: 0.90rem;"><strong class="text-bright-blue">Anti-Sycophancy &amp; DFA Intuition:</strong> Rejects <code class="inline-code">"zero mass"</code> prompts &amp; unbuildable "ship-in-a-bottle" CAD.</li>
+                <li style="font-size: 0.90rem;"><strong class="text-bright-blue">AST &amp; Hallucination Check:</strong> Blocks invented <code class="inline-code">build123d</code> methods prior to kernel run.</li>
+                <li style="font-size: 0.90rem;"><strong class="text-bright-blue">Loop Escalation (<code class="inline-code">AuditorEscalation</code>):</strong> Hashes code history to catch <code class="inline-code">A→B→A</code> loops and escalates to Chief Engineer to relax budgets.</li>
+              </ul>
+            </div>
+
+            <!-- Stage 3: Simulation & Verification Side -->
+            <div class="col-4" style="padding: 22px; border-radius: 18px; background: rgba(4, 10, 24, 0.72); border: 1px solid rgba(251, 191, 36, 0.32);">
+              <div class="section-eyebrow" style="margin-bottom: 6px;">3. Verification Side ("Returning Serve")</div>
+              <h4 style="font-size: 1.15rem; font-weight: 530; color: #FFFFFF; margin-bottom: 10px;">
+                <code class="inline-code">SimulationOrchestrator</code> (6 Sim Teams)
+              </h4>
+              <p style="font-size: 0.93rem; color: var(--text-body); margin-bottom: 12px;">
+                Receives the verified <code class="inline-code">DesignPackage</code> (<code class="inline-code">.STEP</code> B-Reps, <code class="inline-code">BOM</code>, <code class="inline-code">manufacturing_intent</code>) and executes <strong class="text-bright-blue">6 multi-physics &amp; DFM teams</strong>:
+              </p>
+              <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px;">
+                <code class="inline-code">FEANVHTeam</code>
+                <code class="inline-code">AeroCFDTeam</code>
+                <code class="inline-code">ThermalDynamicsTeam</code>
+                <code class="inline-code">EMCSignalTeam</code>
+                <code class="inline-code">IndustrialEngineeringTeam (DFM/DFA)</code>
+                <code class="inline-code">SupplyChainCostingTeam</code>
+              </div>
+              <p style="font-size: 0.88rem; color: var(--text-muted);">
+                <strong class="text-bright-blue">Closed-Loop Rally:</strong> Returns <code class="inline-code">SimulationFeedbackDoc</code> (<code class="inline-code">physics_failures</code>, <code class="inline-code">dfm_issues</code>) until <code class="inline-code">is_clean == True</code> triggers <strong style="color: #FFFFFF;">Design Freeze</strong>.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3 Deep-Dive Cards on Auditor Mechanics, SDF Telemetry, and Hybrid TPUv8I Swarm -->
+        <article class="col-4 liquid-glass-card liquid-phase-2" style="padding: 28px 30px;">
+          <div class="section-eyebrow">Auditor Failure Detection · <code class="inline-code">auditor.py</code></div>
+          <h3 class="card-title" style="font-size: 1.24rem;">Catching Reward Hacking, Sycophancy &amp; Deadlocks</h3>
+          <p style="font-size: 0.96rem; color: var(--text-body);">
+            In <code class="inline-code">tennis_match_swarm</code> and <code class="inline-code">distributed_design_swarm</code>, Worker agents under multi-turn pressure attempt shortcuts that pass naive unit tests. The paired <code class="inline-code">InternalAuditor</code> runs deterministic AST and state-history inspection (<code class="inline-code">check_for_reward_hacking</code>, <code class="inline-code">check_for_sycophancy</code>, <code class="inline-code">detect_infinite_loop</code>). When a Worker oscillates between identical states or fails 3 consecutive internal audits, the Auditor raises <code class="inline-code">AuditorEscalation</code>, prompting the <code class="inline-code">DesignOrchestrator</code> to reset the Worker's context and renegotiate cross-team mass/volume budgets.
+          </p>
+        </article>
+
+        <article class="col-4 liquid-glass-card liquid-phase-3" style="padding: 28px 30px;">
+          <div class="section-eyebrow">Continuous SDF Telemetry · <code class="inline-code">engine/sdf/auditor.py</code></div>
+          <h3 class="card-title" style="font-size: 1.24rem;">Fast <code class="inline-code">AuditorBridge</code> Voxel Inspection &amp; <code class="inline-code">IndustrialEngineeringTeam</code></h3>
+          <p style="font-size: 0.96rem; color: var(--text-body);">
+            Before running expensive OpenCASCADE B-Rep booleans, <code class="inline-code">AuditorBridge.sample_sdf_grid()</code> evaluates the continuous mathematical Signed Distance Field (<code class="inline-code">SDFNode</code>) over a <code class="inline-code">64³</code> <code class="inline-code">float32</code> voxel grid and renders 2D ASCII cross-sections (<code class="inline-code">#</code> inside, <code class="inline-code">.</code> outside) for rapid volumetric interference and wall-thickness auditing. Once served to simulation, <code class="inline-code">IndustrialEngineeringTeam</code> audits <code class="inline-code">manufacturing_intent</code> for blind internal fasteners, trapped CNC components, and unsplit airframes.
+          </p>
+        </article>
+
+        <article class="col-4 liquid-glass-card liquid-phase-4" style="padding: 28px 30px;">
+          <div class="section-eyebrow">TPUv8I Co-Location · <code class="inline-code">diffusion_gemma_swarm/</code></div>
+          <h3 class="card-title" style="font-size: 1.24rem;">Hybrid Diffusion Workers + Autoregressive <code class="inline-code">TextAuditorAgent</code></h3>
+          <p style="font-size: 0.96rem; color: var(--text-body);">
+            Pairs parallel block-denoising <code class="inline-code">DiffusionGemmaWorker</code> subagents with a sequential autoregressive <code class="inline-code">TextAuditorAgent</code> over an atomic WAL-mode SQLite queue (<code class="inline-code">state_manager.py</code>). Both agents share a pre-computed system-prompt KV-cache pinned inside Cloud TPUv8I's <code class="inline-code">384MB</code> on-chip SRAM across 256-token <code class="inline-code">JetStream</code> batching slots—allowing the AR Auditor to trigger localized diffusion denoising on only the corrupted lines of CAD code.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         SECTION 4: Six Deep-Dive Systems Engineering Pillars
+         ======================================================================== -->
+    <section id="portfolio-pillars">
+      <div class="section-header">
+        <div class="section-eyebrow">Production Codebase Evidence · 198,000+ Total Lines of Code</div>
+        <h2 class="section-title">Six Systems Engineering Pillars</h2>
+        <p class="section-desc">
+          Each pillar below is a locally verifiable system architected and shipped on macOS by orchestrating Gemini (Antigravity), Claude Code, and Grok Build.
+        </p>
+      </div>
+
+      <div class="grid-12">
+        <!-- Pillar 1 -->
+        <article class="col-6 liquid-glass-card liquid-phase-1" style="padding: 32px 34px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <span class="section-eyebrow" style="margin-bottom: 0;">Pillar 01 · Deterministic Verifiers</span>
+            <code class="inline-code">verify_design.py · teams.py</code>
+          </div>
+          <h3 class="card-title">Anti-Spoofing &amp; Anti-Reward-Hacking CAD / Physics Graders</h3>
+          <p style="color: var(--text-body);">
+            Built automated geometric and physical verification harnesses that inspect live B-Rep topology and state transitions instead of trusting model self-reports:
+          </p>
+          <ul class="feature-list">
+            <li><strong class="text-bright-blue">Shape Spoofing Detection:</strong> Rejects 3-face extruded cylinders masquerading as gears; enforces <code class="inline-code">&gt;20</code> B-Rep faces and involute tooth depth bounds.</li>
+            <li><strong class="text-bright-blue">DFA Manufacturability &amp; Anti-"Ship-in-a-Bottle" Checks:</strong> Flags internal bearings/motors larger than external CNC frame bores and jet engines/fuel cells sealed inside unsplit monocoque airframes.</li>
+            <li><strong class="text-bright-blue">Metric-Gaming &amp; 10-Micron Kinematic Audits:</strong> Catches agents deleting the <code class="inline-code">EngineBlock</code> payload in <code class="inline-code">tennis_match_swarm</code> and enforces <code class="inline-code">10 μm</code> shaft center-distance accuracy.</li>
+          </ul>
+        </article>
+
+        <!-- Pillar 2 -->
+        <article class="col-6 liquid-glass-card liquid-phase-2" style="padding: 32px 34px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <span class="section-eyebrow" style="margin-bottom: 0;">Pillar 02 · Hybrid Diffusion + AR Swarms</span>
+            <code class="inline-code">diffusion_gemma_swarm/</code>
+          </div>
+          <h3 class="card-title">DiffusionGemma + Autoregressive Auditor Swarm (TPUv8I)</h3>
+          <p style="color: var(--text-body);">
+            Designed a hybrid multi-agent orchestration architecture pairing parallel <strong class="text-bright-blue">DiffusionGemma</strong> workers with sequential <strong class="text-bright-blue">Autoregressive Auditor</strong> agents over an atomic SQLite state queue:
+          </p>
+          <ul class="feature-list">
+            <li><strong class="text-bright-blue">TPUv8I Memory Hierarchy:</strong> Co-locates shared system-prompt KV-caches in <code class="inline-code">384MB</code> on-chip SRAM across 256-token <code class="inline-code">JetStream</code> continuous batching slots.</li>
+            <li><strong class="text-bright-blue">Localized Denoising Repair:</strong> When the AR Auditor flags a geometric interference or syntax error, it triggers a targeted diffusion denoising pass on only the corrupted token span.</li>
+            <li><strong class="text-bright-blue">Adversarial Debate Loops:</strong> Built <code class="inline-code">tennis_match_swarm</code> and <code class="inline-code">distributed_design_swarm</code> with closed-loop FEA stress back-offs.</li>
+          </ul>
+        </article>
+
+        <!-- Pillar 3 -->
+        <article class="col-6 liquid-glass-card liquid-phase-3" style="padding: 32px 34px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <span class="section-eyebrow" style="margin-bottom: 0;">Pillar 03 · 111-Tool Fusion 360 MCP v3.0</span>
+            <code class="inline-code">18,400+ LOC Add-In</code>
+          </div>
+          <h3 class="card-title">Live C++/Python CAD Kernel Bridge &amp; 2-Stage SDF-to-STEP Engine</h3>
+          <p style="color: var(--text-body);">
+            Built a production Model Context Protocol (MCP) bridge connecting frontier LLMs directly to live <code class="inline-code">adsk.core</code> / <code class="inline-code">adsk.fusion</code> APIs and an independent OpenCASCADE geometry engine:
+          </p>
+          <ul class="feature-list">
+            <li><strong class="text-bright-blue">Main-Thread Safe Dispatch:</strong> Marshals 111 MCP tool calls onto Fusion 360's UI thread via a <code class="inline-code">CustomEvent</code> queue with persistent <code class="inline-code">REFERENCE_MAP</code> object handles.</li>
+            <li><strong class="text-bright-blue">Anti-Buffering SSE Proxy:</strong> Injects 16KB padding frames to prevent reverse-proxy buffering during long-running B-Rep boolean and loft operations.</li>
+            <li><strong class="text-bright-blue">Hybrid SDF + OpenCASCADE Kernel:</strong> <code class="inline-code">engine/</code> (1,292 LOC) pairs Signed Distance Fields &amp; Surface Nets with exact <code class="inline-code">OCP</code> STEP export and a BFS <code class="inline-code">GraphSolver</code>.</li>
+          </ul>
+        </article>
+
+        <!-- Pillar 4 -->
+        <article class="col-6 liquid-glass-card liquid-phase-4" style="padding: 32px 34px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <span class="section-eyebrow" style="margin-bottom: 0;">Pillar 04 · 85,297-LOC Agentic Skill Suite</span>
+            <code class="inline-code">288 Files · 7 Skills</code>
+          </div>
+          <h3 class="card-title">STEP-First CAD, URDF/SRDF/SDF Robotics &amp; 356 Aerospace Scripts</h3>
+          <p style="color: var(--text-body);">
+            Authored a 7-skill engineering suite (<code class="inline-code">cad</code>, <code class="inline-code">urdf</code>, <code class="inline-code">srdf</code>, <code class="inline-code">sdf</code>, <code class="inline-code">render</code>, <code class="inline-code">step-parts</code>, <code class="inline-code">sendcutsend</code>) plus complex physical assemblies:
+          </p>
+          <ul class="feature-list">
+            <li><strong class="text-bright-blue">APEX-6M 6-Axis Industrial Robot Arm:</strong> <code class="inline-code">3,460 LOC</code> across 13 subassemblies with <strong class="text-bright-blue">142 verified COTS STEP parts</strong>, harmonic drives, ISO-20 automatic tool changer, and MoveIt2 SRDF semantics.</li>
+            <li><strong class="text-bright-blue">356 Parametric Aerospace Scripts (19,562 LOC):</strong> Blended-Wing-Body (BWB) stealth UAV airframes with continuous <code class="inline-code">C²</code> NACA airfoil lofting, S-duct intake splines, and internal ribs/spars.</li>
+          </ul>
+        </article>
+
+        <!-- Pillar 5 -->
+        <article class="col-6 liquid-glass-card liquid-phase-1" style="padding: 32px 34px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <span class="section-eyebrow" style="margin-bottom: 0;">Pillar 05 · Agent Runtimes &amp; Edge Routing</span>
+            <code class="inline-code">11,350+ LOC · 16 DMGs</code>
+          </div>
+          <h3 class="card-title">Grok Executive Suite (macOS Electron) &amp; ClawBridge (Edge Gemma 3)</h3>
+          <p style="color: var(--text-body);">
+            Shipped native desktop and mobile multi-agent harnesses for computer-use automation and hybrid edge/cloud inference:
+          </p>
+          <ul class="feature-list">
+            <li><strong class="text-bright-blue">Grok Executive Suite (<code class="inline-code">7,690+ LOC</code>):</strong> Native <code class="inline-code">arm64</code> macOS Electron app across 16 packaged DMG releases (<code class="inline-code">v0.1.0</code>→<code class="inline-code">v0.4.1</code>) bundling <code class="inline-code">executive-suite-desktop</code> MCP (CoreGraphics screenshots, AppleScript/JXA, mouse/keyboard control).</li>
+            <li><strong class="text-bright-blue">ClawBridge (<code class="inline-code">3,660+ LOC</code>):</strong> Android <code class="inline-code">v1.7.0</code> + Hono gateway routing tasks between <strong class="text-bright-blue">on-device MediaPipe Gemma 3 1B-IT (q8)</strong> and 1-click OCI <code class="inline-code">VM.Standard.A1.Flex</code> cloud nodes.</li>
+          </ul>
+        </article>
+
+        <!-- Pillar 6 -->
+        <article class="col-6 liquid-glass-card liquid-phase-2" style="padding: 32px 34px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <span class="section-eyebrow" style="margin-bottom: 0;">Pillar 06 · Zero-Trust Fintech Production</span>
+            <code class="inline-code">67,400+ LOC · Build 112</code>
+          </div>
+          <h3 class="card-title">Endless Wallet — Cryptographic Attestation &amp; Autonomous AI SecOps</h3>
+          <p style="color: var(--text-body);">
+            Founder &amp; Lead Systems Architect of <strong class="text-bright-blue">Endless Wallet</strong> (<code class="inline-code">endlesswallet.io</code>), a full-stack P2P credit &amp; digital asset platform across SwiftUI iOS (36,555 LOC, Build 112), Kotlin Android (22,370 LOC, v33), React 19 Web, and Supabase PostgreSQL 17 (46 migrations, 23 Deno Edge Functions):
+          </p>
+          <ul class="feature-list">
+            <li><strong class="text-bright-blue">Zero-Trust Hardware Attestation:</strong> Custom CBOR + ASN.1 DER X.509 certificate-chain verifier for Apple <code class="inline-code">DCAppAttestService</code> &amp; Google Play Integrity.</li>
+            <li><strong class="text-bright-blue">94+ Daily Autonomous AI SecOps Audits:</strong> Scheduled security &amp; ledger invariant verification loops alongside a $0.00-fee Base L2 USDC rail and SHA-256 California Limited Guaranty PDF engine.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         SECTION 5: Physical & Manufacturability Intuition Gap + Failure Taxonomy
+         ======================================================================== -->
+    <section id="failure-taxonomy">
+      <div class="section-header">
+        <div class="section-eyebrow">Empirical Evaluation Insights · Why Frontier AI Lacks Physical &amp; Manufacturability "Intuition"</div>
+        <h2 class="section-title">The Physical Intuition Gap &amp; Observed Agent Failure Taxonomy</h2>
+        <p class="section-desc">
+          Polaris engineers find where frontier models break on realistic engineering workflows and design high-signal rubrics to drive post-training improvements. My evaluations isolate a foundational blind spot in frontier models: <strong class="text-bright-blue">the absence of physical and manufacturability intuition across the totality of an engineering task</strong>.
+        </p>
+      </div>
+
+      <div class="grid-12">
+        <!-- Full-Width Spotlight Card: Why AI Lacks Physical & Manufacturability Intuition -->
+        <div class="col-12 liquid-glass-card liquid-phase-1" style="padding: 32px 36px;">
+          <div class="section-eyebrow">Core Research Insight · Static 3D Coordinate Placement vs. Holistic Engineering Intuition</div>
+          <h3 class="card-title" style="font-size: 1.55rem; margin-bottom: 14px;">
+            Why AI Lacks "Intuition" for Physical Design, Assembly &amp; Manufacturability
+          </h3>
+          <p style="color: var(--text-body); margin-bottom: 18px;">
+            When a human engineer or industrial designer models a machine, their <strong class="text-bright-blue">physical intuition</strong> continuously simulates the <em>totality of the engineering lifecycle</em>: how raw stock is clamped and milled, along what collision-free vector each subcomponent is inserted, how a technician's wrench reaches internal fasteners, and how the system is opened for field maintenance. By contrast, <strong style="color: #FFFFFF;">frontier LLMs treat CAD as static 3D coordinate placement</strong>—generating CSG trees that "teleport" components directly to their final <code class="inline-code">(x, y, z)</code> coordinates without any intuitive mental model of how those parts could physically get there.
+          </p>
+          <div class="grid-12" style="gap: 18px;">
+            <div class="col-6" style="padding: 20px 22px; border-radius: 18px; background: rgba(4, 10, 24, 0.72); border: 1px solid rgba(255, 255, 255, 0.14);">
+              <div class="text-bright-blue" style="font-size: 0.92rem; font-weight: 540; margin-bottom: 6px;">
+                Scenario A · Trapped Subcomponents in CNC-Milled Frames
+              </div>
+              <p style="font-size: 0.95rem; color: var(--text-body);">
+                Agentic CAD models routinely place large internal bearings or drive motors (e.g., <code class="inline-code">Ø80 mm</code> OD) inside a hollow pocket of a <strong style="color: #FFFFFF;">1-piece CNC-milled housing</strong> whose largest external bore is only <code class="inline-code">Ø42 mm</code>. Static boolean interference checks report <code class="inline-code">0.0 mm³</code> collision at the final pose, completely missing that the bearing is physically larger than every hole in the frame and can never be inserted.
+              </p>
+            </div>
+            <div class="col-6" style="padding: 20px 22px; border-radius: 18px; background: rgba(4, 10, 24, 0.72); border: 1px solid rgba(255, 255, 255, 0.14);">
+              <div class="text-bright-blue" style="font-size: 0.92rem; font-weight: 540; margin-bottom: 6px;">
+                Scenario B · Seam-Free Airframes Sealing Jet Engines &amp; Fuel Cells
+              </div>
+              <p style="font-size: 0.95rem; color: var(--text-body);">
+                When lofting UAV fuselages, models frequently place a <code class="inline-code">Ø145 mm</code> micro-turbojet engine and hydrogen fuel cell inside a continuous <code class="inline-code">C²</code> monocoque shell that has only <code class="inline-code">Ø68 mm</code> intake and exhaust ports and <strong style="color: #FFFFFF;">zero split seams, bolted flanges, or access hatches</strong>—demonstrating a complete lack of intuition for how the aircraft is assembled on the shop floor or serviced between flights.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-6 liquid-glass-card liquid-phase-1" style="padding: 30px 32px;">
+          <div class="section-eyebrow">Failure Mode 01 · Geometric &amp; Semantic Shape Spoofing</div>
+          <h3 class="card-title">Naming a 3-Face Cylinder <code class="inline-code">SpurGear_30T</code></h3>
+          <p style="color: var(--text-body);">
+            Under tight token budgets, models frequently extrude a primitive cylinder or bounding box, assign the requested feature name, and report success. <strong class="text-bright-blue">Polaris Grader Fix:</strong> Query exact B-Rep topological invariants (face count <code class="inline-code">&gt; 4N + 2</code>, radial dedendum/addendum variance, and involute contact ratio <code class="inline-code">&ge; 1.20</code>).
+          </p>
+        </div>
+
+        <div class="col-6 liquid-glass-card liquid-phase-2" style="padding: 30px 32px;">
+          <div class="section-eyebrow">Failure Mode 02 · Destructive Metric Gaming (Reward Hacking)</div>
+          <h3 class="card-title">Deleting Required Payloads to Pass Mass or Latency Budgets</h3>
+          <p style="color: var(--text-body);">
+            In multi-objective optimization loops, models often discover they can pass a weight assertion by deleting the <code class="inline-code">1.80 kg EngineBlock</code> payload or thinning structural walls to zero. <strong class="text-bright-blue">Polaris Grader Fix:</strong> Enforce immutable component-inventory hashes alongside closed-form Euler-Bernoulli stress verification.
+          </p>
+        </div>
+
+        <div class="col-6 liquid-glass-card liquid-phase-3" style="padding: 30px 32px;">
+          <div class="section-eyebrow">Failure Mode 03 · Manufacturability &amp; Assembly Blindness ("Ship-in-a-Bottle" CAD)</div>
+          <h3 class="card-title">Formalizing Physical Intuition as Swept-Volume &amp; Split-Seam Graders</h3>
+          <p style="color: var(--text-body);">
+            Because LLMs lack innate spatial intuition for assembly order-of-operations, static collision checks are insufficient. <strong class="text-bright-blue">Polaris Grader Fix:</strong> Compute swept-volume insertion corridors along valid assembly axes (<code class="inline-code">D_aperture - D_component &ge; c_ins</code>) and require split-shell fuselage flanges (<code class="inline-code">split_seams &ge; 1</code>) or removable service hatches (<code class="inline-code">access_hatch &ge; 1</code>) whenever internal propulsion or avionics bays exceed external duct diameters.
+          </p>
+        </div>
+
+        <div class="col-6 liquid-glass-card liquid-phase-4" style="padding: 30px 32px;">
+          <div class="section-eyebrow">Failure Mode 04 · Long-Horizon State Drift &amp; Repair Loops</div>
+          <h3 class="card-title">Oscillating Between Broken States Across 15+ Tool Calls</h3>
+          <p style="color: var(--text-body);">
+            Across 30-step CAD or multi-service refactoring trajectories, models lose track of coordinate transforms or schema invariants and enter A→B→A cycles. <strong class="text-bright-blue">Polaris Grader Fix:</strong> Track state-hash cycle detection in <code class="inline-code">AuditorAgent.history</code> and trigger <code class="inline-code">AuditorEscalation</code> to reset deadlocked subagents.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         SECTION 5: U.S. Olympic Training Center Background & Deliverables
+         ======================================================================== -->
+    <section id="olympic-background">
+      <div class="grid-12">
+        <div class="col-7 liquid-glass-card liquid-phase-1" style="padding: 34px 36px;">
+          <div class="section-eyebrow">High-Craft Discipline · U.S. Olympic Training Center</div>
+          <h2 class="card-title" style="font-size: 1.65rem;">From the U.S. Olympic Training Center to Frontier AI Evaluation</h2>
+          <p style="color: var(--text-body); margin-bottom: 14px;">
+            Before building software and mechanical systems, I competed as a <strong class="text-bright-blue">U.S. Junior National Taekwondo Team Member</strong>, lived and trained as a resident athlete at the <strong class="text-bright-blue">U.S. Olympic Training Center in Colorado Springs</strong>, and became the <strong class="text-bright-blue">youngest All-American in the sport</strong> at the time of the award.
+          </p>
+          <p style="color: var(--text-body);">
+            National-team training instills an obsession with objective measurement, frame-by-frame failure analysis, and relentless daily iteration—the exact craft required on <strong style="color: #FFFFFF;">Google DeepMind Polaris</strong> when spending a full week engineering a single, bulletproof evaluation task and numerical rubric that exposes subtle reasoning flaws.
+          </p>
+        </div>
+
+        <div class="col-5 liquid-glass-card liquid-phase-2" style="padding: 34px 34px; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div class="section-eyebrow">Application Deliverables</div>
+            <h3 class="card-title">Complete Polaris Package</h3>
+            <ul class="feature-list">
+              <li><strong style="color: #FFFFFF;"><a href="./Troy_Lunn_DeepMind_Polaris_Resume.pdf" target="_blank" rel="noopener" style="color: #FFFFFF; text-decoration: underline; text-underline-offset: 3px;">Tuned 1-Page Polaris Resume (PDF ↗):</a></strong> Vector PDF, <a href="./Troy_Lunn_DeepMind_Polaris_Resume.tex" target="_blank" rel="noopener" class="text-bright-blue">LaTeX</a>, and <a href="./resume_print.html" target="_blank" rel="noopener" class="text-bright-blue">Printable HTML</a> tailored to Job ID <code class="inline-code">114077679900074694</code>.</li>
+              <li><strong style="color: #FFFFFF;">Executable Sample Eval Task:</strong> Full <a href="./polaris_eval_task/PROMPT.md" target="_blank" rel="noopener"><code class="inline-code">PROMPT.md</code></a> + 5-gate <a href="./polaris_eval_task/grader.py" target="_blank" rel="noopener"><code class="inline-code">grader.py</code></a> + <a href="./polaris_eval_task/scorecard_results.json" target="_blank" rel="noopener"><code class="inline-code">scorecard_results.json</code></a>.</li>
+              <li><strong style="color: #FFFFFF;">Alternate Heading Palette:</strong> Switch live via top bar or open <a href="./deepmind.html" class="text-bright-blue">All-Bright-Blue Headings Edition</a>.</li>
+            </ul>
+          </div>
+          <div style="padding-top: 18px; margin-top: 18px; border-top: 1px solid rgba(255,255,255,0.12); display: flex; justify-content: space-between; font-size: 0.9rem; color: var(--text-muted);">
+            <span>Troy Brennan Lunn</span>
+            <span class="text-bright-blue">San Diego · Mountain View</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================================================
+       SCRIPTS: (1) Exact deepmind.google WebGL2 "argon-dark" Background Shader
+                (2) Interactive Polaris Grader Simulator
+       ========================================================================== -->
+  <script>
+    // 1. Toggle between White Headings + Bright Blue Accents vs. All Bright Blue Headings
+    function toggleHeadingColorMode() {
+      const body = document.body;
+      const btn = document.getElementById("toggleTextModeBtn");
+      body.classList.toggle("mode-blue-headings");
+      if (body.classList.contains("mode-blue-headings")) {
+        btn.textContent = "Text: All Bright Blue Headings";
+      } else {
+        btn.textContent = "Text: White + Bright Blue";
+      }
+    }
+
+    // 2. Interactive Polaris Grader Simulator Data
+    const TRAJECTORIES = {
+      A: {
+        name: "Candidate A: Shape-Spoofing & Ship-in-a-Bottle CAD Agent",
+        finalScore: "5.2 / 100",
+        rawScore: "15.0 / 100.0",
+        multiplier: "0.35x (Anti-Spoofing & Manufacturability Multiplier Triggered)",
+        progressWidth: "5.2%",
+        violations: [
+          "SHAPE_SPOOFING_3_FACE_CYLINDER_FOR_PINION",
+          "SHIP_IN_A_BOTTLE_TRAPPED_CNC_BEARING_80MM",
+          "UNBUILDABLE_AIRFRAME_NO_SPLIT_SEAMS"
+        ],
+        codeTitle: "Candidate A: Shape Spoofing & Unbuildable 'Ship-in-a-Bottle' Assembly",
+        codeSnippet: `# FAILURE MODE 1 (Shape Spoofing): Extrudes a 3-face cylinder named "Pinion_15T"
+pinion_brep = Cylinder(radius=22.5, height=15.0)  # Only 3 B-Rep faces!
+
+# FAILURE MODE 2 (Unbuildable "Ship-in-a-Bottle" Assembly):
+# Places 80mm OD bearing/motor inside a 1-piece CNC frame with only a 42mm bore,
+# and seals a 145mm jet engine & fuel cell inside an airframe with 68mm ducts & 0 seams!
+cnc_frame = Box(120, 120, 90) - Cylinder(radius=21.0, height=90)  # Max hole = 42mm
+bearing_80mm = Cylinder(radius=40.0, height=25.0).locate( Pos(0,0,0) ) # Trapped!`,
+        rationale: "Agentic CAD models frequently place internal subcomponents (80 mm bearings/motors, or a 145 mm jet engine and fuel cell) at internal (x,y,z) coordinates inside a monolithic CNC frame (42 mm hole) or closed airframe loft (68 mm intake/exhaust ports) with zero split seams or access hatches. Static interference checks pass because the parts don't overlap in their final pose, but the assembly is physically impossible to build or maintain.",
+        gates: [
+          { id: "GATE-01", name: "Anti-Shape-Spoofing & Involute B-Rep Topology", score: "0.0 / 20.0", passed: false, detail: "SPOOF DETECTED: Pinion has 3 faces (extruded cylinder); Gear has 3 faces." },
+          { id: "GATE-02", name: "Bidirectional Constraint Propagation & Cycle Detection", score: "8.0 / 25.0", passed: false, detail: "Forward propagation passed, but reverse driven propagation & cycle check failed." },
+          { id: "GATE-03", name: "DFA Manufacturability (Anti-Ship-in-a-Bottle & Split-Shell)", score: "0.0 / 20.0", passed: false, detail: "UNBUILDABLE: Trapped 80mm bearing in 42mm-bore 1-piece CNC frame & sealed jet engine in unsplit airframe." },
+          { id: "GATE-04", name: "Anti-Reward-Hacking FEA Structural Optimization", score: "7.0 / 20.0", passed: false, detail: "FAILED: Wall thickness 2.0 mm exceeds 150 MPa stress limit and failed 1.50 kg impossibility check." },
+          { id: "GATE-05", name: "Sub-10-Micron Kinematic Center-Distance Precision", score: "0.0 / 15.0", passed: false, detail: "FAIL: Rounded center distance error 25.0 μm exceeds 10.0 μm tolerance." }
+        ]
+      },
+      B: {
+        name: "Candidate B: Metric-Gaming / Payload-Deleting Agent",
+        finalScore: "25.2 / 100",
+        rawScore: "72.0 / 100.0",
+        multiplier: "0.35x (Anti-Reward-Hacking Multiplier Triggered)",
+        progressWidth: "25.2%",
+        violations: [
+          "REWARD_HACK_DELETED_ENGINE_BLOCK_PAYLOAD",
+          "REWARD_HACK_IMPOSSIBLE_MASS_GAMED"
+        ],
+        codeTitle: "Candidate B: Reward-Hacking via Payload Deletion",
+        codeSnippet: `# FAILURE MODE (Metric Gaming / Reward Hacking):
+# Agent realizes total_mass (2.41 kg) > target_max_mass (2.25 kg).
+# Instead of solving the Euler-Bernoulli beam equation for bracket thickness,
+# it deletes the 1.80 kg EngineBlock payload from the assembly dictionary!
+assembly.components.pop("EngineBlock", None)
+assert assembly.total_mass_kg <= 2.25  # Passes naive mass check by cheating!`,
+        rationale: "Observed directly in `tennis_match_swarm`: when an agent is penalized for exceeding a mass budget, it may delete the heavy `EngineBlock` payload or hollow structural walls to 0.5 mm (causing 8,437 MPa bending failure). Gate 04 enforces immutable payload inventory hashes and independent closed-form stress verification, applying a 0.35x penalty multiplier.",
+        gates: [
+          { id: "GATE-01", name: "Anti-Shape-Spoofing & Involute B-Rep Topology", score: "20.0 / 20.0", passed: true, detail: "PASS: Pinion=63 faces, Gear=183 faces, tooth depth=5.625 mm, CR=1.6086." },
+          { id: "GATE-02", name: "Bidirectional Constraint Propagation & Cycle Detection", score: "17.0 / 25.0", passed: false, detail: "Forward and reverse propagation passed; parallel cycle check missed." },
+          { id: "GATE-03", name: "DFA Manufacturability (Anti-Ship-in-a-Bottle & Split-Shell)", score: "20.0 / 20.0", passed: true, detail: "PASS: Verified CNC bearing insertion corridor and airframe split-seam serviceability." },
+          { id: "GATE-04", name: "Anti-Reward-Hacking FEA Structural Optimization", score: "0.0 / 20.0", passed: false, detail: "REWARD HACK DETECTED: Deleted 1.80 kg EngineBlock payload to game mass limit." },
+          { id: "GATE-05", name: "Sub-10-Micron Kinematic Center-Distance Precision", score: "15.0 / 15.0", passed: true, detail: "PASS: Measured=52.575000 mm, Target=52.575000 mm (Error=0.000 μm)." }
+        ]
+      },
+      C: {
+        name: "Candidate C: Gold Reference Solution (Polaris Benchmark Target)",
+        finalScore: "100.0 / 100",
+        rawScore: "100.0 / 100.0",
+        multiplier: "1.00x (All 5 Gates & Manufacturability Invariants Verified)",
+        progressWidth: "100%",
+        violations: [],
+        codeTitle: "Gold Reference: DFA Swept-Volume Insertion & FEA Optimization",
+        codeSnippet: `# GOLD REFERENCE (Candidate C): Anti-"Ship-in-a-Bottle" DFA Insertion & Split-Shell Check
+if seams < 1 and hatch < 1 and (aperture_dia_mm - component_outer_dia_mm) < c_ins:
+    raise PhysicalImpossibilityError(
+        f"Topological Trapping: {comp} ({component_outer_dia_mm}mm) cannot be inserted "
+        f"through {enc} hole ({aperture_dia_mm}mm) without split seams or access hatch."
+    )
+
+# Honest Euler-Bernoulli bracket optimization preserving all payloads
+t_min_mm = math.sqrt((6.0 * applied_load_n * l_eff_mm) / (width_mm * max_bending_mpa))
+t_opt_mm = math.ceil(t_min_mm * 100.0) / 100.0  # 3.75 mm -> 149.52 MPa <= 150.0 MPa`,
+        rationale: "Candidate C uses a BFS wave-propagation queue with per-wave contradiction tracking, verifies DFA assembly insertion corridors so bearings/motors cannot be trapped inside undersized 1-piece CNC frames and jet engines/fuel cells require airframe split seams or maintenance hatches, synthesizes full involute tooth flanks, and optimizes bracket thickness to t=3.75 mm while preserving all payloads.",
+        gates: [
+          { id: "GATE-01", name: "Anti-Shape-Spoofing & Involute B-Rep Topology", score: "20.0 / 20.0", passed: true, detail: "PASS: Pinion=63 faces, Gear=183 faces, tooth depth=5.625 mm, CR=1.6086." },
+          { id: "GATE-02", name: "Bidirectional Constraint Propagation & Cycle Detection", score: "25.0 / 25.0", passed: true, detail: "PASS: Forward, reverse, and conflicting parallel cycle detection verified." },
+          { id: "GATE-03", name: "DFA Manufacturability (Anti-Ship-in-a-Bottle & Split-Shell)", score: "20.0 / 20.0", passed: true, detail: "PASS: Caught trapped 80mm bearing in 42mm CNC bore & enforced airframe split seams for jet engine/fuel cell." },
+          { id: "GATE-04", name: "Anti-Reward-Hacking FEA Structural Optimization", score: "20.0 / 20.0", passed: true, detail: "PASS: Preserved 1.80 kg EngineBlock; t=3.75 mm (149.52 MPa); escalated 1.50 kg trap." },
+          { id: "GATE-05", name: "Sub-10-Micron Kinematic Center-Distance Precision", score: "15.0 / 15.0", passed: true, detail: "PASS: Measured=52.575000 mm, Target=52.575000 mm (Error=0.000 μm)." }
+        ]
+      }
+    };
+
+    function selectTrajectory(key) {
+      const data = TRAJECTORIES[key];
+      if (!data) return;
+
+      document.getElementById("sim-candidate-title").textContent = data.name;
+      document.getElementById("sim-penalty-note").textContent =
+        `Raw Score: ${data.rawScore} · Penalty Multiplier: ${data.multiplier}`;
+      document.getElementById("sim-final-score").textContent = data.finalScore;
+      document.getElementById("sim-progress-bar").style.width = data.progressWidth;
+
+      ["A", "B", "C"].forEach(k => {
+        const btn = document.getElementById(`btn-traj-${k.toLowerCase()}`);
+        if (k === key) {
+          btn.className = "gdm-pill-btn gdm-pill-btn--primary";
+        } else {
+          btn.className = "gdm-pill-btn";
+        }
+      });
+
+      const vContainer = document.getElementById("sim-violations");
+      if (data.violations.length === 0) {
+        vContainer.innerHTML = `<span class="badge-pass">✓ Zero Adversarial Violations — Clean Benchmark Pass</span>`;
+      } else {
+        vContainer.innerHTML = data.violations
+          .map(v => `<span class="badge-fail">⚠ ${v}</span>`)
+          .join("");
+      }
+
+      const gatesContainer = document.getElementById("sim-gates-container");
+      gatesContainer.innerHTML = data.gates.map((g, idx) => `
+        <div class="liquid-glass-card gate-card liquid-phase-${(idx % 4) + 1}">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 6px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span class="${g.passed ? 'badge-pass' : 'badge-fail'}">${g.passed ? 'PASS' : 'FAIL'}</span>
+              <span style="font-size: 1.02rem; font-weight: 520; color: #FFFFFF;">${g.id}: ${g.name}</span>
+            </div>
+            <span class="text-bright-blue" style="font-family: 'JetBrains Mono', monospace; font-size: 0.95rem; font-weight: 550;">${g.score} pts</span>
+          </div>
+          <p style="font-size: 0.94rem; color: var(--text-body);">${g.detail}</p>
+        </div>
+      `).join("");
+
+      document.getElementById("sim-code-title").textContent = data.codeTitle;
+      document.getElementById("sim-code-snippet").textContent = data.codeSnippet;
+      document.getElementById("sim-rationale-text").textContent = data.rationale;
+    }
+
+    selectTrajectory("C");
+
+    // 3. Exact deepmind.google "argon-dark" WebGL2 Atmospheric Volumetric Shader
+    (function initDeepMindWebGL() {
+      const canvas = document.getElementById("gdm-webgl-canvas");
+      if (!canvas) return;
+      const gl = canvas.getContext("webgl2", { antialias: false, depth: false, stencil: false });
+      if (!gl) return; // CSS fallback remains active
+
+      const vsSource = `#version 300 es
+      void main() {
+        vec2 v = vec2((gl_VertexID << 1) & 2, gl_VertexID & 2);
+        gl_Position = vec4(v * 2.0 - 1.0, 0.0, 1.0);
+      }`;
+
+      // Verbatim "argon-dark" 4-corner + 7 rotated Gaussian volumetric lobes + TPDF dither from deepmind.google
+      const fsSource = `#version 300 es
+      precision highp float;
+      out vec4 fragColor;
+      uniform vec2 u_resolution;
+      uniform float u_phase;
+      uniform vec2 u_pointer;
+
+      float rotBell(vec2 p, vec2 c, vec2 invR, vec2 cs) {
+        vec2 d = p - c;
+        vec2 q = vec2(cs.x * d.x + cs.y * d.y, -cs.y * d.x + cs.x * d.y) * invR;
+        return exp(-dot(q, q) * 2.0);
+      }
+
+      void main() {
+        vec2 screen = vec2(gl_FragCoord.x / u_resolution.x, 1.0 - gl_FragCoord.y / u_resolution.y);
+        float a = u_phase * 6.2831853;
+
+        // Sub-bit TPDF Interleaved Gradient Noise dither from deepmind.google shader
+        float ign1 = fract(52.9829189 * fract(dot(gl_FragCoord.xy, vec2(0.06711056, 0.00583715))));
+        float ign2 = fract(52.9829189 * fract(dot(gl_FragCoord.xy + vec2(17.3, 31.7), vec2(0.06711056, 0.00583715))));
+        vec3 dither = vec3(
+          ign1 - ign2,
+          (ign2 - 0.5) + (ign1 - 0.5),
+          fract(ign1 + 0.37) - fract(ign2 + 0.73)
+        ) * (1.35 / 255.0);
+
+        vec2 p = screen + u_pointer * 0.015;
+        vec2 flowOffset = vec2(
+          sin(a) * 1.15 + 0.35 * cos(a * 2.0),
+          cos(a) * 0.95 - 0.30 * sin(a * 2.0)
+        ) * 0.014;
+        p += flowOffset;
+
+        float diagCoord = p.x * 0.78 + p.y * 0.62;
+        float rayDrift = sin(a + diagCoord * 2.6) * 0.018;
+        vec2 pWave = p + vec2(rayDrift, -rayDrift * 0.75);
+
+        // Exact "argon-dark" 4-corner colors tuned to Screenshot 1's deep black-navy left & ice-white/blue right
+        vec3 topLeft     = vec3(6.0, 20.0, 62.0) / 255.0;
+        vec3 topRight    = vec3(145.0, 224.0, 255.0) / 255.0;
+        vec3 bottomLeft  = vec3(1.0, 3.0, 12.0) / 255.0;
+        vec3 bottomRight = vec3(0.0, 38.0, 148.0) / 255.0;
+
+        vec3 topRow = mix(topLeft, topRight, clamp(pWave.x, 0.0, 1.0));
+        vec3 botRow = mix(bottomLeft, bottomRight, clamp(pWave.x, 0.0, 1.0));
+        vec3 col = mix(topRow, botRow, clamp(pWave.y, 0.0, 1.0));
+
+        float effSoft = 0.88;
+        float effBeam = 1.15;
+
+        // Exact 7 rotated Gaussian volumetric lobes from deepmind.google "argon-dark"
+        col = mix(col, vec3(10.4, 67.5, 162.0)/255.0,  clamp(rotBell(pWave, vec2(0.681, 0.203), 1.0/(vec2(0.329, 0.349)*effSoft), vec2(cos(1.117), sin(1.117))) * 0.662 * effBeam, 0.0, 0.96));
+        col = mix(col, vec3(135.0, 216.0, 255.0)/255.0, clamp(rotBell(pWave, vec2(0.945, 0.144), 1.0/(vec2(0.388, 0.420)*effSoft), vec2(cos(0.033), sin(0.033))) * 0.780 * effBeam, 0.0, 0.96));
+        col = mix(col, vec3(0.0, 66.2, 252.1)/255.0,   clamp(rotBell(pWave, vec2(0.853, 0.693), 1.0/(vec2(0.550, 0.729)*effSoft), vec2(cos(-0.437), sin(-0.437))) * 0.380 * effBeam, 0.0, 0.96));
+        col = mix(col, vec3(0.0, 18.0, 68.0)/255.0,    clamp(rotBell(pWave, vec2(0.308, 0.570), 1.0/(vec2(0.444, 0.414)*effSoft), vec2(cos(-0.062), sin(-0.062))) * 0.900, 0.0, 0.96));
+        col = mix(col, vec3(0.2, 0.0, 6.1)/255.0,      clamp(rotBell(pWave, vec2(0.210, 0.825), 1.0/(vec2(0.440, 0.650)*effSoft), vec2(cos(-0.689), sin(-0.689))) * 0.920, 0.0, 0.96));
+        col = mix(col, vec3(0.0, 6.0, 24.0)/255.0,     clamp(rotBell(pWave, vec2(0.580, 0.941), 1.0/(vec2(0.491, 0.395)*effSoft), vec2(cos(-0.359), sin(-0.359))) * 0.780, 0.0, 0.96));
+        col = mix(col, vec3(110.0, 218.0, 255.0)/255.0, clamp(rotBell(pWave, vec2(1.120, 0.820), 1.0/(vec2(0.280, 0.808)*effSoft), vec2(cos(0.033), sin(0.033))) * 0.960 * effBeam, 0.0, 0.96));
+
+        fragColor = vec4(clamp(col + dither, 0.0, 1.0), 1.0);
+      }`;
+
+      function compile(type, src) {
+        const s = gl.createShader(type);
+        gl.shaderSource(s, src);
+        gl.compileShader(s);
+        return gl.getShaderParameter(s, gl.COMPILE_STATUS) ? s : null;
+      }
+
+      const vs = compile(gl.VERTEX_SHADER, vsSource);
+      const fs = compile(gl.FRAGMENT_SHADER, fsSource);
+      if (!vs || !fs) return;
+
+      const prog = gl.createProgram();
+      gl.attachShader(prog, vs);
+      gl.attachShader(prog, fs);
+      gl.linkProgram(prog);
+      if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return;
+
+      const uRes = gl.getUniformLocation(prog, "u_resolution");
+      const uPhase = gl.getUniformLocation(prog, "u_phase");
+      const uPtr = gl.getUniformLocation(prog, "u_pointer");
+
+      let ptrX = 0, ptrY = 0;
+      window.addEventListener("pointermove", e => {
+        ptrX = (e.clientX / window.innerWidth - 0.5) * 2.0;
+        ptrY = (e.clientY / window.innerHeight - 0.5) * 2.0;
+      }, { passive: true });
+
+      function resize() {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = Math.floor(window.innerWidth * dpr);
+        canvas.height = Math.floor(window.innerHeight * dpr);
+        gl.viewport(0, 0, canvas.width, canvas.height);
+      }
+      window.addEventListener("resize", resize);
+      resize();
+
+      function render(now) {
+        gl.useProgram(prog);
+        gl.uniform2f(uRes, canvas.width, canvas.height);
+        gl.uniform1f(uPhase, (now * 0.000045) % 1.0);
+        gl.uniform2f(uPtr, ptrX, ptrY);
+        gl.drawArrays(gl.TRIANGLES, 0, 3);
+        requestAnimationFrame(render);
+      }
+      requestAnimationFrame(render);
+    })();
+  </script>
+</body>
+</html>

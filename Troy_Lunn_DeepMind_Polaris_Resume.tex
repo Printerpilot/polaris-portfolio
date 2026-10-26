@@ -1,0 +1,67 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[top=0.42in,bottom=0.42in,left=0.48in,right=0.48in]{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{parskip}
+
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2pt}
+
+\titleformat{\section}{\large\bfseries\uppercase}{}{0em}{}[\titlerule]
+\titlespacing*{\section}{0pt}{6pt}{3pt}
+
+\setlist[itemize]{leftmargin=1.2em,itemsep=1.5pt,topsep=1.5pt,parsep=0pt}
+
+\begin{document}
+
+\begin{center}
+    {\LARGE \textbf{TROY BRENNAN LUNN}} \\[2pt]
+    Greater San Diego, CA (Open to Mountain View, CA / Relocation) $\cdot$
+    \href{mailto:troy.lunn@endlesswallet.io}{troy.lunn@endlesswallet.io} $\cdot$
+    \href{mailto:tkdtroy@gmail.com}{tkdtroy@gmail.com} $\cdot$
+    \href{https://github.com/Printerpilot}{github.com/Printerpilot} $\cdot$
+    \href{https://endlesswallet.io}{endlesswallet.io}
+\end{center}
+
+\section{Summary \& Mission}
+Systems Architect, AI Evaluation \& Swarm Engineer, and Founder with \textbf{198,000+ lines of production code} shipped across autonomous multi-agent swarms, deterministic verification rubrics, CAD/robotics kernels, Model Context Protocol (MCP) bridges, and zero-trust fintech platforms. Daily power-user and comparative evaluator of \textbf{Gemini (Antigravity)}, \textbf{Claude (Claude Code / Cowork)}, and \textbf{Grok Build} on complex, long-horizon software and hardware engineering workflows. Former \textbf{U.S. Junior National Taekwondo Team Member (U.S. Olympic Training Center, Colorado Springs)} and \textbf{youngest All-American in the sport}---driven to build frontier AI evaluation and reasoning systems that better humanity and bring us closer to a world of unimaginable abundance.
+
+\section{Technical Skills \& Polaris Alignment}
+\begin{itemize}
+    \item \textbf{AI Coding Agents \& Evaluation Engineering:} Long-horizon SWE/CAD task design; deterministic Python/AST/B-Rep graders; anti-reward-hacking, anti-shape-spoofing, and anti-sycophancy rubrics; cross-model failure analysis (\textbf{Gemini 2.5/4 in Antigravity}, \textbf{Claude Code}, \textbf{Grok Build CLI}, \textbf{OpenAI Codex}).
+    \item \textbf{Multi-Agent Swarms \& LLM Infrastructure:} Hybrid \textbf{DiffusionGemma + Autoregressive (AR) Auditor} swarms; Cloud TPUv8I KV-cache prefix sharing \& JetStream continuous batching (\texttt{asyncio}); LangGraph; Model Context Protocol (MCP stdio, FastMCP SSE, JSON-RPC 2.0); on-device MediaPipe GenAI (\textbf{Gemma 3 1B-IT q8}) \& OpenClaw gateways.
+    \item \textbf{Languages \& Full-Stack Systems:} Python, Swift (\texttt{SwiftUI}), Kotlin (\texttt{Jetpack Compose}), TypeScript/JavaScript (\texttt{React 19}, \texttt{Deno}, \texttt{Node.js}, \texttt{Electron}, \texttt{Hono}, \texttt{Three.js}), SQL (\texttt{PostgreSQL 17} / \texttt{Supabase}), C++/OpenCASCADE (\texttt{build123d}, \texttt{CadQuery}, \texttt{adsk.core}/\texttt{adsk.fusion}), EVM (\texttt{ethers.js}, Base L2).
+\end{itemize}
+
+\section{Selected AI Systems, Evaluation \& Engineering Experience}
+
+\textbf{Independent AI Systems Researcher \& Principal Architect} \hfill \textbf{2025 -- Present} \\
+\textit{Agentic Swarms, Deterministic Evaluation Rubrics, MCP Connectors \& CAD/Robotics Kernels}
+\begin{itemize}
+    \item \textbf{Polaris-Style Deterministic Graders \& Physical Intuition Verifiers (\texttt{verify\_design.py}, \texttt{tennis\_match\_swarm}, \texttt{layer1\_agentic\_loop}):} Built automated B-Rep topological complexity gates that defeat LLM \textbf{``Shape Spoofing''} (catching models that extrude 3-face cylinders named \texttt{Pinion\_15T} instead of synthesizing $>20$-face involute gear teeth), discriminate NURBS spline-mesh artifacts ($<0.1\text{ cm}^3$) from real collisions, and enforce $10\ \mu\text{m}$ ($0.001\text{ cm}$) kinematic center-distance accuracy. Formalized \textbf{Physical \& Manufacturability Intuition (DFA/DFM)} into deterministic graders after finding that frontier AI lacks an intuitive grasp of the \textit{totality} of an engineering task---designing \textbf{unbuildable ``Ship-in-a-Bottle'' assemblies} such as placing large bearings/motors inside a 1-piece CNC frame whose external holes are smaller than the component, or sealing a jet engine and fuel cell inside an airframe with only small intake/exhaust ports and zero split seams or access hatches.
+    \item \textbf{Multi-Team ``Tennis Match'' Engineering Swarm, 1:1 Auditor Agents \& DiffusionGemma Swarm (\texttt{tennis\_match\_swarm}, \texttt{distributed\_design\_swarm}, \texttt{diffusion\_gemma\_swarm}):} Architected a dual-orchestrator swarm where \texttt{DesignOrchestrator} (Chief Engineer) dispatches typed \texttt{DesignGoal} contracts across \textbf{7 specialized \texttt{DesignTeam} Workers} (\texttt{MDE}, \texttt{OML\_Aero}, \texttt{Propulsion}, \texttt{Thermal}, \texttt{EE}, \texttt{Avionics}, \texttt{Materials}) linked by a BFS \texttt{GraphSolver}, and serves verified \texttt{.STEP} packages to \texttt{SimulationOrchestrator} across \textbf{6 verification teams} (\texttt{FEANVHTeam}, \texttt{AeroCFDTeam}, \texttt{ThermalDynamicsTeam}, \texttt{EMCSignalTeam}, \texttt{IndustrialEngineeringTeam} for DFM/DFA, \texttt{SupplyChainCostingTeam}). Paired every Worker 1-to-1 with an adversarial \textbf{\texttt{InternalAuditor} / \texttt{AuditorAgent}} catching \textbf{Reward Hacking} (deleting the $1.80\text{ kg}$ \texttt{EngineBlock} payload), \textbf{Sycophancy}, \textbf{API Hallucinations}, and \textbf{State-Cycle Loops} (\texttt{AuditorEscalation}), plus \textbf{Cloud TPUv8I (384 MB SRAM)} \texttt{DiffusionGemmaWorker} + AR \texttt{TextAuditorAgent} KV-cache sharing.
+    \item \textbf{Fusion 360 State-Aware MCP Server v3.0 \& Multi-LLM Bridges (\texttt{FusionStateAwareAgent}, $\sim$18,400+ LOC):} Built an in-process Autodesk Fusion 360 add-in exposing \textbf{111 deterministic CAD/CAM/inspection MCP tools} across \textbf{Gemini/Antigravity, Claude, and Grok}, with thread-safe UI event marshalling, persistent B-Rep entity pointers (\texttt{REFERENCE\_MAP}), and a custom FastMCP SSE proxy over Tailscale Funnel featuring \textbf{16 KB SSE comment padding} (defeating Cloudflare buffering) and ASGI host-header rewriting.
+    \item \textbf{Agentic CAD \& Robotics Skill Suite (\texttt{.agents/skills/} --- 288 files, 85,297 LOC) \& Flagship Hardware:} Authored 7 modular skills (\texttt{cad}, \texttt{urdf}, \texttt{srdf}, \texttt{sdf}, \texttt{render}, \texttt{step-parts}, \texttt{sendcutsend}) with a Three.js CAD Explorer, MoveIt2 WebSocket IK server, and SendCutSend DFM preflight verifiers. Programmatically generated the \textbf{APEX-6M 6-Axis CNC Robot Arm} (\texttt{3,460 LOC}, 13 subassemblies, \textbf{142 COTS STEP parts}, 24k RPM ISO20 ATC spindle with twisted helical carbide cutters, 190-body Voron StealthChanger printhead, $0.0\text{ mm}$ interference), a 2-stage \textbf{Hybrid SDF + OpenCASCADE B-Rep Kernel} (\texttt{1,292 LOC}) with BFS wave-propagation constraint solving, and a 13-station NACA \textbf{BWB Stealth UAV} (\texttt{19,562 LOC} across 356 scripts).
+\end{itemize}
+
+\textbf{Creator \& Lead Engineer} $|$ \textit{Grok Executive Suite \& ClawBridge Mobile Agent Runtime} \hfill \textbf{2026 -- Present}
+\begin{itemize}
+    \item \textbf{Grok Executive Suite (\texttt{grok-cowork-app} --- 7,690+ LOC, 16 macOS arm64 DMG Releases \texttt{v0.1.0} $\rightarrow$ \texttt{v0.4.1}):} Built a native Apple Silicon Electron desktop IDE for Grok Build CLI with multi-project context injection, isolated \texttt{node-cron} scheduled execution buffers, 350ms live \texttt{events.jsonl} tool-telemetry tracking, Apple Developer ID notarization, and bundled CoreGraphics/JXA macOS desktop-control MCP servers (7 stdio / 16 SSE tools).
+    \item \textbf{ClawBridge Mobile Agent Swarm Control Surface (\texttt{com.troy.clawbridge} --- 3,660+ LOC, Android \texttt{v1.7.0}):} Built a React 19 / TypeScript 6 / Capacitor 8 Android runtime embedding an in-process Hono/Zod OpenAI-compatible gateway (\texttt{127.0.0.1:7842}) dynamically routing between offline on-device \textbf{MediaPipe Gemma 3 1B-IT (q8)} and cloud \textbf{OpenClaw} swarm nodes provisioned via 1-click \textbf{Oracle Cloud (OCI)} \texttt{\#cloud-config} + Caddy auto-TLS scripts.
+\end{itemize}
+
+\textbf{Founder \& Lead Systems Architect} $|$ \textit{Endless Wallet LLC (\texttt{endlesswallet.io})} \hfill \textbf{2019 -- Present}
+\begin{itemize}
+    \item Architected and shipped a \textbf{67,400+ LOC} non-custodial P2P social lending \& 7-C credit evaluation (\textbf{CORE}) platform across \textbf{native iOS (\texttt{SwiftUI}, 36,555 LOC, Build 112)}, \textbf{native Android (\texttt{Jetpack Compose}, 22,370 LOC, v33 / SDK 36)}, \textbf{React 19 Web}, and \textbf{Supabase PostgreSQL 17 (46 SQL migrations, 23 Deno Edge Functions)} by orchestrating \textbf{Gemini (Antigravity)}, \textbf{Claude}, and \textbf{Grok} across shared handoff specs.
+    \item Engineered a \textbf{\$0.00-fee Base Mainnet (Chain ID 8453) USDC settlement rail} (\texttt{c2c-pay}, \texttt{autopay-worker} with 288 \texttt{pg\_cron} heartbeats/day and micro-ETH gas sponsorship); a zero-dependency \textbf{California Limited Guaranty PDF \& SHA-256 e-signature engine}; and \textbf{NIST SP 800-207 Zero-Trust hardware attestation} (custom Deno CBOR/ASN.1 DER/ECDSA P-256 Apple App Attest verifier + Play Integrity + \textbf{94+ daily autonomous AI SecOps audit digests}), earning full \textbf{Plaid Production Approval}.
+\end{itemize}
+
+\section{Competitive Distinction \& Leadership}
+\begin{itemize}
+    \item \textbf{U.S. Junior National Taekwondo Team Member \& Resident Athlete, U.S. Olympic Training Center (Colorado Springs, CO):} Competed internationally at the highest level of elite athletics; recognized as the \textbf{youngest All-American in the sport} at the time of award.
+    \item \textbf{Entrepreneur \& Advanced Manufacturing Engineer, Cast Aero:} First-principles aerospace and defense manufacturing systems design.
+\end{itemize}
+
+\end{document}
