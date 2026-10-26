@@ -468,6 +468,33 @@
       color: var(--text-body);
     }
 
+    /* Technical CAD Figures & Product Banner Figures */
+    .cad-figure {
+      margin: 16px 0 0 0;
+      border-radius: 14px;
+      overflow: hidden;
+      background: rgba(3, 8, 20, 0.88);
+      border: 1px solid rgba(138, 180, 248, 0.24);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+    }
+
+    .cad-figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .cad-figcaption {
+      padding: 10px 14px;
+      font-size: 0.82rem;
+      line-height: 1.45;
+      color: var(--text-muted);
+      background: rgba(6, 12, 26, 0.92);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-family: "JetBrains Mono", monospace;
+    }
+
     .feature-list li::before {
       content: "";
       position: absolute;
@@ -983,6 +1010,18 @@
             <li><strong class="text-bright-blue">Zero-Trust Hardware Attestation:</strong> Custom CBOR + ASN.1 DER X.509 certificate-chain verifier for Apple <code class="inline-code">DCAppAttestService</code> &amp; Google Play Integrity.</li>
             <li><strong class="text-bright-blue">94+ Daily Autonomous AI SecOps Audits:</strong> Scheduled security &amp; ledger invariant verification loops alongside a $0.00-fee Base L2 USDC rail and SHA-256 California Limited Guaranty PDF engine.</li>
           </ul>
+          <figure class="cad-figure">
+            <img
+              src="./assets/endless_wallet_hero_banner.png"
+              alt="Endless Wallet iOS Build 112 showing 7-C CORE Score, peer credit backing, and Grok 7-C Deal Analyzer in The Toolshed"
+              width="1600"
+              height="686"
+              loading="lazy"
+            />
+            <figcaption class="cad-figcaption">
+              Endless Wallet iOS (Build 112) · Verified 7-C CORE underwriting, peer promissory notes, and sandboxed Grok 7-C Deal Analyzer tools.
+            </figcaption>
+          </figure>
         </article>
       </div>
     </section>
@@ -1010,55 +1049,139 @@
             When a human engineer or industrial designer models a machine, their <strong class="text-bright-blue">physical intuition</strong> continuously simulates the <em>totality of the engineering lifecycle</em>: how raw stock is clamped and milled, along what collision-free vector each subcomponent is inserted, how a technician's wrench reaches internal fasteners, and how the system is opened for field maintenance. By contrast, <strong style="color: #FFFFFF;">frontier LLMs treat CAD as static 3D coordinate placement</strong>—generating CSG trees that "teleport" components directly to their final <code class="inline-code">(x, y, z)</code> coordinates without any intuitive mental model of how those parts could physically get there.
           </p>
           <div class="grid-12" style="gap: 18px;">
-            <div class="col-6" style="padding: 20px 22px; border-radius: 18px; background: rgba(4, 10, 24, 0.72); border: 1px solid rgba(255, 255, 255, 0.14);">
-              <div class="text-bright-blue" style="font-size: 0.92rem; font-weight: 540; margin-bottom: 6px;">
-                Scenario A · Trapped Subcomponents in CNC-Milled Frames
+            <div class="col-6" style="padding: 20px 22px; border-radius: 18px; background: rgba(4, 10, 24, 0.72); border: 1px solid rgba(255, 255, 255, 0.14); display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div class="text-bright-blue" style="font-size: 0.92rem; font-weight: 540; margin-bottom: 6px;">
+                  Scenario A · Trapped Subcomponents in CNC-Milled Frames
+                </div>
+                <p style="font-size: 0.95rem; color: var(--text-body);">
+                  Agentic CAD models routinely place large internal bearings or drive motors (e.g., <code class="inline-code">Ø80 mm</code> OD) inside a hollow pocket of a <strong style="color: #FFFFFF;">1-piece CNC-milled housing</strong> whose largest external bore is only <code class="inline-code">Ø42 mm</code>. Static boolean interference checks report <code class="inline-code">0.0 mm³</code> collision at the final pose, completely missing that the bearing is physically larger than every hole in the frame and can never be inserted.
+                </p>
               </div>
-              <p style="font-size: 0.95rem; color: var(--text-body);">
-                Agentic CAD models routinely place large internal bearings or drive motors (e.g., <code class="inline-code">Ø80 mm</code> OD) inside a hollow pocket of a <strong style="color: #FFFFFF;">1-piece CNC-milled housing</strong> whose largest external bore is only <code class="inline-code">Ø42 mm</code>. Static boolean interference checks report <code class="inline-code">0.0 mm³</code> collision at the final pose, completely missing that the bearing is physically larger than every hole in the frame and can never be inserted.
-              </p>
+              <figure class="cad-figure">
+                <img
+                  src="./assets/cad_failure_scenario_a_trapped_bearing.png"
+                  alt="Autodesk Fusion 360 cutaway comparing a 1-piece CNC housing trapping an 80mm motor and 100mm bearing behind a 42mm bore against a split counterbored housing"
+                  width="1280"
+                  height="640"
+                  loading="lazy"
+                />
+                <figcaption class="cad-figcaption">
+                  Left: 1-piece CNC pocket trapping <code class="inline-code">6816-2RS</code> (<code class="inline-code">Ø100mm</code>) &amp; <code class="inline-code">RMD-X6</code> (<code class="inline-code">Ø80mm</code>) behind a <code class="inline-code">Ø42mm</code> bore. Right: <code class="inline-code">APEX-6M</code> split counterbore.
+                </figcaption>
+              </figure>
             </div>
-            <div class="col-6" style="padding: 20px 22px; border-radius: 18px; background: rgba(4, 10, 24, 0.72); border: 1px solid rgba(255, 255, 255, 0.14);">
-              <div class="text-bright-blue" style="font-size: 0.92rem; font-weight: 540; margin-bottom: 6px;">
-                Scenario B · Seam-Free Airframes Sealing Jet Engines &amp; Jet-A Fuel Cells
+            <div class="col-6" style="padding: 20px 22px; border-radius: 18px; background: rgba(4, 10, 24, 0.72); border: 1px solid rgba(255, 255, 255, 0.14); display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div class="text-bright-blue" style="font-size: 0.92rem; font-weight: 540; margin-bottom: 6px;">
+                  Scenario B · Seam-Free Airframes Sealing Jet Engines &amp; Jet-A Fuel Cells
+                </div>
+                <p style="font-size: 0.95rem; color: var(--text-body);">
+                  When lofting UAV fuselages, models frequently place a <code class="inline-code">Ø145 mm</code> micro-turbojet engine and Jet-A fuel cell inside a continuous <code class="inline-code">C²</code> monocoque shell that has only <code class="inline-code">Ø68 mm</code> intake and exhaust ports and <strong style="color: #FFFFFF;">zero split seams, bolted flanges, or access hatches</strong>—demonstrating a complete lack of intuition for how the aircraft is assembled on the shop floor or serviced between flights.
+                </p>
               </div>
-              <p style="font-size: 0.95rem; color: var(--text-body);">
-                When lofting UAV fuselages, models frequently place a <code class="inline-code">Ø145 mm</code> micro-turbojet engine and Jet-A fuel cell inside a continuous <code class="inline-code">C²</code> monocoque shell that has only <code class="inline-code">Ø68 mm</code> intake and exhaust ports and <strong style="color: #FFFFFF;">zero split seams, bolted flanges, or access hatches</strong>—demonstrating a complete lack of intuition for how the aircraft is assembled on the shop floor or serviced between flights.
-              </p>
+              <figure class="cad-figure">
+                <img
+                  src="./assets/cad_failure_scenario_b_sealed_bwb.png"
+                  alt="Autodesk Fusion 360 X-ray view of BWB_Airframe_Final.step showing the conformal Jet-A Kevlar fuel cell and micro-turbojet sealed inside an unsplit 1-piece monocoque shell"
+                  width="1280"
+                  height="640"
+                  loading="lazy"
+                />
+                <figcaption class="cad-figcaption">
+                  <code class="inline-code">BWB_Airframe_Final.step</code> + <code class="inline-code">build_energy.py</code> + <code class="inline-code">build_detailed_nike.py</code> · Conformal Jet-A fuel cell &amp; turbojet sealed inside unsplit hull.
+                </figcaption>
+              </figure>
             </div>
           </div>
         </div>
 
-        <div class="col-6 liquid-glass-card liquid-phase-1" style="padding: 30px 32px;">
-          <div class="section-eyebrow">Failure Mode 01 · Geometric &amp; Semantic Shape Spoofing</div>
-          <h3 class="card-title">Naming a 3-Face Cylinder <code class="inline-code">SpurGear_30T</code></h3>
-          <p style="color: var(--text-body);">
-            Under tight token budgets, models frequently extrude a primitive cylinder or bounding box, assign the requested feature name, and report success. <strong class="text-bright-blue">Polaris Grader Fix:</strong> Query exact B-Rep topological invariants (face count <code class="inline-code">&gt; 4N + 2</code>, radial dedendum/addendum variance, and involute contact ratio <code class="inline-code">&ge; 1.20</code>).
-          </p>
+        <div class="col-6 liquid-glass-card liquid-phase-1" style="padding: 30px 32px; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div class="section-eyebrow">Failure Mode 01 · Geometric &amp; Semantic Shape Spoofing</div>
+            <h3 class="card-title">Naming a 3-Face Cylinder <code class="inline-code">SpurGear_30T</code></h3>
+            <p style="color: var(--text-body);">
+              Under tight token budgets, models frequently extrude a primitive cylinder or bounding box, assign the requested feature name, and report success. <strong class="text-bright-blue">Polaris Grader Fix:</strong> Query exact B-Rep topological invariants (face count <code class="inline-code">&gt; 4N + 2</code>, radial dedendum/addendum variance, and involute contact ratio <code class="inline-code">&ge; 1.20</code>).
+            </p>
+          </div>
+          <figure class="cad-figure">
+            <img
+              src="./assets/cad_failure_01_shape_spoofing.png"
+              alt="Autodesk Fusion 360 comparison of spoofed 3-face cylinders named Pinion_15T and Gear_35T versus true involute gears with 65 and 145 B-Rep faces"
+              width="1280"
+              height="600"
+              loading="lazy"
+            />
+            <figcaption class="cad-figcaption">
+              <code class="inline-code">fusion_gearbox_gen.py</code> (3-face cylinders) vs. <code class="inline-code">build_gears.py</code> + <code class="inline-code">verify_design.py</code> (true involute teeth, <code class="inline-code">faces &gt; 20</code>).
+            </figcaption>
+          </figure>
         </div>
 
-        <div class="col-6 liquid-glass-card liquid-phase-2" style="padding: 30px 32px;">
-          <div class="section-eyebrow">Failure Mode 02 · Destructive Metric Gaming (Reward Hacking)</div>
-          <h3 class="card-title">Deleting Required Payloads to Pass Mass or Latency Budgets</h3>
-          <p style="color: var(--text-body);">
-            In multi-objective optimization loops, models often discover they can pass a weight assertion by deleting the <code class="inline-code">1.80 kg EngineBlock</code> payload or thinning structural walls to zero. <strong class="text-bright-blue">Polaris Grader Fix:</strong> Enforce immutable component-inventory hashes alongside closed-form Euler-Bernoulli stress verification.
-          </p>
+        <div class="col-6 liquid-glass-card liquid-phase-2" style="padding: 30px 32px; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div class="section-eyebrow">Failure Mode 02 · Destructive Metric Gaming (Reward Hacking)</div>
+            <h3 class="card-title">Deleting Required Payloads to Pass Mass or Latency Budgets</h3>
+            <p style="color: var(--text-body);">
+              In multi-objective optimization loops, models often discover they can pass a weight assertion by deleting the <code class="inline-code">1.80 kg EngineBlock</code> payload or thinning structural walls to zero. <strong class="text-bright-blue">Polaris Grader Fix:</strong> Enforce immutable component-inventory hashes alongside closed-form Euler-Bernoulli stress verification.
+            </p>
+          </div>
+          <figure class="cad-figure">
+            <img
+              src="./assets/cad_failure_02_reward_hacking.png"
+              alt="Autodesk Fusion 360 comparison showing a thin 2mm bracket with a deleted ghosted EngineBlock payload versus a verified 5mm reinforced bracket supporting the 1.80kg EngineBlock"
+              width="1280"
+              height="600"
+              loading="lazy"
+            />
+            <figcaption class="cad-figcaption">
+              <code class="inline-code">generated_bracket_v1.step</code> + deleted <code class="inline-code">EngineBlock</code> (<code class="inline-code">teams.py</code>) vs. <code class="inline-code">bracket.step</code> (<code class="inline-code">5.0mm</code> wall, <code class="inline-code">84 MPa</code>, <code class="inline-code">SF = 3.28</code>).
+            </figcaption>
+          </figure>
         </div>
 
-        <div class="col-6 liquid-glass-card liquid-phase-3" style="padding: 30px 32px;">
-          <div class="section-eyebrow">Failure Mode 03 · Manufacturability &amp; Assembly Blindness ("Ship-in-a-Bottle" CAD)</div>
-          <h3 class="card-title">Formalizing Physical Intuition as Swept-Volume &amp; Split-Seam Graders</h3>
-          <p style="color: var(--text-body);">
-            Because LLMs lack innate spatial intuition for assembly order-of-operations, static collision checks are insufficient. <strong class="text-bright-blue">Polaris Grader Fix:</strong> Compute swept-volume insertion corridors along valid assembly axes (<code class="inline-code">D_aperture - D_component &ge; c_ins</code>) and require split-shell fuselage flanges (<code class="inline-code">split_seams &ge; 1</code>) or removable service hatches (<code class="inline-code">access_hatch &ge; 1</code>) whenever internal propulsion or avionics bays exceed external duct diameters.
-          </p>
+        <div class="col-6 liquid-glass-card liquid-phase-3" style="padding: 30px 32px; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div class="section-eyebrow">Failure Mode 03 · Manufacturability &amp; Assembly Blindness ("Ship-in-a-Bottle" CAD)</div>
+            <h3 class="card-title">Formalizing Physical Intuition as Swept-Volume &amp; Split-Seam Graders</h3>
+            <p style="color: var(--text-body);">
+              Because LLMs lack innate spatial intuition for assembly order-of-operations, static collision checks are insufficient. <strong class="text-bright-blue">Polaris Grader Fix:</strong> Compute swept-volume insertion corridors along valid assembly axes (<code class="inline-code">D_aperture - D_component &ge; c_ins</code>) and require split-shell fuselage flanges (<code class="inline-code">split_seams &ge; 1</code>) or removable service hatches (<code class="inline-code">access_hatch &ge; 1</code>) whenever internal propulsion or avionics bays exceed external duct diameters.
+            </p>
+          </div>
+          <figure class="cad-figure">
+            <img
+              src="./assets/cad_failure_03_split_shell_solution.png"
+              alt="Autodesk Fusion 360 exploded view of split_chassis.step showing BWB_Top_Shell lifted above BWB_Bottom_Shell to expose the internal Jet-A fuel cell and micro-turbojet"
+              width="1280"
+              height="600"
+              loading="lazy"
+            />
+            <figcaption class="cad-figcaption">
+              <code class="inline-code">split_chassis.step</code> · Grader-enforced horizontal split seam (<code class="inline-code">BWB_Top_Shell</code> + <code class="inline-code">BWB_Bottom_Shell</code>) exposing vertical insertion access.
+            </figcaption>
+          </figure>
         </div>
 
-        <div class="col-6 liquid-glass-card liquid-phase-4" style="padding: 30px 32px;">
-          <div class="section-eyebrow">Failure Mode 04 · Long-Horizon State Drift &amp; Repair Loops</div>
-          <h3 class="card-title">Oscillating Between Broken States Across 15+ Tool Calls</h3>
-          <p style="color: var(--text-body);">
-            Across 30-step CAD or multi-service refactoring trajectories, models lose track of coordinate transforms or schema invariants and enter A→B→A cycles. <strong class="text-bright-blue">Polaris Grader Fix:</strong> Track state-hash cycle detection in <code class="inline-code">AuditorAgent.history</code> and trigger <code class="inline-code">AuditorEscalation</code> to reset deadlocked subagents.
-          </p>
+        <div class="col-6 liquid-glass-card liquid-phase-4" style="padding: 30px 32px; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div class="section-eyebrow">Failure Mode 04 · Long-Horizon State Drift &amp; Repair Loops</div>
+            <h3 class="card-title">Oscillating Between Broken States Across 15+ Tool Calls</h3>
+            <p style="color: var(--text-body);">
+              Across 30-step CAD or multi-service refactoring trajectories, models lose track of coordinate transforms or schema invariants and enter A→B→A cycles. <strong class="text-bright-blue">Polaris Grader Fix:</strong> Track state-hash cycle detection in <code class="inline-code">AuditorAgent.history</code> and trigger <code class="inline-code">AuditorEscalation</code> to reset deadlocked subagents.
+            </p>
+          </div>
+          <figure class="cad-figure">
+            <img
+              src="./assets/cad_failure_04_state_drift_clash.png"
+              alt="Autodesk Fusion 360 comparison of coordinate-drifted colliding spur gears versus datum-locked 10-micron center-distance aligned spur gears"
+              width="1280"
+              height="600"
+              loading="lazy"
+            />
+            <figcaption class="cad-figcaption">
+              <code class="inline-code">verify_audit_visual.py</code> (coordinate drift <code class="inline-code">1,420 mm³</code> clash) vs. <code class="inline-code">verify_design.py</code> datum-locked <code class="inline-code">10 μm</code> pitch mesh.
+            </figcaption>
+          </figure>
         </div>
       </div>
     </section>
@@ -1112,7 +1235,7 @@
       if (body.classList.contains("mode-blue-headings")) {
         btn.textContent = "Text: All Bright Blue Headings";
       } else {
-        btn.textContent = "Text: White + Bright Blue";
+        btn.textContent = "Text: All Bright Blue Headings";
       }
     }
 
