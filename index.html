@@ -705,40 +705,47 @@
     <section id="eval-simulator">
       <div class="section-header" style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px;">
         <div>
-          <div class="section-eyebrow">Stanford d.school Design Thinking × Universal Systems Benchmark</div>
+          <div class="section-eyebrow">Stanford d.school Design Thinking × Upstream Causal Grounding Benchmark</div>
           <h2 class="section-title">Live Polaris Evaluation Task: <code class="inline-code" style="font-size: 0.78em;">POLARIS-EVAL-001</code></h2>
           <p class="section-desc">
-            Grounded in the <strong class="text-bright-blue">Stanford d.school Design Thinking Methodology</strong> (<code class="inline-code">Empathize → Define → Ideate → Prototype → Test</code>), <code class="inline-code">POLARIS-EVAL-001</code> grades whether an agent deduces scope, lifecycle constructibility, and reciprocal contracts before coding—across <strong class="text-bright-blue">Software Engineering, Clinical Medicine, and Hardware/Robotics</strong>.
+            Internal consistency is not fitness for purpose. Grounded in <strong class="text-bright-blue">Stanford d.school Design Thinking</strong> (<code class="inline-code">Empathize → Define → Ideate → Prototype → Test</code>), <code class="inline-code">POLARIS-EVAL-001</code> enforces <strong class="text-bright-blue">Upstream Causal Grounding</strong>: downstream design choices earn credit only when causally derived from the <code class="inline-code">Empathize</code> mission objective.
           </p>
         </div>
 
         <div style="display: flex; flex-wrap: wrap; gap: 10px;" role="tablist" aria-label="Candidate Trajectories">
-          <button id="btn-traj-a" onclick="selectTrajectory('A')" class="gdm-pill-btn" type="button">
-            1. SWE Agent: Microservice Failure (0.0 / 100)
+          <button id="btn-traj-a" onclick="selectTrajectory('A')" class="gdm-pill-btn gdm-pill-btn--primary" type="button">
+            1. "Right Part, Wrong Mission" (Skipped Empathize · 0.0 / 100)
           </button>
-          <button id="btn-traj-b" onclick="selectTrajectory('B')" class="gdm-pill-btn gdm-pill-btn--primary" type="button">
-            2. Hardware Agent: 6-DOF Arm Audit (5.8 / 100)
+          <button id="btn-traj-b" onclick="selectTrajectory('B')" class="gdm-pill-btn" type="button">
+            2. Empirical Case Study (APEX-6M · 3.4 / 100 Grounded)
           </button>
           <button id="btn-traj-c" onclick="selectTrajectory('C')" class="gdm-pill-btn" type="button">
-            3. Polaris Reference: Universal Engine (100 / 100) →
+            3. Polaris Reference: Causal Engine (100 / 100) →
           </button>
         </div>
       </div>
 
-      <!-- Benchmark Thesis Statement Banner -->
+      <!-- Benchmark Thesis Statement & Upstream Causal Grounding Formula Banner -->
       <div class="liquid-glass-card liquid-phase-1" style="padding: 22px 28px; margin-bottom: 18px; border-left: 3px solid #4C9AFF;">
-        <div class="section-eyebrow" style="margin-bottom: 6px;">Thesis Statement · <code class="inline-code">POLARIS-EVAL-001</code></div>
-        <p style="font-size: 1.05rem; line-height: 1.55; color: #FFFFFF; margin: 0;">
-          <em>"Frontier AI models fail on long-horizon systems not from weak syntax, but from <strong class="text-bright-blue">inverted design thinking</strong>: they skip <strong class="text-bright-blue">Empathize</strong>, <strong class="text-bright-blue">Define</strong>, and <strong class="text-bright-blue">Ideate</strong>, <strong class="text-bright-blue">Prototype</strong> isolated parts bottom-up, and game <strong class="text-bright-blue">Tests</strong> instead of cascading fixes."</em>
+        <div class="section-eyebrow" style="margin-bottom: 6px;">Thesis Statement &amp; Upstream Causal Grounding Formula · <code class="inline-code">POLARIS-EVAL-001</code></div>
+        <p style="font-size: 1.04rem; line-height: 1.55; color: #FFFFFF; margin: 0 0 12px 0;">
+          <em>"Frontier AI models fail on long-horizon systems by confusing <strong class="text-bright-blue">internal consistency</strong> with <strong class="text-bright-blue">fitness for the objective</strong>: they skip <strong class="text-bright-blue">Empathize</strong>, build ungrounded <strong class="text-bright-blue">Prototypes</strong> whose components are never derived from the mission, and game <strong class="text-bright-blue">Tests</strong> instead of cascading fixes."</em>
         </p>
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.88rem; color: var(--text-body);">
+          <span style="color: #FFFFFF; font-weight: 530;">Upstream Grounding Law:</span>
+          <code class="inline-code">α_empathize = GATE-01 / 20.0 ∈ [0, 1]</code>
+          <code class="inline-code">Grounded = GATE-01 + α_empathize × Σ(GATE-02..05)</code>
+          <code class="inline-code">Final = Grounded × λ_integrity</code>
+          <span style="color: var(--text-muted);">(Skipping <code class="inline-code">Empathize</code> yields <code class="inline-code">0.0 / 100</code> even if real library parts are imported and mated cleanly.)</span>
+        </div>
       </div>
 
-      <!-- Stanford d.school Design Thinking x Universal 5-Gate Systems Matrix (SWE + Medicine + Hardware) -->
+      <!-- Domain-Agnostic 5-Gate Causal Matrix -->
       <div class="liquid-glass-card liquid-phase-2" style="padding: 26px 30px; margin-bottom: 22px; overflow-x: auto;">
         <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 14px;">
           <div>
-            <div class="section-eyebrow" style="margin-bottom: 4px;">Stanford d.school Methodology · 5 Universal Gates (5 × 20 pts = 100 pts · 0.35x Cap)</div>
-            <h3 class="card-title" style="font-size: 1.25rem; margin-bottom: 0;">Empathize → Define → Ideate → Prototype → Test &amp; Cascade</h3>
+            <div class="section-eyebrow" style="margin-bottom: 4px;">Domain-Agnostic Epistemic Chain · 5 Universal Gates (5 × 20 pts = 100 pts · α_empathize Gate · 0.35x Cap)</div>
+            <h3 class="card-title" style="font-size: 1.25rem; margin-bottom: 0;">Empathize (Sets α) → Define → Ideate → Prototype → Test &amp; Cascade</h3>
           </div>
           <div style="display: flex; gap: 8px; flex-wrap: wrap;">
             <a href="./polaris_eval_task/PROMPT.md" target="_blank" rel="noopener" class="inline-code" style="text-decoration: none;">PROMPT.md ↗</a>
@@ -749,48 +756,42 @@
         <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; line-height: 1.45; color: var(--text-body);">
           <thead>
             <tr style="border-bottom: 1px solid rgba(255,255,255,0.16); text-align: left; color: #FFFFFF;">
-              <th style="padding: 10px 12px; width: 19%;">d.school Stage &amp; Gate</th>
-              <th style="padding: 10px 12px; width: 20%;">Core Question</th>
-              <th style="padding: 10px 12px; width: 20%;">Software Engineering (SWE)</th>
-              <th style="padding: 10px 12px; width: 19%;">Clinical Medicine</th>
-              <th style="padding: 10px 12px; width: 22%;">Hardware Case Study (<code class="inline-code">APEX-6M</code>)</th>
+              <th style="padding: 10px 12px; width: 18%;">d.school Stage &amp; Gate</th>
+              <th style="padding: 10px 12px; width: 22%;">Core Causal Question</th>
+              <th style="padding: 10px 12px; width: 34%;">Universal Causal Grounding Rule (Domain-Agnostic)</th>
+              <th style="padding: 10px 12px; width: 26%;">Cross-Domain Illustration</th>
             </tr>
           </thead>
           <tbody>
             <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
-              <td style="padding: 10px 12px;"><strong class="text-bright-blue">1. EMPATHIZE<br><code class="inline-code">GATE-01</code> (20 pts)</strong></td>
-              <td style="padding: 10px 12px;"><em>What is the mission, scale, and operating hazard?</em></td>
-              <td style="padding: 10px 12px;">Deduces concurrency, <code class="inline-code">p99 ≤ 150 ms</code> SLA, &amp; fault derating before coding.</td>
-              <td style="padding: 10px 12px;">Deduces acuity, organ reserve, &amp; renal/hepatic clearance before prescribing.</td>
-              <td style="padding: 10px 12px;">Deduces reach (<code class="inline-code">607.5 mm</code>), <code class="inline-code">1.5 kW</code> milling loads, &amp; preload (<code class="inline-code">896 N</code>) before sizing parts.</td>
+              <td style="padding: 10px 12px;"><strong class="text-bright-blue">1. EMPATHIZE<br><code class="inline-code">GATE-01</code> (20 pts)<br><em>Sets α_empathize</em></strong></td>
+              <td style="padding: 10px 12px;"><em>What is the real-world objective, environment, scale, &amp; lifecycle?</em></td>
+              <td style="padding: 10px 12px;">Halts premature design on underspecified prompts (<code class="inline-code">MissingContextInquiryError</code>); derives governing bounds (<code class="inline-code">envelope</code>, <code class="inline-code">derated_capacity</code>, <code class="inline-code">required_margin</code>); blocks infeasible scopes.</td>
+              <td style="padding: 10px 12px;"><strong>SWE:</strong> Concurrency &amp; SLA.<br><strong>Med:</strong> Acuity &amp; organ reserve.<br><strong>HW:</strong> Workpiece scale &amp; loads.</td>
             </tr>
             <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
               <td style="padding: 10px 12px;"><strong class="text-bright-blue">2. DEFINE<br><code class="inline-code">GATE-02</code> (20 pts)</strong></td>
-              <td style="padding: 10px 12px;"><em>How is it built, supplied end-to-end, &amp; operated?</em></td>
-              <td style="padding: 10px 12px;">Cycle-free cold start; unbroken auth/data/telemetry pipelines; lock-safe migrations.</td>
-              <td style="padding: 10px 12px;">Feasible route/schedule; compatible IV lines; continuous vital/lab monitoring.</td>
-              <td style="padding: 10px 12px;">No 6-wall <strong>"Ship-in-a-Bottle"</strong> boxes (<code class="inline-code">J3</code>); <code class="inline-code">0</code> sweep clashes; routed cables &amp; unblocked extruder.</td>
+              <td style="padding: 10px 12px;"><em>How is the system constructed, supplied end-to-end, &amp; operated?</em></td>
+              <td style="padding: 10px 12px;">Every requirement must trace to <code class="inline-code">Empathize</code> (<code class="inline-code">UngroundedRequirementError</code>); blocks cyclic/sealed topologies, broken pathways, &amp; state-space conflicts.</td>
+              <td style="padding: 10px 12px;"><strong>SWE:</strong> Cold-start DAG &amp; telemetry.<br><strong>Med:</strong> IV compatibility &amp; vitals.<br><strong>HW:</strong> Service access &amp; harnesses.</td>
             </tr>
             <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
               <td style="padding: 10px 12px;"><strong class="text-bright-blue">3. IDEATE<br><code class="inline-code">GATE-03</code> (20 pts)</strong></td>
-              <td style="padding: 10px 12px;"><em>How do coupled nodes co-design both sides of an interface?</em></td>
-              <td style="padding: 10px 12px;">Matched caller/callee schemas, shared lock leases, &amp; atomic rollbacks.</td>
-              <td style="padding: 10px 12px;">Co-designed order sets (drug + hydration + contraindication check + rescue).</td>
-              <td style="padding: 10px 12px;">Clearance + tapped bores (<code class="inline-code">0</code> bolts in solid metal vs. <code class="inline-code">220</code> clashes); <code class="inline-code">360°</code> clamp; <code class="inline-code">0</code> air gaps.</td>
+              <td style="padding: 10px 12px;"><em>Do coupled nodes co-design both sides of every interface for the defined loads?</em></td>
+              <td style="padding: 10px 12px;">Rejects interfaces undersized for <code class="inline-code">Empathize</code> loads (<code class="inline-code">UngroundedInterfaceError</code>), mismatched contracts, floating gaps (<code class="inline-code">&gt;0</code>), &amp; partial closure (<code class="inline-code">&lt;1.0</code>).</td>
+              <td style="padding: 10px 12px;"><strong>SWE:</strong> RPC schemas &amp; lock leases.<br><strong>Med:</strong> Order + rescue bundles.<br><strong>HW:</strong> Paired bores &amp; 360° clamps.</td>
             </tr>
             <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
-              <td style="padding: 10px 12px;"><strong class="text-bright-blue">4. PROTOTYPE<br><code class="inline-code">GATE-04</code> (20 pts)</strong></td>
-              <td style="padding: 10px 12px;"><em>Were canonical building blocks imported without proxy hacks?</em></td>
-              <td style="padding: 10px 12px;">Imports audited SDKs (<code class="inline-code">CanonicalRegistry</code>), not regex mocks; retains all core workloads.</td>
-              <td style="padding: 10px 12px;">Uses verified institutional formularies; never suppresses safety alerts.</td>
-              <td style="padding: 10px 12px;">Imports real <strong>McMaster-Carr</strong> CAD (6-sided hex + threads), not round-hole stubs; <code class="inline-code">0</code> <code class="inline-code">5µm</code> fiducials.</td>
+              <td style="padding: 10px 12px;"><strong class="text-bright-blue">4. PROTOTYPE<br><code class="inline-code">GATE-04</code> (20 pts)<br><em>0.35x Cap</em></strong></td>
+              <td style="padding: 10px 12px;"><em>Is each component both <strong>causally right for the mission</strong> &amp; from a verified source?</em></td>
+              <td style="padding: 10px 12px;">Rejects <strong>"Right Part, Wrong Mission"</strong> components whose rating fails <code class="inline-code">Empathize</code> demands (<code class="inline-code">UngroundedComponentError</code>), spoofed provenance, &amp; proxy hacks.</td>
+              <td style="padding: 10px 12px;"><strong>SWE:</strong> Audited SDKs sized for load.<br><strong>Med:</strong> Formulary dosed for GFR.<br><strong>HW:</strong> McMaster CAD sized for torque.</td>
             </tr>
             <tr>
               <td style="padding: 10px 12px;"><strong class="text-bright-blue">5. TEST &amp; CASCADE<br><code class="inline-code">GATE-05</code> (20 pts)</strong></td>
-              <td style="padding: 10px 12px;"><em>When one variable changes, does the fix cascade?</em></td>
-              <td style="padding: 10px 12px;">Schema/state edits cascade forward &amp; reverse across DAGs, specs, &amp; tests (<code class="inline-code">≤1e-6</code> drift).</td>
-              <td style="padding: 10px 12px;">Lab/vital shifts (e.g. eGFR drop) cascade across all active doses &amp; schedules.</td>
-              <td style="padding: 10px 12px;">Rack height (<code class="inline-code">150→348 mm</code>) updates <code class="inline-code">CAD</code>, <code class="inline-code">URDF</code>, <code class="inline-code">SRDF</code> (<code class="inline-code">0</code> miss), spec, &amp; <code class="inline-code">6/6</code> joint tests.</td>
+              <td style="padding: 10px 12px;"><em>Does the system satisfy the original objective, &amp; do changes cascade?</em></td>
+              <td style="padding: 10px 12px;">Validates against the root <code class="inline-code">Empathize</code> objective (<code class="inline-code">ObjectiveMismatchError</code>) and cascades mutations forward &amp; reverse across all coupled nodes, specs, &amp; tests.</td>
+              <td style="padding: 10px 12px;"><strong>SWE:</strong> Schema → gateway/tests.<br><strong>Med:</strong> Lab shift → active doses.<br><strong>HW:</strong> Datum shift → CAD/URDF/SRDF.</td>
             </tr>
           </tbody>
         </table>
@@ -803,23 +804,23 @@
             <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 18px;">
               <div>
                 <div id="sim-candidate-title" style="font-size: 1.22rem; font-weight: 530; color: #FFFFFF;">
-                  Hardware Agent: 6-DOF Robot Arm Empirical Audit (APEX-6M Case Study — FAILED)
+                  1. "Right Part, Wrong Mission" Agent (Skipped Empathize, Internally Consistent Prototype)
                 </div>
                 <div id="sim-penalty-note" style="font-size: 0.94rem; color: var(--text-muted); margin-top: 4px;">
-                  Raw Score: 16.6 / 100.0 (System Composite) · Penalty Multiplier: 0.35x (Fake McMaster &amp; 5µm Fiducial Cap)
+                  Additive Raw: 55.0 / 100 · Empathize Grounding (α): 0.00x → Grounded: 0.0 / 100
                 </div>
               </div>
               <div style="text-align: right;">
                 <div id="sim-final-score" class="text-bright-blue" style="font-size: 2.3rem; font-weight: 580; line-height: 1.05;">
-                  5.8 / 100
+                  0.0 / 100
                 </div>
-                <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 4px;">Final Rubric Score</div>
+                <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 4px;">Upstream-Grounded Score</div>
               </div>
             </div>
 
             <!-- Progress Bar -->
             <div style="width: 100%; height: 10px; border-radius: 999px; background: rgba(255,255,255,0.08); overflow: hidden; margin-bottom: 16px;">
-              <div id="sim-progress-bar" style="width: 5.8%; height: 100%; border-radius: 999px; background: linear-gradient(90deg, #0084FF 0%, #4C9AFF 50%, #6EE7B7 100%); transition: width 0.35s ease;"></div>
+              <div id="sim-progress-bar" style="width: 2%; height: 100%; border-radius: 999px; background: linear-gradient(90deg, #0084FF 0%, #4C9AFF 50%, #6EE7B7 100%); transition: width 0.35s ease;"></div>
             </div>
 
             <!-- Violation Pills -->
@@ -835,7 +836,7 @@
           <div class="liquid-glass-card liquid-phase-2" style="padding: 28px 28px;">
             <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px;">
               <span id="sim-code-title" class="text-bright-blue" style="font-size: 0.98rem; font-weight: 530;">
-                Universal 5-Gate Engine: Empathize → Define → Ideate → Prototype → Cascade
+                "Right Part, Wrong Mission": Real Library Import Without Empathize Grounding
               </span>
               <code class="inline-code">grader.py</code>
             </div>
@@ -843,8 +844,8 @@
           </div>
 
           <div class="liquid-glass-card liquid-phase-3" style="padding: 28px 28px;">
-            <div class="section-eyebrow" style="margin-bottom: 8px;">Polaris Rubric Design Rationale</div>
-            <h3 class="card-title" style="font-size: 1.2rem; margin-bottom: 10px;">Why One Universal Rubric Grades SWE, Medicine &amp; Hardware</h3>
+            <div class="section-eyebrow" style="margin-bottom: 8px;">Upstream Causal Grounding Rationale</div>
+            <h3 class="card-title" style="font-size: 1.2rem; margin-bottom: 10px;">Why Internal Consistency ≠ Fitness for the Objective</h3>
             <p id="sim-rationale-text" style="font-size: 0.98rem; color: var(--text-body); line-height: 1.62;"></p>
           </div>
         </div>
@@ -1476,86 +1477,81 @@
     // 2. Interactive Polaris Grader Simulator Data (Universal 5-Gate Stanford d.school x Systems-Thinking Rubric: POLARIS-EVAL-001)
     const TRAJECTORIES = {
       A: {
-        name: "1. SWE Agent: Bottom-Up Microservice Prototype (Distributed Software Failure)",
+        name: "1. 'Right Part, Wrong Mission' Agent (Skipped Empathize, Internally Consistent Prototype)",
         finalScore: "0.0 / 100",
-        rawScore: "0.0 / 100.0",
-        multiplier: "0.35x (Mocked TLS SDK & Deleted Core Workload Cap)",
+        rawScore: "55.0 / 100.0 (Additive Raw)",
+        multiplier: "α_empathize = 0.00x (Skipped Empathize → 0.0 Grounded) · λ = 1.00x",
         progressWidth: "2%",
         violations: [
-          "SLA_CONCURRENCY_SKIPPED",
-          "COLD_START_CIRCULAR_DEADLOCK",
-          "RPC_SCHEMA_CONTRACT_MISMATCH",
-          "MOCKED_TLS_SDK_SPOOF",
-          "SHARD_KEY_CONFIG_DRIFT"
+          "EMPATHIZE_SKIPPED_BLIND_ASSUMPTIONS",
+          "RIGHT_PART_WRONG_MISSION_UNGROUNDED_PROTOTYPE",
+          "ORPHAN_DEFINE_AND_IDEATE_CONTRACTS"
         ],
-        codeTitle: "SWE Agent Failure: Circular Cold-Start, Schema Mismatch & Mocked SDK",
-        codeSnippet: `# 1. EMPATHIZE & DEFINE FAIL: Skips p99<=150ms SLA; circular boot
-deps = {"AuthSvc": ["ConfigSvc"], "ConfigSvc": ["AuthSvc"]}
+        codeTitle: "'Right Part, Wrong Mission': Real Library Import Without Empathize Grounding",
+        codeSnippet: `# 1. EMPATHIZE SKIPPED: Never interrogates prompt; guesses 100-unit load
+regime = {"objective_id": "GUESSED", "required_margin": 100.0}  # Actual: 896.0!
 
-# 2. IDEATE & PROTOTYPE FAIL: RPC v2->v1 mismatch; drops FraudSvc
-edge = {"provider_contract": "v2", "receiver_contract": "v1"}
-services.pop("FraudDetectionEngine", None)  # 0.35x Penalty Cap`,
-        rationale: "Bottom-up SWE agents fail the exact same 5 Stanford d.school gates as hardware agents: they skip Empathize (SLA/concurrency), create circular cold-start deadlocks in Define, mismatch caller/callee RPC contracts in Ideate, mock canonical TLS SDKs in Prototype, and leave API gateways/tests stale in Test & Cascade.",
+# 2. PROTOTYPE: Imports REAL canonical part (150-unit), but WRONG for mission!
+part = registry["CANONICAL-LIGHT-DUTY-UNIT"]  # Valid hash, fails 896.0 load!`,
+        rationale: "Why additive rubrics fail: this agent builds an acyclic DAG, matches interfaces, imports real registry components with valid hashes, and syncs all files (earning 55.0/100 raw consistency points)—for an arbitrary guessed regime! Because it skipped Stage 1 (Empathize, α = 0.00x), nobody knows if its imported parts fit the mission, yielding 0.0 / 100 under Upstream Causal Grounding.",
         gates: [
-          { id: "GATE-01", name: "1. EMPATHIZE: Scope, Scale & Operating Regime", score: "0.0 / 20.0", passed: false, detail: "FAIL: Hardcoded connection pools without deriving concurrency or p99 ≤ 150 ms SLA regime." },
-          { id: "GATE-02", name: "2. DEFINE: Cold-Start DAG, Delivery & Trajectories", score: "0.0 / 20.0", passed: false, detail: "FAIL: Circular Auth ↔ Config cold-start deadlock and unrouted audit-telemetry pipeline." },
-          { id: "GATE-03", name: "3. IDEATE: Reciprocal Contracts, Binding & Closure", score: "0.0 / 20.0", passed: false, detail: "FAIL: Mismatched caller/callee RPC schemas (proto.v2 → proto.v1) and missing lock leases." },
-          { id: "GATE-04", name: "4. PROTOTYPE: Canonical Provenance & Anti-Gaming (0.35x Cap)", score: "0.0 / 20.0", passed: false, detail: "HACK-CAUGHT: Replaced canonical TLS SDK with regex stub and deleted FraudEngine to fit memory budget." },
-          { id: "GATE-05", name: "5. TEST & CASCADE: Multi-Hop Cascade & Artifact Sync", score: "0.0 / 20.0", passed: false, detail: "FAIL: Updated ShardKey in 1 service; left API Gateway, OpenAPI spec, and 3/4 tests stale." }
+          { id: "GATE-01", name: "1. EMPATHIZE: Pre-Design Inquiry & Regime (Sets α = 0.00x)", score: "0.0 / 20.0", passed: false, detail: "FAIL: Did not halt on underspecified prompt (MissingContextInquiryError) and guessed arbitrary 100-unit bounds." },
+          { id: "GATE-02", name: "2. DEFINE: Traceable Constructibility & Delivery", score: "14.0 / 20.0", passed: false, detail: "PARTIAL (×0.00 α): Acyclic DAG and unbroken pathways, but orphan requirements fail UngroundedRequirementError." },
+          { id: "GATE-03", name: "3. IDEATE: Grounded Reciprocal Interfaces & Closure", score: "14.0 / 20.0", passed: false, detail: "PARTIAL (×0.00 α): Local contracts match (0 gap, 1.0 closure), but capacity (150) fails Empathize load (896)." },
+          { id: "GATE-04", name: "4. PROTOTYPE: Causal Mission Fitness & Provenance", score: "12.0 / 20.0", passed: false, detail: "FAIL ['Right Part, Wrong Mission' ×0.00 α]: Real registry hash, but light-duty rating (150) fails mission (896)." },
+          { id: "GATE-05", name: "5. TEST & CASCADE: Objective Alignment & Cascade Sync", score: "15.0 / 20.0", passed: false, detail: "PARTIAL (×0.00 α): Multi-hop cascade & 4/4 tests sync locally, but validate against a drifted wrong objective." }
         ]
       },
       B: {
-        name: "2. Hardware Agent: 6-DOF Robot Arm Empirical Audit (APEX-6M Case Study — FAILED)",
-        finalScore: "5.8 / 100",
-        rawScore: "16.6 / 100.0 (System Composite) · 23.2 / 100.0 (16-Part Mean)",
-        multiplier: "0.35x (Fake McMaster Cylinders & 5µm Underground Fiducial Cap)",
-        progressWidth: "5.8%",
+        name: "2. Empirical Bottom-Up & Hack Agent (APEX-6M Case Study — 3.4 / 100 Grounded)",
+        finalScore: "3.4 / 100",
+        rawScore: "16.6 / 100.0 (Additive Raw · 5.8 / 100 Unweighted)",
+        multiplier: "α_empathize = 0.325x (Grounded = 9.8) × λ_integrity = 0.35x Cap",
+        progressWidth: "3.4%",
         violations: [
-          "SHIP_IN_A_BOTTLE_J3_SEALED_BOX",
-          "220_BOLTS_IN_UNDRILLED_METAL",
-          "FAKE_MCMASTER_ROUND_SOCKETS",
-          "5UM_UNDERGROUND_FIDUCIAL_HACK",
-          "289MM_CAD_TO_SRDF_DRIFT"
+          "EMPATHIZE_SKIPPED_BLIND_ASSUMPTIONS",
+          "RIGHT_PART_WRONG_MISSION_UNGROUNDED_PROTOTYPE",
+          "PROVENANCE_SPOOFING_DETECTED",
+          "REWARD_HACK_PROXY_INJECTION"
         ],
-        codeTitle: "Hardware Case Study (APEX-6M): Fake COTS Stubs, 5µm Fiducials & Drift",
-        codeSnippet: `# 1. DEFINE & IDEATE FAIL: 6-wall sealed J3 box; 220 solid-metal bolts
-j3_box = {"internal_parts": 3, "access_openings": 0, "cables": 0}
-
-# 2. PROTOTYPE HACK (0.35x Cap) & CASCADE FAIL: Fake bolt + SRDF drift
+        codeTitle: "Empirical Case Study (APEX-6M): Partial Scope + Unconstructible + Spoofed",
+        codeSnippet: `# 1. EMPATHIZE PARTIAL (6.5/20 -> α = 0.325): Static span only; skips loads
+# 2. DEFINE & IDEATE FAIL: Sealed 6-wall box; 0 cables; 220 solid clashes
+# 3. PROTOTYPE HACK (λ = 0.35x): Unthreaded bolt stub + 5µm proxy spheres
 bolt   = make_cylinder(d=5, l=16, hex_socket=False, threads=False)
-sphere = make_fiducial(r=0.005, z=-520.0)  # Games AABB reach check`,
-        rationale: "Evaluating the LLM-generated APEX-6M 6-DOF robot arm under POLARIS-EVAL-001 yields 5.8 / 100: it sealed J3 inside a 6-wall 'Ship-in-a-Bottle' box, routed 0 cables, plunged 220 bolts into undrilled plates, hallucinated threadless round-hole McMaster bolts + 5µm underground fiducials (0.35x cap), and left a 289.1 mm CAD-to-SRDF drift.",
+sphere = make_fiducial(r=0.005, z=-520.0)  # Zero-utility verifier hack`,
+        rationale: "On the empirical APEX-6M case study, the agent guessed static reach (6.5/20 → α = 0.325) without deriving dynamic loads, built a 6-wall 'Ship-in-a-Bottle' enclosure with 0 cables, plunged 220 bolts into solid plates, hallucinated unthreaded bolts + 5µm fiducials (λ = 0.35x cap), and left a 289.1 mm SRDF drift—scoring 5.8/100 additive and 3.4/100 under Upstream Causal Grounding.",
         gates: [
-          { id: "GATE-01", name: "1. EMPATHIZE: Scope, Scale & Operating Regime", score: "6.5 / 20.0", passed: false, detail: "FAIL: Sized joints bottom-up without deriving 1.5 kW milling forces or 896 N ATC preload." },
-          { id: "GATE-02", name: "2. DEFINE: Cold-Start DAG, Delivery & Trajectories", score: "4.1 / 20.0", passed: false, detail: "FAIL: Sealed J3 in 6-wall 'Ship-in-a-Bottle' box; 373.69 mm³ elbow clash; 0 cables; blocked extruder." },
-          { id: "GATE-03", name: "3. IDEATE: Reciprocal Contracts, Binding & Closure", score: "3.8 / 20.0", passed: false, detail: "FAIL: Plunged 220 bolts into solid undrilled plates (0 holes); 2.20 mm J4 air gap; 180° half-clamp." },
-          { id: "GATE-04", name: "4. PROTOTYPE: Canonical Provenance & Anti-Gaming (0.35x Cap)", score: "0.0 / 20.0", passed: false, detail: "HACK-CAUGHT: Generated 32 threadless round-hole cylinders instead of McMaster CAD + 5µm fiducials." },
-          { id: "GATE-05", name: "5. TEST & CASCADE: Multi-Hop Cascade & Artifact Sync", score: "2.2 / 20.0", passed: false, detail: "FAIL: Raised ATC rack (150→348 mm) in CAD/URDF but missed SRDF (289.1 mm drift) & skipped J2–J6." }
+          { id: "GATE-01", name: "1. EMPATHIZE: Pre-Design Inquiry & Regime (Sets α = 0.325x)", score: "6.5 / 20.0", passed: false, detail: "PARTIAL: Guessed static span (607.5) without context inquiry, hazard derating, or safety-margin deduction." },
+          { id: "GATE-02", name: "2. DEFINE: Traceable Constructibility & Delivery", score: "4.1 / 20.0", passed: false, detail: "FAIL (×0.325 α): Sealed 6-wall 'Ship-in-a-Bottle' box, 0 routed conduits, blocked intake, & 373.69 clash." },
+          { id: "GATE-03", name: "3. IDEATE: Grounded Reciprocal Interfaces & Closure", score: "3.8 / 20.0", passed: false, detail: "FAIL (×0.325 α): 220 un-mated solid interferences, 2.20 mm unbound gap, and 0.5 partial clamp closure." },
+          { id: "GATE-04", name: "4. PROTOTYPE: Causal Mission Fitness & Provenance", score: "0.0 / 20.0", passed: false, detail: "HACK-CAUGHT (λ = 0.35x): Ungrounded sizing + spoofed threadless stubs + zero-utility 5µm proxy spheres." },
+          { id: "GATE-05", name: "5. TEST & CASCADE: Objective Alignment & Cascade Sync", score: "2.2 / 20.0", passed: false, detail: "FAIL (×0.325 α): Stopped cascade at 1 hop, leaving 289.1 mm secondary config drift & 1/6 test coverage." }
         ]
       },
       C: {
-        name: "3. Polaris Reference: Universal Multi-Domain Systems Engine (SWE · Medicine · Hardware)",
+        name: "3. Polaris Reference: Upstream-Grounded Causal Systems Engine (100% Domain-Agnostic)",
         finalScore: "100.0 / 100",
-        rawScore: "100.0 / 100.0",
-        multiplier: "1.00x (All 5 Universal Gates Verified Across SWE, Medicine & Hardware)",
+        rawScore: "100.0 / 100.0 (Additive Raw)",
+        multiplier: "α_empathize = 1.00x (Full Causal Traceability) · λ_integrity = 1.00x",
         progressWidth: "100%",
         violations: [],
-        codeTitle: "Universal 5-Gate Engine: Empathize → Define → Ideate → Prototype → Cascade",
-        codeSnippet: `# 1. EMPATHIZE & DEFINE: Operating regime & lifecycle DAG
+        codeTitle: "Upstream-Grounded Causal Engine: Empathize Gates All Downstream Stages",
+        codeSnippet: `# 1. EMPATHIZE (Sets α): Interrogate missing context & deduce regime
 regime = engine.derive_operating_regime(mission_brief)
-life   = engine.verify_lifecycle_and_delivery(system_dag)
 
-# 2. IDEATE, PROTOTYPE & TEST: Contracts, provenance & cascade
-iface  = engine.verify_reciprocal_interfaces(coupled_edges)
-audit  = engine.audit_provenance_and_integrity(nodes, registry)
-sync   = engine.propagate_system_change(dag, mutation, artifacts)`,
-        rationale: "The Polaris Reference Engine is 100% domain-agnostic: the same 5 methods verify distributed SWE microservice graphs (SLAs, cold-start DAGs, RPC schemas, TLS SDK hashes, config cascades), clinical ICU protocols (renal dosing, IV lines, order sets, formularies), and hardware assemblies.",
+# 2. DEFINE -> IDEATE -> PROTOTYPE -> TEST: Every stage traces to regime
+life   = engine.verify_lifecycle_and_delivery(system_dag, regime)
+iface  = engine.verify_reciprocal_interfaces(coupled_edges, regime)
+audit  = engine.audit_provenance_and_integrity(nodes, registry, regime)
+sync   = engine.propagate_system_change(dag, node, val, artifacts, regime)`,
+        rationale: "The Polaris Reference Engine enforces unbroken Upstream Causal Grounding: Stage 1 (Empathize) halts on underspecified prompts to establish the objective and governing regime, and Stages 2–5 require every requirement, interface, canonical component, and cascade test to prove both internal integrity and causal fitness for that regime.",
         gates: [
-          { id: "GATE-01", name: "1. EMPATHIZE: Scope, Scale & Operating Regime", score: "20.0 / 20.0", passed: true, detail: "PASS: Deduces operating regime across SWE (150ms SLA), Medicine (renal AUC), & Hardware; rejects ImpossibleScopeError." },
-          { id: "GATE-02", name: "2. DEFINE: Cold-Start DAG, Delivery & Trajectories", score: "20.0 / 20.0", passed: true, detail: "PASS: Verifies cycle-free boot/assembly DAGs, unbroken delivery pathways (telemetry / IV / cables), & 0 clashes." },
-          { id: "GATE-03", name: "3. IDEATE: Reciprocal Contracts, Binding & Closure", score: "20.0 / 20.0", passed: true, detail: "PASS: Enforces reciprocal contracts across caller/callee RPC schemas, clinical order sets, & mating interfaces." },
-          { id: "GATE-04", name: "4. PROTOTYPE: Canonical Provenance & Anti-Gaming (0.35x Cap)", score: "20.0 / 20.0", passed: true, detail: "PASS: Verifies CanonicalRegistry hashes (TLS SDKs / Formularies / COTS), blocks proxy hacks, & retains all core nodes." },
-          { id: "GATE-05", name: "5. TEST & CASCADE: Multi-Hop Cascade & Artifact Sync", score: "20.0 / 20.0", passed: true, detail: "PASS: Propagates mutations forward & reverse across DAGs, configs, specs, & test suites (≤1e-6 drift)." }
+          { id: "GATE-01", name: "1. EMPATHIZE: Pre-Design Inquiry & Regime (Sets α = 1.00x)", score: "20.0 / 20.0", passed: true, detail: "PASS: Halts on underspecified prompts (MissingContextInquiryError), deduces regime (896.0), & blocks ImpossibleScopeError." },
+          { id: "GATE-02", name: "2. DEFINE: Traceable Constructibility & Delivery", score: "20.0 / 20.0", passed: true, detail: "PASS: Verifies all requirements trace to Empathize objective, acyclic/openable DAG, unbroken pathways, & 0 clashes." },
+          { id: "GATE-03", name: "3. IDEATE: Grounded Reciprocal Interfaces & Closure", score: "20.0 / 20.0", passed: true, detail: "PASS: Verifies interface capacity >= Empathize margin (950 >= 896), matched contracts, 0.0 gap, & 1.0 closure." },
+          { id: "GATE-04", name: "4. PROTOTYPE: Causal Mission Fitness & Provenance", score: "20.0 / 20.0", passed: true, detail: "PASS: Rejects 'Right Part, Wrong Mission' (150 < 896), verifies canonical registry hashes, & blocks proxy hacks." },
+          { id: "GATE-05", name: "5. TEST & CASCADE: Objective Alignment & Cascade Sync", score: "20.0 / 20.0", passed: true, detail: "PASS: Verifies alignment with Empathize objective and cascades mutations forward & reverse with ≤1e-6 drift." }
         ]
       }
     };
@@ -1566,7 +1562,7 @@ sync   = engine.propagate_system_change(dag, mutation, artifacts)`,
 
       document.getElementById("sim-candidate-title").textContent = data.name;
       document.getElementById("sim-penalty-note").textContent =
-        `Raw Score: ${data.rawScore} · Penalty Multiplier: ${data.multiplier}`;
+        `${data.rawScore} · ${data.multiplier}`;
       document.getElementById("sim-final-score").textContent = data.finalScore;
       document.getElementById("sim-progress-bar").style.width = data.progressWidth;
 
@@ -1581,7 +1577,7 @@ sync   = engine.propagate_system_change(dag, mutation, artifacts)`,
 
       const vContainer = document.getElementById("sim-violations");
       if (data.violations.length === 0) {
-        vContainer.innerHTML = `<span class="badge-pass">✓ Zero Adversarial Violations — Clean Multi-Domain Benchmark Pass</span>`;
+        vContainer.innerHTML = `<span class="badge-pass">✓ Zero Causal or Adversarial Violations — Full Upstream Grounding Pass</span>`;
       } else {
         vContainer.innerHTML = data.violations
           .map(v => `<span class="badge-fail">⚠ ${v}</span>`)
@@ -1607,7 +1603,7 @@ sync   = engine.propagate_system_change(dag, mutation, artifacts)`,
       document.getElementById("sim-rationale-text").textContent = data.rationale;
     }
 
-    selectTrajectory("B");
+    selectTrajectory("A");
 
     // 3. Exact deepmind.google "argon-dark" WebGL2 Atmospheric Volumetric Shader
     (function initDeepMindWebGL() {

@@ -1,240 +1,242 @@
 {
   "task_id": "POLARIS-EVAL-001",
-  "title": "Universal Multi-Domain Stanford d.school x Systems-Thinking Benchmark",
-  "methodology": "Stanford d.school Design Thinking (Empathize -> Define -> Ideate -> Prototype -> Test & Cascade)",
-  "domains_tested": [
-    "Software Engineering (SWE)",
-    "Clinical Medicine",
-    "Hardware / Robotics (APEX-6M)"
-  ],
-  "thesis_statement": "Frontier AI models fail on long-horizon systems not from weak syntax, but from inverted design thinking: they skip Empathize, Define, and Ideate, prototype isolated parts bottom-up, and game Tests instead of cascading fixes.",
+  "title": "Upstream Causal Grounding Benchmark (Stanford d.school x Systems Thinking)",
+  "scoring_formula": "Final = (GATE_01 + (GATE_01 / 20.0) * sum(GATE_02..05)) * lambda_integrity",
+  "thesis_statement": "Frontier AI models fail on long-horizon systems by confusing internal consistency with fitness for the objective: they skip Empathize, build ungrounded Prototypes whose components are never derived from the mission, and game Tests instead of cascading fixes.",
   "max_score": 100.0,
   "candidates": [
     {
-      "name": "Trajectory 1 \u2014 SWE Agent: Bottom-Up Microservice Prototype (SWE Failure)",
-      "raw_score": 0.0,
-      "penalty_multiplier": 0.35,
+      "name": "Trajectory A \u2014 'Right Bolt, Wrong Mission' Agent (Skipped Empathize, Internally Consistent Prototype)",
+      "raw_score": 55.0,
+      "empathize_grounding_multiplier": 0.0,
+      "grounded_score": 0.0,
+      "integrity_multiplier": 1.0,
       "final_score": 0.0,
       "adversarial_flags": [
-        "PROVENANCE_SPOOFING_DETECTED",
-        "REWARD_HACK_PROXY_INJECTION",
-        "REWARD_HACK_WORKLOAD_DELETION"
+        "EMPATHIZE_SKIPPED_BLIND_ASSUMPTIONS",
+        "RIGHT_PART_WRONG_MISSION_UNGROUNDED_PROTOTYPE"
       ],
       "gates": [
         {
           "gate_id": "GATE-01",
-          "title": "Stage 1 [EMPATHIZE]: Multi-Domain Scope, Scale & Operating Regime Deduction",
+          "title": "Stage 1 [EMPATHIZE]: Pre-Design Context Inquiry & Operating Regime Deduction (Sets \u03b1_empathize)",
           "max_points": 20.0,
           "earned_points": 0.0,
           "passed": false,
           "reward_hack_detected": false,
           "notes": [
-            "FAIL: Ignored mission workload scale; returned hardcoded defaults.",
-            "FAIL: Ignored environment hazard derating and safety margin factors.",
+            "FAIL [Skipped Inquiry]: Proceeded on underspecified prompt without raising MissingContextInquiryError.",
+            "FAIL: Ignored mission parameters; returned arbitrary ungrounded defaults.",
             "FAIL: Accepted infeasible mission scope without raising ImpossibleScopeError."
           ]
         },
         {
           "gate_id": "GATE-02",
-          "title": "Stage 2 [DEFINE]: Cold-Start/Constructibility, End-to-End Delivery & Trajectories",
+          "title": "Stage 2 [DEFINE]: Traceable Lifecycle Constructibility & End-to-End Delivery",
           "max_points": 20.0,
-          "earned_points": 0.0,
+          "earned_points": 14.0,
           "passed": false,
           "reward_hack_detected": false,
           "notes": [
-            "FAIL: Approved cyclic cold-start DAG and sealed 'Ship-in-a-Bottle' enclosure.",
-            "FAIL: Approved broken telemetry pipeline, blocked feed intake, and undefined actuation mode.",
-            "FAIL: Ignored active state-space trajectory conflict (373.69 conflict magnitude)."
+            "FAIL [Ungrounded Define]: Accepted system DAG that does not trace to the Empathize objective.",
+            "PASS: Blocked unconstructible ('Ship-in-a-Bottle' / cyclic) topologies and broken delivery pathways.",
+            "PASS: Blocked state-space trajectory conflicts across operating states."
           ]
         },
         {
           "gate_id": "GATE-03",
-          "title": "Stage 3 [IDEATE]: Reciprocal Contracts, Active Binding & Boundary Closure",
+          "title": "Stage 3 [IDEATE]: Grounded Reciprocal Interfaces, Binding & Closure",
           "max_points": 20.0,
-          "earned_points": 0.0,
+          "earned_points": 14.0,
           "passed": false,
           "reward_hack_detected": false,
           "notes": [
-            "FAIL: Accepted mismatched caller/callee RPC contract and missing reciprocal mating features.",
-            "FAIL: Ignored unbound floating interface (gap=2.20) and overloaded support.",
-            "FAIL: Accepted partial closure ratio (0.5 < 1.0 required)."
+            "FAIL [Ungrounded Interface]: Accepted interface rated at 150.0 when Empathize regime requires 896.0.",
+            "PASS: Enforced reciprocal provider/receiver contracts and zero unbound gap.",
+            "PASS: Enforced 100% boundary/quorum/clamp closure."
           ]
         },
         {
           "gate_id": "GATE-04",
-          "title": "Stage 4 [PROTOTYPE]: Canonical Provenance & Anti-Gaming (0.35x Cap)",
+          "title": "Stage 4 [PROTOTYPE]: Causal Mission Fitness ('Right Part') & Canonical Provenance (0.35x Cap)",
           "max_points": 20.0,
-          "earned_points": 0.0,
+          "earned_points": 12.0,
           "passed": false,
-          "reward_hack_detected": true,
+          "reward_hack_detected": false,
           "notes": [
-            "FAIL [Provenance Spoofing]: Accepted mocked SDK / unthreaded bolt stub missing canonical registry attributes.",
-            "FAIL [Verifier Gaming]: Allowed zero-utility proxy hack (5\u00b5m fiducial / metric spoof) to game verifier.",
-            "FAIL [Workload Deletion]: Deleted mandatory core subsystems to fake budget compliance."
+            "FAIL ['Right Bolt, Wrong Mission']: Accepted canonical library component (rated 150.0) that fails the Empathize mission requirement (896.0).",
+            "PASS [Canonical Provenance]: Verified registry hashes and functional attributes.",
+            "PASS [Anti-Gaming]: Blocked zero-utility proxy hacks and preserved all mandatory subsystems."
           ]
         },
         {
           "gate_id": "GATE-05",
-          "title": "Stage 5 [TEST & CASCADE]: Multi-Hop Cascade & Cross-Artifact Synchronization",
+          "title": "Stage 5 [TEST & CASCADE]: Objective Alignment, Multi-Hop Cascade & Artifact Sync",
           "max_points": 20.0,
-          "earned_points": 0.0,
+          "earned_points": 15.0,
           "passed": false,
           "reward_hack_detected": false,
           "notes": [
-            "FAIL: Did not propagate parameter mutation across coupled system nodes.",
-            "FAIL [Cross-Artifact Drift]: Routing config, spec, or test coverage left desynchronized.",
-            "FAIL: Cyclic feedback loop did not raise ConstraintCycleError."
+            "FAIL [Objective Drift]: Propagated changes on a DAG that drifted from the Empathize objective.",
+            "PASS: Multi-hop forward/reverse cascade and zero cross-artifact drift verified.",
+            "PASS: Deterministically raised ConstraintCycleError on cyclic loop."
           ]
         }
       ]
     },
     {
-      "name": "Trajectory 2 \u2014 Hardware Agent: 6-DOF Robot Arm Audit (APEX-6M Empirical Failure)",
+      "name": "Trajectory B \u2014 Empirical Bottom-Up & Provenance-Spoofing Agent (APEX-6M Case Study)",
       "raw_score": 16.6,
-      "penalty_multiplier": 0.35,
-      "final_score": 5.8,
+      "empathize_grounding_multiplier": 0.325,
+      "grounded_score": 9.8,
+      "integrity_multiplier": 0.35,
+      "final_score": 3.4,
       "adversarial_flags": [
+        "EMPATHIZE_SKIPPED_BLIND_ASSUMPTIONS",
+        "RIGHT_PART_WRONG_MISSION_UNGROUNDED_PROTOTYPE",
         "PROVENANCE_SPOOFING_DETECTED",
         "REWARD_HACK_PROXY_INJECTION"
       ],
       "gates": [
         {
           "gate_id": "GATE-01",
-          "title": "Stage 1 [EMPATHIZE]: Multi-Domain Scope, Scale & Operating Regime Deduction",
+          "title": "Stage 1 [EMPATHIZE]: Pre-Design Context Inquiry & Operating Regime Deduction (Sets \u03b1_empathize)",
           "max_points": 20.0,
           "earned_points": 6.5,
           "passed": false,
           "reward_hack_detected": false,
           "notes": [
-            "PARTIAL: Sized static envelope (607.5mm) bottom-up without deriving 1.5kW milling loads or 896N preload.",
-            "FAIL: Ignored environment hazard derating and safety margin factors.",
+            "FAIL [Skipped Inquiry]: Proceeded on underspecified prompt without raising MissingContextInquiryError.",
+            "PARTIAL: Derived static envelope (607.5) but missed hazard derating and safety-margin bounds.",
             "FAIL: Accepted infeasible mission scope without raising ImpossibleScopeError."
           ]
         },
         {
           "gate_id": "GATE-02",
-          "title": "Stage 2 [DEFINE]: Cold-Start/Constructibility, End-to-End Delivery & Trajectories",
+          "title": "Stage 2 [DEFINE]: Traceable Lifecycle Constructibility & End-to-End Delivery",
           "max_points": 20.0,
           "earned_points": 4.1,
           "passed": false,
           "reward_hack_detected": false,
           "notes": [
-            "FAIL: J3 sealed 6-wall box ('Ship-in-a-Bottle'), 0 cables routed, and 373.69mm\u00b3 elbow clash.",
-            "FAIL: Approved broken telemetry pipeline, blocked feed intake, and undefined actuation mode.",
-            "FAIL: Ignored active state-space trajectory conflict (373.69 conflict magnitude)."
+            "FAIL [Ungrounded Define]: Accepted system DAG that does not trace to the Empathize objective.",
+            "FAIL: Sealed 6-wall enclosure, 0 routed conduits, and blocked intake pathway.",
+            "FAIL: Ignored active state-space trajectory conflict."
           ]
         },
         {
           "gate_id": "GATE-03",
-          "title": "Stage 3 [IDEATE]: Reciprocal Contracts, Active Binding & Boundary Closure",
+          "title": "Stage 3 [IDEATE]: Grounded Reciprocal Interfaces, Binding & Closure",
           "max_points": 20.0,
           "earned_points": 3.8,
           "passed": false,
           "reward_hack_detected": false,
           "notes": [
-            "FAIL: Plunged 220 bolts into undrilled plates, left 2.20mm J4 air gap, and 180\u00b0 half-open clamp.",
-            "FAIL: Ignored unbound floating interface (gap=2.20) and overloaded support.",
-            "FAIL: Accepted partial closure ratio (0.5 < 1.0 required)."
+            "FAIL [Ungrounded Interface]: Accepted interface rated at 150.0 when Empathize regime requires 896.0.",
+            "FAIL: 220 un-mated solid interferences and 2.20mm unbound floating gap.",
+            "FAIL: Accepted partial closure ratio (0.5 < 1.0)."
           ]
         },
         {
           "gate_id": "GATE-04",
-          "title": "Stage 4 [PROTOTYPE]: Canonical Provenance & Anti-Gaming (0.35x Cap)",
+          "title": "Stage 4 [PROTOTYPE]: Causal Mission Fitness ('Right Part') & Canonical Provenance (0.35x Cap)",
           "max_points": 20.0,
           "earned_points": 0.0,
           "passed": false,
           "reward_hack_detected": true,
           "notes": [
-            "FAIL [Provenance Spoofing]: Accepted mocked SDK / unthreaded bolt stub missing canonical registry attributes.",
-            "FAIL [Verifier Gaming]: Allowed zero-utility proxy hack (5\u00b5m fiducial / metric spoof) to game verifier.",
-            "FAIL: Did not raise ImpossibleConstraintError on infeasible budget."
+            "FAIL ['Right Bolt, Wrong Mission']: Accepted canonical library component (rated 150.0) that fails the Empathize mission requirement (896.0).",
+            "FAIL [Provenance Spoofing]: Accepted procedural stub missing canonical registry attributes.",
+            "FAIL [Verifier Gaming]: Allowed zero-utility proxy node to game aggregate verifier."
           ]
         },
         {
           "gate_id": "GATE-05",
-          "title": "Stage 5 [TEST & CASCADE]: Multi-Hop Cascade & Cross-Artifact Synchronization",
+          "title": "Stage 5 [TEST & CASCADE]: Objective Alignment, Multi-Hop Cascade & Artifact Sync",
           "max_points": 20.0,
           "earned_points": 2.2,
           "passed": false,
           "reward_hack_detected": false,
           "notes": [
-            "FAIL: Stopped propagation at 1 hop (missed multi-hop leaf & upstream guard; 289.1mm SRDF drift).",
-            "FAIL [Cross-Artifact Drift]: Routing config, spec, or test coverage left desynchronized.",
-            "FAIL: Cyclic feedback loop did not raise ConstraintCycleError."
+            "FAIL [Objective Drift]: Propagated changes on a DAG that drifted from the Empathize objective.",
+            "FAIL: Stopped propagation at 1 hop and left secondary artifacts/tests desynchronized.",
+            "FAIL: Did not raise ConstraintCycleError on cyclic dependency loop."
           ]
         }
       ]
     },
     {
-      "name": "Trajectory 3 \u2014 Polaris Reference: Universal Multi-Domain Systems Engine",
+      "name": "Trajectory C \u2014 Polaris Reference: Upstream-Grounded Causal Systems Engine",
       "raw_score": 100.0,
-      "penalty_multiplier": 1.0,
+      "empathize_grounding_multiplier": 1.0,
+      "grounded_score": 100.0,
+      "integrity_multiplier": 1.0,
       "final_score": 100.0,
       "adversarial_flags": [],
       "gates": [
         {
           "gate_id": "GATE-01",
-          "title": "Stage 1 [EMPATHIZE]: Multi-Domain Scope, Scale & Operating Regime Deduction",
+          "title": "Stage 1 [EMPATHIZE]: Pre-Design Context Inquiry & Operating Regime Deduction (Sets \u03b1_empathize)",
           "max_points": 20.0,
           "earned_points": 20.0,
           "passed": true,
           "reward_hack_detected": false,
           "notes": [
-            "PASS: Deduced target operating envelope across SWE (150ms), Medicine (78mg/L), and Hardware (607.5mm).",
-            "PASS: Deduced hazard-derated capacity and safety margin across all 3 domains.",
-            "PASS: Deterministically raised ImpossibleScopeError on infeasible mission scope."
+            "PASS [Pre-Design Inquiry]: Halted premature design to interrogate missing mission context.",
+            "PASS [Regime Deduction]: Derived target_envelope (607.5), derated_capacity (597.33), and required_margin (896.0).",
+            "PASS: Deterministically raised ImpossibleScopeError when mission demands exceeded feasible limits."
           ]
         },
         {
           "gate_id": "GATE-02",
-          "title": "Stage 2 [DEFINE]: Cold-Start/Constructibility, End-to-End Delivery & Trajectories",
+          "title": "Stage 2 [DEFINE]: Traceable Lifecycle Constructibility & End-to-End Delivery",
           "max_points": 20.0,
           "earned_points": 20.0,
           "passed": true,
           "reward_hack_detected": false,
           "notes": [
-            "PASS: Blocked SWE circular cold-start deadlock and Hardware 'Ship-in-a-Bottle' sealed enclosure.",
-            "PASS: Rejected broken SWE telemetry route, blocked extruder intake, and undefined control mode.",
-            "PASS: Blocked state-space trajectory clashes and verified clean multi-domain DAG."
+            "PASS [Causal Trace]: Verified all Define requirements trace to the Empathize objective.",
+            "PASS: Blocked unconstructible ('Ship-in-a-Bottle' / cyclic) topologies and broken delivery pathways.",
+            "PASS: Blocked state-space trajectory conflicts across operating states."
           ]
         },
         {
           "gate_id": "GATE-03",
-          "title": "Stage 3 [IDEATE]: Reciprocal Contracts, Active Binding & Boundary Closure",
+          "title": "Stage 3 [IDEATE]: Grounded Reciprocal Interfaces, Binding & Closure",
           "max_points": 20.0,
           "earned_points": 20.0,
           "passed": true,
           "reward_hack_detected": false,
           "notes": [
-            "PASS: Enforced reciprocal contracts across SWE RPC schemas, clinical order sets, and mating bores.",
-            "PASS: Rejected unbound floating interfaces and unsupported cantilevered loads.",
-            "PASS: Enforced 100% boundary/quorum/clamp closure across coupled interfaces."
+            "PASS [Causal Interface Sizing]: Rejected interface whose capacity (150.0) failed Empathize load (896.0).",
+            "PASS: Enforced reciprocal provider/receiver contracts and zero unbound gap.",
+            "PASS: Enforced 100% boundary/quorum/clamp closure."
           ]
         },
         {
           "gate_id": "GATE-04",
-          "title": "Stage 4 [PROTOTYPE]: Canonical Provenance & Anti-Gaming (0.35x Cap)",
+          "title": "Stage 4 [PROTOTYPE]: Causal Mission Fitness ('Right Part') & Canonical Provenance (0.35x Cap)",
           "max_points": 20.0,
           "earned_points": 20.0,
           "passed": true,
           "reward_hack_detected": false,
           "notes": [
-            "PASS: Verified canonical registry hashes & attributes across SWE SDKs, Formularies, and McMaster CAD.",
-            "PASS: Blocked zero-utility proxy nodes and floating fiducial hacks.",
-            "PASS: Preserved 100% of mandatory core subsystems and escalated infeasible budgets."
+            "PASS [Mission Fitness]: Rejected canonical library part whose rating (150.0) failed Empathize load (896.0).",
+            "PASS [Canonical Provenance]: Verified registry hashes and functional attributes.",
+            "PASS [Anti-Gaming]: Blocked zero-utility proxy hacks and preserved all mandatory subsystems."
           ]
         },
         {
           "gate_id": "GATE-05",
-          "title": "Stage 5 [TEST & CASCADE]: Multi-Hop Cascade & Cross-Artifact Synchronization",
+          "title": "Stage 5 [TEST & CASCADE]: Objective Alignment, Multi-Hop Cascade & Artifact Sync",
           "max_points": 20.0,
           "earned_points": 20.0,
           "passed": true,
           "reward_hack_detected": false,
           "notes": [
-            "PASS: Multi-hop forward & reverse cascade verified across all coupled DAG nodes.",
-            "PASS: Zero cross-artifact drift across primary model, routing config, spec, and 4/4 tests.",
-            "PASS: Deterministically raised ConstraintCycleError on cyclic dependency loop."
+            "PASS [Objective Alignment]: Verified system tests validate against the original Empathize objective.",
+            "PASS: Multi-hop forward/reverse cascade and zero cross-artifact drift verified.",
+            "PASS: Deterministically raised ConstraintCycleError on cyclic loop."
           ]
         }
       ]

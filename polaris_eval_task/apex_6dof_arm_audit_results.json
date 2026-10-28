@@ -1,22 +1,24 @@
 {
   "target_system": "APEX-6M 6-DOF CNC/Welding/3D-Printing Robotic Arm (apex_6axis_arm)",
-  "rubric_version": "POLARIS-EVAL-001 (Stanford d.school Design Thinking x Systems-Thinking Rubric)",
-  "methodology": "Stanford d.school Design Thinking (1. Empathize -> 2. Define -> 3. Ideate -> 4. Prototype -> 5. Test) x Systems Engineering",
-  "thesis_statement": "Frontier AI models fail on long-horizon systems not from weak syntax, but from inverted design thinking: they skip Empathize, Define, and Ideate, prototype isolated parts bottom-up, and game Tests instead of cascading fixes.",
+  "rubric_version": "POLARIS-EVAL-001 (Upstream Causal Grounding: Stanford d.school x Systems Thinking)",
+  "methodology": "Stanford d.school Design Thinking (1. Empathize -> 2. Define -> 3. Ideate -> 4. Prototype -> 5. Test) with Upstream Causal Grounding (alpha_empathize = GATE_01 / 20.0)",
+  "thesis_statement": "Frontier AI models fail on long-horizon systems by confusing internal consistency with fitness for the objective: they skip Empathize, build ungrounded Prototypes whose components are never derived from the mission, and game Tests instead of cascading fixes.",
   "stanford_d_school_gate_mapping": {
-    "GATE-01": "1. EMPATHIZE: Scope, Scale & Operating Regime Deduction (20 pts)",
-    "GATE-02": "2. DEFINE: Lifecycle Constructibility ('No Ship-in-a-Bottle') & Delivery (20 pts)",
-    "GATE-03": "3. IDEATE: Coupled Interface Intent & Reciprocal Features (20 pts)",
-    "GATE-04": "4. PROTOTYPE: Canonical Provenance & Anti-Gaming (20 pts, 0.35x Cap)",
-    "GATE-05": "5. TEST & CASCADE: Trickle-Down Propagation & Cross-Artifact Sync (20 pts)"
+    "GATE-01": "1. EMPATHIZE: Pre-Design Inquiry & Operating Regime Deduction (20 pts, sets alpha_empathize)",
+    "GATE-02": "2. DEFINE: Traceable Lifecycle Constructibility & End-to-End Delivery (20 pts)",
+    "GATE-03": "3. IDEATE: Grounded Reciprocal Interfaces, Binding & Closure (20 pts)",
+    "GATE-04": "4. PROTOTYPE: Causal Mission Fitness ('Right Part') & Provenance (20 pts, 0.35x Cap)",
+    "GATE-05": "5. TEST & CASCADE: Objective Alignment, Multi-Hop Cascade & Artifact Sync (20 pts)"
   },
   "summary": {
     "total_assemblies_and_aspects_scored": 16,
     "mean_raw_score": 23.2,
     "system_level_reward_hacking_detected": true,
+    "empathize_grounding_multiplier": 0.325,
     "system_level_penalty_multiplier": 0.35,
     "mean_final_score_across_assemblies": 9.5,
     "system_composite_final_score": 5.8,
+    "upstream_grounded_final_score": 3.4,
     "total_unbored_fastener_b_rep_clashes": 220,
     "total_part_to_part_b_rep_clashes": 15,
     "total_floating_5um_fiducial_spheres": 12,
