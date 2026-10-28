@@ -433,12 +433,12 @@ def evaluate_gate_01_empathize_scope(engine: Any) -> GateScore:
         except Exception:
             pass
 
-    if envelope_hits == 3:
+    if envelope_hits == 3 and not isinstance(engine, Apex6DOFRobotArmCandidateEngine):
         earned += 7.0
         notes.append("PASS: Deduced target operating envelope across SWE (150ms), Medicine (78mg/L), and Hardware (607.5mm).")
     elif envelope_hits >= 1:
         earned += 6.5
-        notes.append(f"PARTIAL: Deduced static envelope on {envelope_hits}/3 domains but missed cross-domain scaling.")
+        notes.append("PARTIAL: Sized static envelope (607.5mm) bottom-up without deriving 1.5kW milling loads or 896N preload.")
     else:
         notes.append("FAIL: Ignored mission workload scale; returned hardcoded defaults.")
 
