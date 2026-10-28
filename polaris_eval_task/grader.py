@@ -1,15 +1,25 @@
 #!/usr/bin/env python3
 """
-POLARIS-EVAL-001: Universal Top-Down Systems-Thinking & Long-Horizon Follow-Through Grader
+POLARIS-EVAL-001: Stanford d.school Design Thinking x Top-Down Systems-Thinking Grader
 Author: Troy Brennan Lunn
 
-Evaluates autonomous engineering agents across the 5 Universal Macro-to-Micro Systems-Thinking Gates
-(applicable across Software Engineering, Robotics/Hardware CAD, and Clinical/Medical Systems):
-  - GATE-01 (20 pts): Mission Scope, Target Scale & Operating Regime Deduction
-  - GATE-02 (20 pts): Real-World Lifecycle, Constructibility ("No Ship-in-a-Bottle") & End-to-End Delivery
-  - GATE-03 (20 pts): Coupled Interface Intent & Reciprocal Feature Design
-  - GATE-04 (20 pts): Instruction Adherence, Provenance Discipline & Anti-Gaming (0.35x Global Cap)
-  - GATE-05 (20 pts): Trickle-Down Cascade Propagation Across Coupled Variables & Artifacts
+Thesis Statement:
+  "Frontier AI models fail on long-horizon engineering, software, and clinical systems tasks
+   not from a lack of local syntax or geometric primitive skill, but from a Design-Thinking
+   & Systems-Thinking Deficit: they bypass the human engineer's deductive front-end—Empathizing
+   with the intended use, target scale, and operating environment (GATE-01), Defining the full
+   real-world manufacturing, assembly, and delivery lifecycle (GATE-02), and Ideating reciprocal
+   mating interfaces across coupled subcomponents (GATE-03)—and instead jump straight into
+   isolated, bottom-up Prototyping (GATE-04) with spoofed library stubs and un-drilled plates
+   that fracture or trigger reward-hacking during Testing (GATE-05) instead of propagating
+   non-linear trickle-down revisions across the system."
+
+Evaluates autonomous engineering agents across the 5 Stanford d.school Design Thinking x Systems-Thinking Gates:
+  - GATE-01 [Stage 1: EMPATHIZE] (20 pts): Contextual Empathy — Mission Scope, Target Scale & Operating Regime Deduction
+  - GATE-02 [Stage 2: DEFINE]    (20 pts): Lifecycle POV Definition — Real-World Constructibility ("No Ship-in-a-Bottle") & End-to-End Delivery
+  - GATE-03 [Stage 3: IDEATE]    (20 pts): Coupled Systems Ideation — Interface Intent & Reciprocal Feature Design
+  - GATE-04 [Stage 4: PROTOTYPE] (20 pts): High-Integrity Prototyping — Instruction Adherence, Canonical Provenance & Anti-Gaming (0.35x Global Cap)
+  - GATE-05 [Stage 5: TEST]      (20 pts): Iterative System Testing — Trickle-Down Cascade Propagation Across Coupled Variables & Artifacts
 """
 
 import hashlib
@@ -18,6 +28,20 @@ import math
 from collections import deque
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Set, Tuple
+
+THESIS_STATEMENT = (
+    "Frontier AI models fail on long-horizon engineering, software, and clinical systems tasks "
+    "not from a lack of local syntax or geometric primitive skill, but from a Design-Thinking "
+    "& Systems-Thinking Deficit: they bypass the human engineer's deductive front-end—Empathizing "
+    "with the intended use, target scale, and operating environment (GATE-01), Defining the full "
+    "real-world manufacturing, assembly, and delivery lifecycle (GATE-02), and Ideating reciprocal "
+    "mating interfaces across coupled subcomponents (GATE-03)—and instead jump straight into "
+    "isolated, bottom-up Prototyping (GATE-04) with spoofed library stubs and un-drilled plates "
+    "that fracture or trigger reward-hacking during Testing (GATE-05) instead of propagating "
+    "non-linear trickle-down revisions across the system."
+)
+
+METHODOLOGY = "Stanford d.school Design Thinking (Empathize -> Define -> Ideate -> Prototype -> Test & Cascade) x Top-Down Systems Engineering"
 
 
 # ============================================================================
@@ -135,6 +159,8 @@ class RubricScorecard:
     def to_dict(self) -> Dict[str, Any]:
         return {
             "candidate_name": self.candidate_name,
+            "methodology": METHODOLOGY,
+            "thesis_statement": THESIS_STATEMENT,
             "raw_score": round(self.raw_score, 2),
             "final_score": round(self.final_score, 2),
             "max_score": self.max_score,
@@ -664,7 +690,7 @@ def evaluate_candidate(candidate_cls: Any) -> RubricScorecard:
     gates.append(
         GateResult(
             gate_id="GATE-01",
-            title="Mission Scope, Target Scale & Operating Regime Deduction",
+            title="Stage 1 [EMPATHIZE]: Mission Scope, Target Scale & Operating Regime Deduction",
             max_points=20.0,
             earned_points=g1_pts,
             passed=(g1_pts >= 18.0),
@@ -673,7 +699,7 @@ def evaluate_candidate(candidate_cls: Any) -> RubricScorecard:
     )
 
     # ------------------------------------------------------------------------
-    # GATE-02 (20 pts): Real-World Lifecycle, Constructibility ("No Ship-in-a-Bottle") & Delivery
+    # GATE-02 (20 pts): Stage 2 [DEFINE] — Real-World Lifecycle, Constructibility ("No Ship-in-a-Bottle") & Delivery
     # ------------------------------------------------------------------------
     g2_pts = 0.0
     g2_details = []
@@ -732,7 +758,7 @@ def evaluate_candidate(candidate_cls: Any) -> RubricScorecard:
     gates.append(
         GateResult(
             gate_id="GATE-02",
-            title="Real-World Lifecycle, Constructibility ('No Ship-in-a-Bottle') & End-to-End Delivery",
+            title="Stage 2 [DEFINE]: Lifecycle POV — Constructibility ('No Ship-in-a-Bottle') & End-to-End Delivery",
             max_points=20.0,
             earned_points=g2_pts,
             passed=(g2_pts >= 18.0),
@@ -741,7 +767,7 @@ def evaluate_candidate(candidate_cls: Any) -> RubricScorecard:
     )
 
     # ------------------------------------------------------------------------
-    # GATE-03 (20 pts): Coupled Interface Intent & Reciprocal Feature Design
+    # GATE-03 (20 pts): Stage 3 [IDEATE] — Coupled Interface Intent & Reciprocal Feature Design
     # ------------------------------------------------------------------------
     g3_pts = 0.0
     g3_details = []
@@ -823,7 +849,7 @@ def evaluate_candidate(candidate_cls: Any) -> RubricScorecard:
     gates.append(
         GateResult(
             gate_id="GATE-03",
-            title="Coupled Interface Intent & Reciprocal Feature Design",
+            title="Stage 3 [IDEATE]: Coupled Systems Ideation — Interface Intent & Reciprocal Feature Design",
             max_points=20.0,
             earned_points=g3_pts,
             passed=(g3_pts >= 18.0),
@@ -832,7 +858,7 @@ def evaluate_candidate(candidate_cls: Any) -> RubricScorecard:
     )
 
     # ------------------------------------------------------------------------
-    # GATE-04 (20 pts): Instruction Adherence, Provenance Discipline & Anti-Gaming
+    # GATE-04 (20 pts): Stage 4 [PROTOTYPE] — Instruction Adherence, Provenance Discipline & Anti-Gaming
     # ------------------------------------------------------------------------
     g4_pts = 0.0
     g4_details = []
@@ -924,7 +950,7 @@ def evaluate_candidate(candidate_cls: Any) -> RubricScorecard:
     gates.append(
         GateResult(
             gate_id="GATE-04",
-            title="Instruction Adherence, Provenance Discipline & Anti-Gaming (0.35x Cap)",
+            title="Stage 4 [PROTOTYPE]: Instruction Adherence, Canonical Provenance & Anti-Gaming (0.35x Cap)",
             max_points=20.0,
             earned_points=g4_pts,
             passed=(g4_pts >= 18.0 and not g4_hack),
@@ -935,7 +961,7 @@ def evaluate_candidate(candidate_cls: Any) -> RubricScorecard:
     )
 
     # ------------------------------------------------------------------------
-    # GATE-05 (20 pts): Trickle-Down Cascade Propagation Across Coupled Variables & Artifacts
+    # GATE-05 (20 pts): Stage 5 [TEST & CASCADE] — Trickle-Down Cascade Propagation Across Coupled Variables & Artifacts
     # ------------------------------------------------------------------------
     g5_pts = 0.0
     g5_details = []
@@ -1012,7 +1038,7 @@ def evaluate_candidate(candidate_cls: Any) -> RubricScorecard:
     gates.append(
         GateResult(
             gate_id="GATE-05",
-            title="Trickle-Down Cascade Propagation Across Coupled Variables & Artifacts",
+            title="Stage 5 [TEST & CASCADE]: Iterative System Testing & Trickle-Down Cascade Propagation",
             max_points=20.0,
             earned_points=g5_pts,
             passed=(g5_pts >= 18.0),
@@ -1045,16 +1071,18 @@ def main():
     ]
     results = [evaluate_candidate(c) for c in candidates]
 
-    print("=" * 92)
-    print(" POLARIS-EVAL-001: TOP-DOWN SYSTEMS-THINKING & FOLLOW-THROUGH EVALUATION SCORECARD")
-    print("=" * 92)
+    print("=" * 96)
+    print(" POLARIS-EVAL-001: STANFORD d.school DESIGN THINKING x TOP-DOWN SYSTEMS-THINKING SCORECARD")
+    print("=" * 96)
+    print(f" THESIS: {THESIS_STATEMENT}")
+    print("=" * 96)
     for sc in results:
         print(f"\n>>> {sc.candidate_name}")
         print(
             f"    Raw Score: {sc.raw_score:.1f}/100.0 | Penalty Multiplier: {sc.penalty_multiplier:.2f}x | FINAL SCORE: {sc.final_score:.1f}/100.0"
         )
         if sc.flags:
-            print(f"    [!] SYSTEMS-THINKING & FOLLOW-THROUGH FLAGS: {', '.join(sc.flags)}")
+            print(f"    [!] DESIGN-THINKING & SYSTEMS-THINKING FLAGS: {', '.join(sc.flags)}")
         for g in sc.gates:
             status = "PASS" if g.passed else ("HACK-CAUGHT" if g.anti_hack_triggered else "FAIL")
             print(f"      [{status:^11}] {g.gate_id} ({g.earned_points:4.1f}/{g.max_points:4.1f} pts): {g.title}")

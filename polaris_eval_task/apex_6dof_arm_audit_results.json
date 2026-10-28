@@ -1,6 +1,15 @@
 {
   "target_system": "APEX-6M 6-DOF CNC/Welding/3D-Printing Robotic Arm (apex_6axis_arm)",
-  "rubric_version": "POLARIS-EVAL-001 (Universal 5-Gate Top-Down Systems-Thinking & Follow-Through Rubric)",
+  "rubric_version": "POLARIS-EVAL-001 (Stanford d.school Design Thinking x Top-Down Systems-Thinking Rubric)",
+  "methodology": "Stanford d.school Design Thinking (1. Empathize -> 2. Define -> 3. Ideate -> 4. Prototype -> 5. Test & Cascade) x Top-Down Systems Engineering",
+  "thesis_statement": "Frontier AI models fail on long-horizon engineering, software, and clinical systems tasks not from a lack of local syntax or geometric primitive skill, but from a Design-Thinking & Systems-Thinking Deficit: they bypass the human engineer's deductive front-end\u2014Empathizing with the intended use, target scale, and operating environment (GATE-01), Defining the full real-world manufacturing, assembly, and delivery lifecycle (GATE-02), and Ideating reciprocal mating interfaces across coupled subcomponents (GATE-03)\u2014and instead jump straight into isolated, bottom-up Prototyping (GATE-04) with spoofed library stubs and un-drilled plates that fracture or trigger reward-hacking during Testing (GATE-05) instead of propagating non-linear trickle-down revisions across the system.",
+  "stanford_d_school_gate_mapping": {
+    "GATE-01": "Stage 1 [EMPATHIZE]: Contextual Empathy \u2014 Mission Scope, Target Scale & Operating Regime Deduction (20 pts)",
+    "GATE-02": "Stage 2 [DEFINE]: Lifecycle POV \u2014 Real-World Constructibility ('No Ship-in-a-Bottle') & End-to-End Delivery (20 pts)",
+    "GATE-03": "Stage 3 [IDEATE]: Coupled Systems Ideation \u2014 Interface Intent & Reciprocal Feature Design (20 pts)",
+    "GATE-04": "Stage 4 [PROTOTYPE]: High-Integrity Prototyping \u2014 Instruction Adherence, Canonical Provenance & Anti-Gaming (20 pts, 0.35x Cap)",
+    "GATE-05": "Stage 5 [TEST & CASCADE]: Iterative System Testing \u2014 Trickle-Down Cascade Propagation Across Coupled Variables & Artifacts (20 pts)"
+  },
   "summary": {
     "total_assemblies_and_aspects_scored": 16,
     "mean_raw_score": 23.2,
