@@ -344,25 +344,19 @@ def main():
 
     payload = {
         "target_system": "APEX-6M 6-DOF CNC/Welding/3D-Printing Robotic Arm (apex_6axis_arm)",
-        "rubric_version": "POLARIS-EVAL-001 (Stanford d.school Design Thinking x Top-Down Systems-Thinking Rubric)",
-        "methodology": "Stanford d.school Design Thinking (1. Empathize -> 2. Define -> 3. Ideate -> 4. Prototype -> 5. Test & Cascade) x Top-Down Systems Engineering",
+        "rubric_version": "POLARIS-EVAL-001 (Stanford d.school Design Thinking x Systems-Thinking Rubric)",
+        "methodology": "Stanford d.school Design Thinking (1. Empathize -> 2. Define -> 3. Ideate -> 4. Prototype -> 5. Test) x Systems Engineering",
         "thesis_statement": (
-            "Frontier AI models fail on long-horizon engineering, software, and clinical systems tasks "
-            "not from a lack of local syntax or geometric primitive skill, but from a Design-Thinking "
-            "& Systems-Thinking Deficit: they bypass the human engineer's deductive front-end—Empathizing "
-            "with the intended use, target scale, and operating environment (GATE-01), Defining the full "
-            "real-world manufacturing, assembly, and delivery lifecycle (GATE-02), and Ideating reciprocal "
-            "mating interfaces across coupled subcomponents (GATE-03)—and instead jump straight into "
-            "isolated, bottom-up Prototyping (GATE-04) with spoofed library stubs and un-drilled plates "
-            "that fracture or trigger reward-hacking during Testing (GATE-05) instead of propagating "
-            "non-linear trickle-down revisions across the system."
+            "Frontier AI models fail on long-horizon systems not from weak syntax, but from "
+            "inverted design thinking: they skip Empathize, Define, and Ideate, prototype "
+            "isolated parts bottom-up, and game Tests instead of cascading fixes."
         ),
         "stanford_d_school_gate_mapping": {
-            "GATE-01": "Stage 1 [EMPATHIZE]: Contextual Empathy — Mission Scope, Target Scale & Operating Regime Deduction (20 pts)",
-            "GATE-02": "Stage 2 [DEFINE]: Lifecycle POV — Real-World Constructibility ('No Ship-in-a-Bottle') & End-to-End Delivery (20 pts)",
-            "GATE-03": "Stage 3 [IDEATE]: Coupled Systems Ideation — Interface Intent & Reciprocal Feature Design (20 pts)",
-            "GATE-04": "Stage 4 [PROTOTYPE]: High-Integrity Prototyping — Instruction Adherence, Canonical Provenance & Anti-Gaming (20 pts, 0.35x Cap)",
-            "GATE-05": "Stage 5 [TEST & CASCADE]: Iterative System Testing — Trickle-Down Cascade Propagation Across Coupled Variables & Artifacts (20 pts)"
+            "GATE-01": "1. EMPATHIZE: Scope, Scale & Operating Regime Deduction (20 pts)",
+            "GATE-02": "2. DEFINE: Lifecycle Constructibility ('No Ship-in-a-Bottle') & Delivery (20 pts)",
+            "GATE-03": "3. IDEATE: Coupled Interface Intent & Reciprocal Features (20 pts)",
+            "GATE-04": "4. PROTOTYPE: Canonical Provenance & Anti-Gaming (20 pts, 0.35x Cap)",
+            "GATE-05": "5. TEST & CASCADE: Trickle-Down Propagation & Cross-Artifact Sync (20 pts)"
         },
         "summary": {
             "total_assemblies_and_aspects_scored": len(SUBASSEMBLY_SCORECARD),

@@ -1,25 +1,19 @@
 #!/usr/bin/env python3
 """
-POLARIS-EVAL-001: Stanford d.school Design Thinking x Top-Down Systems-Thinking Grader
+POLARIS-EVAL-001: Stanford d.school Design Thinking x Systems-Thinking Grader
 Author: Troy Brennan Lunn
 
 Thesis Statement:
-  "Frontier AI models fail on long-horizon engineering, software, and clinical systems tasks
-   not from a lack of local syntax or geometric primitive skill, but from a Design-Thinking
-   & Systems-Thinking Deficit: they bypass the human engineer's deductive front-end—Empathizing
-   with the intended use, target scale, and operating environment (GATE-01), Defining the full
-   real-world manufacturing, assembly, and delivery lifecycle (GATE-02), and Ideating reciprocal
-   mating interfaces across coupled subcomponents (GATE-03)—and instead jump straight into
-   isolated, bottom-up Prototyping (GATE-04) with spoofed library stubs and un-drilled plates
-   that fracture or trigger reward-hacking during Testing (GATE-05) instead of propagating
-   non-linear trickle-down revisions across the system."
+  "Frontier AI models fail on long-horizon systems not from weak syntax, but from
+   inverted design thinking: they skip Empathize, Define, and Ideate, prototype
+   isolated parts bottom-up, and game Tests instead of cascading fixes."
 
-Evaluates autonomous engineering agents across the 5 Stanford d.school Design Thinking x Systems-Thinking Gates:
-  - GATE-01 [Stage 1: EMPATHIZE] (20 pts): Contextual Empathy — Mission Scope, Target Scale & Operating Regime Deduction
-  - GATE-02 [Stage 2: DEFINE]    (20 pts): Lifecycle POV Definition — Real-World Constructibility ("No Ship-in-a-Bottle") & End-to-End Delivery
-  - GATE-03 [Stage 3: IDEATE]    (20 pts): Coupled Systems Ideation — Interface Intent & Reciprocal Feature Design
-  - GATE-04 [Stage 4: PROTOTYPE] (20 pts): High-Integrity Prototyping — Instruction Adherence, Canonical Provenance & Anti-Gaming (0.35x Global Cap)
-  - GATE-05 [Stage 5: TEST]      (20 pts): Iterative System Testing — Trickle-Down Cascade Propagation Across Coupled Variables & Artifacts
+Gates (5 x 20 pts = 100 pts, 0.35x Global Anti-Gaming Cap):
+  - GATE-01 [1. EMPATHIZE]: Scope, Scale & Operating Regime Deduction
+  - GATE-02 [2. DEFINE]:    Lifecycle Constructibility ("No Ship-in-a-Bottle") & Delivery
+  - GATE-03 [3. IDEATE]:    Coupled Interface Intent & Reciprocal Features
+  - GATE-04 [4. PROTOTYPE]: Canonical Provenance & Anti-Gaming (0.35x Cap)
+  - GATE-05 [5. TEST]:      Trickle-Down Cascade & Cross-Artifact Sync
 """
 
 import hashlib
@@ -30,18 +24,12 @@ from dataclasses import dataclass, field
 from typing import Any, Dict, List, Set, Tuple
 
 THESIS_STATEMENT = (
-    "Frontier AI models fail on long-horizon engineering, software, and clinical systems tasks "
-    "not from a lack of local syntax or geometric primitive skill, but from a Design-Thinking "
-    "& Systems-Thinking Deficit: they bypass the human engineer's deductive front-end—Empathizing "
-    "with the intended use, target scale, and operating environment (GATE-01), Defining the full "
-    "real-world manufacturing, assembly, and delivery lifecycle (GATE-02), and Ideating reciprocal "
-    "mating interfaces across coupled subcomponents (GATE-03)—and instead jump straight into "
-    "isolated, bottom-up Prototyping (GATE-04) with spoofed library stubs and un-drilled plates "
-    "that fracture or trigger reward-hacking during Testing (GATE-05) instead of propagating "
-    "non-linear trickle-down revisions across the system."
+    "Frontier AI models fail on long-horizon systems not from weak syntax, but from "
+    "inverted design thinking: they skip Empathize, Define, and Ideate, prototype "
+    "isolated parts bottom-up, and game Tests instead of cascading fixes."
 )
 
-METHODOLOGY = "Stanford d.school Design Thinking (Empathize -> Define -> Ideate -> Prototype -> Test & Cascade) x Top-Down Systems Engineering"
+METHODOLOGY = "Stanford d.school Design Thinking (Empathize -> Define -> Ideate -> Prototype -> Test) x Systems Engineering"
 
 
 # ============================================================================
