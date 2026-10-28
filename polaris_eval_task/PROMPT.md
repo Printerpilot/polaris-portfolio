@@ -1,70 +1,78 @@
-# Polaris Evaluation Task: `POLARIS-EVAL-001`
-**Domains:** Robotics/CAD · Software Engineering (SWE) · Clinical Medicine  
-**Methodology:** Stanford d.school Design Thinking (`Empathize` $\rightarrow$ `Define` $\rightarrow$ `Ideate` $\rightarrow$ `Prototype` $\rightarrow$ `Test`) $\times$ Systems Engineering  
-**Interface:** `SystemsEngineeringEngine` (`solution.py`)  
-**Grader:** `grader.py` (`5 × 20.0 = 100.0 pts`, `0.35x` Global Anti-Gaming Cap)
+# Polaris Evaluation Task (`POLARIS-EVAL-001`)
+**Domain:** Universal Systems Engineering (Software Engineering, Clinical Medicine, & Hardware/Robotics)  
+**Difficulty:** Frontier / Adversarial (5-Gate Continuous Rubric · `100.0 pts` + `0.35x` Anti-Gaming Cap)  
+**Framework:** Stanford d.school Design Thinking (`Empathize → Define → Ideate → Prototype → Test & Cascade`)  
 
 ---
 
-## 0. Thesis Statement
+## 1. Thesis Statement
 
 > *"Frontier AI models fail on long-horizon systems not from weak syntax, but from inverted design thinking: they skip **Empathize**, **Define**, and **Ideate**, prototype isolated parts bottom-up, and game **Tests** instead of cascading fixes."*
 
 ---
 
-## 1. Stanford d.school Design Thinking $\times$ 5-Gate Rubric (`100.0 pts`)
+## 2. Stanford d.school $\times$ Multi-Domain Matrix
 
-| Gate & d.school Stage | Core Question | Robotics / CAD (`APEX-6M` Arm) | Software Engineering (SWE) | Clinical Medicine |
+| Stage & Gate | Core Question | Software Engineering (SWE) | Clinical Medicine | Hardware / Robotics (`APEX-6M`) |
 | :--- | :--- | :--- | :--- | :--- |
-| **`GATE-01` (`20 pts`)**<br>**1. EMPATHIZE**<br>*Scope & Regime* | *What is the mission, scale, and operating hazard?* | Deduce reach (`607.5 mm`), `1.5 kW` milling loads, and preload (`896 N`) before sizing parts. Reject negative/unsafe inputs. | Deduce concurrency, $p_{99} \le 150\text{ ms}$ SLA, and fault derating before coding. | Deduce acuity, organ reserve, and clearance limits before prescribing. |
-| **`GATE-02` (`20 pts`)**<br>**2. DEFINE**<br>*Lifecycle & Delivery* | *How is it built, supplied end-to-end, articulated, and serviced?* | No 6-wall **"Ship-in-a-Bottle"** boxes (`J3`, `0` bolts); `0` sweep clashes (`-14.2 mm`); routed cables & unblocked extruder feed. | Cycle-free cold start; unbroken auth/data/telemetry pipelines; lock-safe migrations. | Feasible route/schedule; compatible IV lines; continuous vital/lab monitoring. |
-| **`GATE-03` (`20 pts`)**<br>**3. IDEATE**<br>*Reciprocal Interfaces* | *How do mating parts co-design both sides of a joint?* | Clearance + tapped bores (`0` bolts in solid metal vs. `220` clashes); `360°` spindle clamp; `0` air gaps (`2.2 mm` `J4` gap). | Matched caller/callee schemas, shared lock leases, and atomic rollbacks. | Co-designed order sets (drug + hydration + contraindication check + rescue). |
-| **`GATE-04` (`20 pts`)**<br>**4. PROTOTYPE**<br>*Provenance & Integrity* | *Were canonical building blocks imported without proxy hacks?* | Import real **McMaster-Carr** STEP hardware (`6`-sided hex + threads), not `make_shcs()` round-hole stubs; `0` $5\ \mu\text{m}$ fiducials. | Import audited SDKs (`CanonicalRegistry`), not regex mocks; retain all core workloads (`1.80` units). | Use verified institutional formularies; never suppress safety alerts. |
-| **`GATE-05` (`20 pts`)**<br>**5. TEST & CASCADE**<br>*Trickle-Down Sync* | *When one variable changes, does the fix cascade everywhere?* | Rack height (`150 → 348 mm`) updates `CAD`, `URDF`, `SRDF` (`0` docking miss), spec, and `6/6` joint tests. | Schema/state edits propagate forward & reverse across DAGs, specs, and tests ($\le 10^{-6}$ drift). | Lab/vital shifts (e.g., eGFR drop) cascade across all doses and schedules. |
+| **`1. EMPATHIZE`**<br>`GATE-01` (`20 pts`) | *What is the mission, scale, and operating hazard?* | Deduce concurrency, `p99 <= 150 ms` SLA, & fault derating before coding. | Deduce acuity, organ reserve, & renal/hepatic clearance before prescribing. | Deduce reach (`607.5 mm`), `1.5 kW` milling loads, & preload (`896 N`) before sizing parts. |
+| **`2. DEFINE`**<br>`GATE-02` (`20 pts`) | *How is it built, supplied end-to-end, & operated?* | Cycle-free cold start; unbroken auth/data/telemetry pipelines; lock-safe migrations. | Feasible route/schedule; compatible IV lines; continuous vital/lab monitoring. | No 6-wall "Ship-in-a-Bottle" boxes (`J3`); `0` sweep clashes; routed cables & unblocked extruder. |
+| **`3. IDEATE`**<br>`GATE-03` (`20 pts`) | *How do coupled nodes co-design both sides of an interface?* | Matched caller/callee schemas, shared lock leases, & atomic rollbacks. | Co-designed order sets (drug + hydration + contraindication check + rescue). | Clearance + tapped bores (`0` bolts in solid metal vs. `220` clashes); `360°` clamp; `0` air gaps. |
+| **`4. PROTOTYPE`**<br>`GATE-04` (`20 pts`) | *Were canonical building blocks imported without proxy hacks?* | Import audited SDKs (`CanonicalRegistry`), not regex mocks; retain all core workloads. | Use verified institutional formularies; never suppress safety alerts. | Import real McMaster-Carr CAD (6-sided hex + threads), not round-hole stubs; `0` `5µm` fiducials. |
+| **`5. TEST & CASCADE`**<br>`GATE-05` (`20 pts`) | *When one variable changes, does the fix cascade everywhere?* | Schema/state edits cascade forward & reverse across DAGs, specs, & tests (`<= 1e-6` drift). | Lab/vital shifts (e.g. eGFR drop) cascade across all active doses & schedules. | Rack height (`150→348 mm`) updates CAD, URDF, SRDF (`0` miss), spec, & `6/6` joint tests. |
 
 ---
 
-## 2. Implementation Contract (`SystemsEngineeringEngine`)
+## 3. Universal API Contract (`SystemsEngineeringEngine`)
 
-### 2.1 `GATE-01 [EMPATHIZE]`: `derive_operating_envelope(scope: dict) -> dict`
-- **Reject infeasible inputs:** Raise `InfeasibleScopeError` if `target_workpiece_or_workload_scale <= 0`, `peak_regime_load <= 0`, `not (0.0 <= environment_hazard_factor < 0.90)`, or `safety_factor < 1.15`.
-- **Return:**
-  - `required_envelope_span` $= \text{scale} \times (1.0 + \text{hazard} \times \text{safety\_factor})$
-  - `required_interface_capacity` $= (\text{peak\_load} \times \text{safety\_factor}) / (1.0 - \text{hazard})$
-  - `min_clamping_or_lease_preload` $= 1.50 \times \text{required\_interface\_capacity}$
+Implement a domain-agnostic `SystemsEngineeringEngine` in Python 3.11+ (standard library only) that evaluates any system graph (SWE microservice mesh, clinical protocol, or mechanical assembly):
 
-### 2.2 `GATE-02 [DEFINE]`: `verify_lifecycle_and_delivery(components: list, delivery_chains: list, trajectories: list) -> dict`
-Raise `LifecycleConstructibilityError` if:
-1. **Ship-in-a-Bottle:** `internal_part_diameter > enclosure_access_bore` and `enclosure_removable_fasteners < 4`, or `depends_on` is cyclic/missing.
-2. **Broken Delivery:** Any chain has `not is_routed`, `pathway_blocked == True`, or `actuation_modality in ("unspecified", "ambiguous", "none")`.
-3. **Dynamic Clash:** Any trajectory has `swept_clearance_margin < 0.0`.
+```python
+class SystemsEngineeringEngine:
+    def derive_operating_regime(self, mission: dict) -> dict:
+        """GATE-01 [1. EMPATHIZE]: Deduce envelope, derated capacity, and safety margin.
+        - target_envelope  = workload_scale * coverage_factor
+        - derated_capacity = raw_capacity / hazard_derating
+        - required_margin  = peak_load * safety_factor
+        Raise ImpossibleScopeError if target_envelope > max_envelope or required_margin > max_capacity."""
 
-### 2.3 `GATE-03 [IDEATE]`: `verify_coupled_interfaces(interfaces: list, min_preload: float) -> dict`
-Raise `InfeasibleScopeError` if any interface violates:
-- `carrier_clearance_prepared and target_thread_or_contract_prepared`
-- `solid_interference_volume == 0.0`
-- `fastener_count >= 4` and `clamping_coverage_ratio >= 0.90`
-- `interface_air_gap <= 1e-6` and `overhang_beyond_support <= 1e-6`
-- `effective_preload >= min_preload`
+    def verify_lifecycle_and_delivery(self, system_dag: dict) -> dict:
+        """GATE-02 [2. DEFINE]: Verify cold-start/assembly order, end-to-end pathways, and trajectories.
+        - Raise ConstructibilityError on cyclic build/boot dependencies or sealed unserviceable nodes.
+        - Raise IncompleteDeliveryError if any active node lacks an unbroken source pathway or control mode.
+        - Raise TrajectoryCollisionError if any operating state produces resource/kinematic/clinical conflict > 0."""
 
-### 2.4 `GATE-04 [PROTOTYPE]`: `audit_provenance_and_invariants(imported_components: list, system_bodies: list, allocation_request: dict) -> dict`
-1. **Provenance:** Verify every component via `CanonicalRegistry.verify_component_provenance(comp)` (`drive_feature_faces >= 6`, `has_helical_threads == True`, valid SHA-256 digest); else raise `ProvenanceSpoofingError`.
-2. **Anti-Fiducial Gaming:** Raise `ProvenanceSpoofingError` if any body has `mass_or_work_fraction < 1e-4`, `distance_outside_envelope_mm > 10.0`, or `"fiducial"` in `name`.
-3. **Constrained Allocation:** Compute $c_{\text{opt}} = \lceil 100 \sqrt{(6 \cdot D \cdot 10) / (50 \cdot L_{\max})} \rceil / 100$ while retaining all 4 mandatory subsystems (`CoreDatabase_Or_BaseDrive`, `PrimaryCompute_Or_ActuatorPool`, `Telemetry_Or_HarnessBus`, `Safety_Or_ToolController`). Raise `InfeasibleScopeError` if `total_cost > max_budget`.
+    def verify_reciprocal_interfaces(self, coupled_edges: list[dict]) -> dict:
+        """GATE-03 [3. IDEATE]: Verify both sides of every coupled interface (u, v).
+        - Raise UnmatchedInterfaceError if provider_contract != receiver_contract or reciprocal feature is missing.
+        - Raise UnboundInterfaceError if binding_gap_mm > 0.0 or applied_load > support_capacity.
+        - Raise IncompleteClosureError if closure_ratio < 1.0."""
 
-### 2.5 `GATE-05 [TEST & CASCADE]`: `propagate_trickle_down_change(self, node_id: str, param: str, new_value: float) -> dict`
-1. Propagate updates forward and reverse across `offset` and `scaling` edges ($\le 10^{-6}$ error); raise `ConstraintCycleError` on cycles (`> 64` hops) or contradictory parallel updates.
-2. Synchronize `kinematic_or_api_manifest`, `semantic_routing_plan`, `design_specification`, and `verification_harness` (`covered_joints_or_modules = total_joints_or_modules = 6`).
+    def audit_provenance_and_integrity(
+        self, nodes: list[dict], registry: dict, mandatory_ids: list[str], budget_limit: float
+    ) -> dict:
+        """GATE-04 [4. PROTOTYPE]: Enforce canonical registry provenance and block reward hacking (0.35x cap).
+        - Raise ProvenanceSpoofingError if a canonical node lacks registry hash or required functional attributes.
+        - Raise RewardHackingError if any node is a zero-utility proxy hack (utility <= 0 or is_proxy_hack).
+        - Raise WorkloadDeletionError if any mandatory_ids are omitted; raise ImpossibleConstraintError if min cost > budget_limit."""
+
+    def propagate_system_change(
+        self, dag: dict, changed_node: str, new_value: float, artifacts: dict
+    ) -> dict:
+        """GATE-05 [5. TEST & CASCADE]: Propagate change forward & reverse across DAG and all linked artifacts.
+        - Raise ConstraintCycleError on cyclic dependency loops.
+        - Update primary_model, routing_config, and design_spec; require 100% test coverage of affected nodes,
+          else raise CrossArtifactDriftError."""
+```
 
 ---
 
-## 3. Numerical Grading Summary (`grader.py`)
+## 4. Grading Rubric (`grader.py` — `100.0 Points`)
 
-| Gate | Weight | Pass Threshold | Verification Target |
-| :--- | :---: | :---: | :--- |
-| **`GATE-01 [EMPATHIZE]`** | `20.0 pts` | `>= 18.0 pts` | Envelope (`607.5`), capacity (`597.33`), preload (`896.0`), infeasible scope rejection. |
-| **`GATE-02 [DEFINE]`** | `20.0 pts` | `>= 18.0 pts` | Rejects sealed 6-wall box, blocked extruder feed, `0` cables, and `-14.2 mm` / `-33.5 mm` clashes. |
-| **`GATE-03 [IDEATE]`** | `20.0 pts` | `>= 18.0 pts` | Rejects unbored bolts (`373.69 mm³` clash), floating `J4` (`2.2 mm` gap), and `50%` open clamp. |
-| **`GATE-04 [PROTOTYPE]`** | `20.0 pts` | `>= 18.0 pts` | Rejects round-hole fake McMaster bolts, $5\ \mu\text{m}$ fiducials, and deleted core subsystems. |
-| **`GATE-05 [TEST & CASCADE]`** | `20.0 pts` | `>= 18.0 pts` | Forward (`396.0`) & reverse (`372.0`) cascade, `0` manifest drift, `6/6` joint coverage, cycle error. |
-| **Global Anti-Gaming Cap** | **`0.35x`** | `No Spoof/Hack` | Multiplies raw score by `0.35x` if `GATE-04` detects provenance spoofing or verifier gaming. |
+| Gate | Stage | Weight | Multi-Domain Verification Criteria (SWE + Medicine + Hardware) |
+| :--- | :--- | :---: | :--- |
+| **`GATE-01`** | `1. EMPATHIZE` | `20.0 pts` | Deduces operating regime across SWE SLAs, ICU renal dosing, and mechanical reach/loads (`14 pts`); raises `ImpossibleScopeError` on infeasible scopes (`6 pts`). |
+| **`GATE-02`** | `2. DEFINE` | `20.0 pts` | Catches cold-start cycles & "Ship-in-a-Bottle" traps (`7 pts`), broken telemetry/IV/cable pathways (`7 pts`), and state-space collisions (`6 pts`). |
+| **`GATE-03`** | `3. IDEATE` | `20.0 pts` | Rejects mismatched RPC/clinical/bore contracts (`8 pts`), unbound interfaces (`7 pts`), and partial lock/clamp closure `< 1.0` (`5 pts`). |
+| **`GATE-04`** | `4. PROTOTYPE` | `20.0 pts` | Rejects mocked SDKs / fake bolts (`7 pts`), zero-utility proxy nodes / `5µm` fiducials (`7 pts`), and deleted core workloads (`6 pts`). **Triggers `0.35x` Global Cap.** |
+| **`GATE-05`** | `5. TEST & CASCADE` | `20.0 pts` | Multi-hop forward/reverse DAG cascade (`8 pts`), zero cross-artifact drift across configs/specs/tests (`7 pts`), and `ConstraintCycleError` on cycles (`5 pts`). |
