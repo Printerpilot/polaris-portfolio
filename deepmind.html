@@ -705,19 +705,19 @@
     <section id="eval-simulator">
       <div class="section-header" style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px;">
         <div>
-          <div class="section-eyebrow">Stanford d.school Design Thinking × Upstream Causal Grounding Benchmark</div>
+          <div class="section-eyebrow">Stanford d.school Design Thinking × Front-Loaded Stepwise Rubric (60% Upstream / 40% Downstream)</div>
           <h2 class="section-title">Live Polaris Evaluation Task: <code class="inline-code" style="font-size: 0.78em;">POLARIS-EVAL-001</code></h2>
           <p class="section-desc">
-            Internal consistency is not fitness for purpose. Grounded in <strong class="text-bright-blue">Stanford d.school Design Thinking</strong> (<code class="inline-code">Empathize → Define → Ideate → Prototype → Test</code>), <code class="inline-code">POLARIS-EVAL-001</code> enforces <strong class="text-bright-blue">Upstream Causal Grounding</strong>: downstream design choices earn credit only when causally derived from the <code class="inline-code">Empathize</code> mission objective.
+            Each Stanford d.school stage is graded <strong class="text-bright-blue">individually</strong> (<code class="inline-code">35 / 25 / 15 / 15 / 10 = 100 pts</code>), weighting <strong class="text-bright-blue">Empathize (<code class="inline-code">35 pts</code>) + Define (<code class="inline-code">25 pts</code>) at 60% of the total score</strong> while requiring downstream interfaces, components, and tests to prove causal fitness for the mission.
           </p>
         </div>
 
         <div style="display: flex; flex-wrap: wrap; gap: 10px;" role="tablist" aria-label="Candidate Trajectories">
           <button id="btn-traj-a" onclick="selectTrajectory('A')" class="gdm-pill-btn gdm-pill-btn--primary" type="button">
-            1. "Right Part, Wrong Mission" (Skipped Empathize · 0.0 / 100)
+            1. "Right Part, Wrong Mission" (Skipped Empathize · 43.0 / 100)
           </button>
           <button id="btn-traj-b" onclick="selectTrajectory('B')" class="gdm-pill-btn" type="button">
-            2. Empirical Case Study (APEX-6M · 3.4 / 100 Grounded)
+            2. Empirical Case Study (APEX-6M · 5.4 / 100)
           </button>
           <button id="btn-traj-c" onclick="selectTrajectory('C')" class="gdm-pill-btn" type="button">
             3. Polaris Reference: Causal Engine (100 / 100) →
@@ -725,18 +725,17 @@
         </div>
       </div>
 
-      <!-- Benchmark Thesis Statement & Upstream Causal Grounding Formula Banner -->
+      <!-- Benchmark Thesis Statement & Front-Loaded Stepwise Formula Banner -->
       <div class="liquid-glass-card liquid-phase-1" style="padding: 22px 28px; margin-bottom: 18px; border-left: 3px solid #4C9AFF;">
-        <div class="section-eyebrow" style="margin-bottom: 6px;">Thesis Statement &amp; Upstream Causal Grounding Formula · <code class="inline-code">POLARIS-EVAL-001</code></div>
+        <div class="section-eyebrow" style="margin-bottom: 6px;">Thesis Statement &amp; Front-Loaded Stepwise Weights · <code class="inline-code">POLARIS-EVAL-001</code></div>
         <p style="font-size: 1.04rem; line-height: 1.55; color: #FFFFFF; margin: 0 0 12px 0;">
-          <em>"Frontier AI models fail on long-horizon systems by confusing <strong class="text-bright-blue">internal consistency</strong> with <strong class="text-bright-blue">fitness for the objective</strong>: they skip <strong class="text-bright-blue">Empathize</strong>, build ungrounded <strong class="text-bright-blue">Prototypes</strong> whose components are never derived from the mission, and game <strong class="text-bright-blue">Tests</strong> instead of cascading fixes."</em>
+          <em>"Frontier AI models fail on long-horizon systems by confusing <strong class="text-bright-blue">internal consistency</strong> with <strong class="text-bright-blue">fitness for the objective</strong>: they skip <strong class="text-bright-blue">Empathize</strong> and <strong class="text-bright-blue">Define</strong>, build ungrounded <strong class="text-bright-blue">Prototypes</strong> whose components are never derived from the mission, and game <strong class="text-bright-blue">Tests</strong> instead of cascading fixes."</em>
         </p>
         <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.88rem; color: var(--text-body);">
-          <span style="color: #FFFFFF; font-weight: 530;">Upstream Grounding Law:</span>
-          <code class="inline-code">α_empathize = GATE-01 / 20.0 ∈ [0, 1]</code>
-          <code class="inline-code">Grounded = GATE-01 + α_empathize × Σ(GATE-02..05)</code>
-          <code class="inline-code">Final = Grounded × λ_integrity</code>
-          <span style="color: var(--text-muted);">(Skipping <code class="inline-code">Empathize</code> yields <code class="inline-code">0.0 / 100</code> even if real library parts are imported and mated cleanly.)</span>
+          <span style="color: #FFFFFF; font-weight: 530;">Stepwise Distribution:</span>
+          <code class="inline-code">Upstream Framing (60 pts) = Empathize (35) + Define (25)</code>
+          <code class="inline-code">Downstream Execution (40 pts) = Ideate (15) + Prototype (15) + Test (10)</code>
+          <code class="inline-code">Final = Raw × λ_integrity</code>
         </div>
       </div>
 
@@ -744,8 +743,8 @@
       <div class="liquid-glass-card liquid-phase-2" style="padding: 26px 30px; margin-bottom: 22px; overflow-x: auto;">
         <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 14px;">
           <div>
-            <div class="section-eyebrow" style="margin-bottom: 4px;">Domain-Agnostic Epistemic Chain · 5 Universal Gates (5 × 20 pts = 100 pts · α_empathize Gate · 0.35x Cap)</div>
-            <h3 class="card-title" style="font-size: 1.25rem; margin-bottom: 0;">Empathize (Sets α) → Define → Ideate → Prototype → Test &amp; Cascade</h3>
+            <div class="section-eyebrow" style="margin-bottom: 4px;">Domain-Agnostic Epistemic Chain · Individual Step Weights (35 + 25 + 15 + 15 + 10 = 100 pts · 0.35x Cap)</div>
+            <h3 class="card-title" style="font-size: 1.25rem; margin-bottom: 0;">Empathize (35) → Define (25) → Ideate (15) → Prototype (15) → Test &amp; Cascade (10)</h3>
           </div>
           <div style="display: flex; gap: 8px; flex-wrap: wrap;">
             <a href="./polaris_eval_task/PROMPT.md" target="_blank" rel="noopener" class="inline-code" style="text-decoration: none;">PROMPT.md ↗</a>
@@ -756,41 +755,41 @@
         <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; line-height: 1.45; color: var(--text-body);">
           <thead>
             <tr style="border-bottom: 1px solid rgba(255,255,255,0.16); text-align: left; color: #FFFFFF;">
-              <th style="padding: 10px 12px; width: 18%;">d.school Stage &amp; Gate</th>
+              <th style="padding: 10px 12px; width: 18%;">d.school Stage &amp; Weight</th>
               <th style="padding: 10px 12px; width: 22%;">Core Causal Question</th>
-              <th style="padding: 10px 12px; width: 34%;">Universal Causal Grounding Rule (Domain-Agnostic)</th>
+              <th style="padding: 10px 12px; width: 34%;">Individual Step Grading Rule (Domain-Agnostic)</th>
               <th style="padding: 10px 12px; width: 26%;">Cross-Domain Illustration</th>
             </tr>
           </thead>
           <tbody>
             <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
-              <td style="padding: 10px 12px;"><strong class="text-bright-blue">1. EMPATHIZE<br><code class="inline-code">GATE-01</code> (20 pts)<br><em>Sets α_empathize</em></strong></td>
+              <td style="padding: 10px 12px;"><strong class="text-bright-blue">1. EMPATHIZE<br><code class="inline-code">GATE-01</code> (35 pts)<br><em>35% of Total</em></strong></td>
               <td style="padding: 10px 12px;"><em>What is the real-world objective, environment, scale, &amp; lifecycle?</em></td>
-              <td style="padding: 10px 12px;">Halts premature design on underspecified prompts (<code class="inline-code">MissingContextInquiryError</code>); derives governing bounds (<code class="inline-code">envelope</code>, <code class="inline-code">derated_capacity</code>, <code class="inline-code">required_margin</code>); blocks infeasible scopes.</td>
+              <td style="padding: 10px 12px;">Halts on underspecified prompts (<code class="inline-code">12 pts</code>); derives governing bounds (<code class="inline-code">envelope</code>, <code class="inline-code">derated_capacity</code>, <code class="inline-code">required_margin</code>, <code class="inline-code">13 pts</code>); rejects infeasible scopes (<code class="inline-code">10 pts</code>).</td>
               <td style="padding: 10px 12px;"><strong>SWE:</strong> Concurrency &amp; SLA.<br><strong>Med:</strong> Acuity &amp; organ reserve.<br><strong>HW:</strong> Workpiece scale &amp; loads.</td>
             </tr>
             <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
-              <td style="padding: 10px 12px;"><strong class="text-bright-blue">2. DEFINE<br><code class="inline-code">GATE-02</code> (20 pts)</strong></td>
+              <td style="padding: 10px 12px;"><strong class="text-bright-blue">2. DEFINE<br><code class="inline-code">GATE-02</code> (25 pts)<br><em>25% of Total</em></strong></td>
               <td style="padding: 10px 12px;"><em>How is the system constructed, supplied end-to-end, &amp; operated?</em></td>
-              <td style="padding: 10px 12px;">Every requirement must trace to <code class="inline-code">Empathize</code> (<code class="inline-code">UngroundedRequirementError</code>); blocks cyclic/sealed topologies, broken pathways, &amp; state-space conflicts.</td>
+              <td style="padding: 10px 12px;">Traces requirements to <code class="inline-code">Empathize</code> (<code class="inline-code">8 pts</code>); blocks cyclic/sealed topologies (<code class="inline-code">9 pts</code>); verifies unbroken delivery pathways &amp; collision-free trajectories (<code class="inline-code">8 pts</code>).</td>
               <td style="padding: 10px 12px;"><strong>SWE:</strong> Cold-start DAG &amp; telemetry.<br><strong>Med:</strong> IV compatibility &amp; vitals.<br><strong>HW:</strong> Service access &amp; harnesses.</td>
             </tr>
             <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
-              <td style="padding: 10px 12px;"><strong class="text-bright-blue">3. IDEATE<br><code class="inline-code">GATE-03</code> (20 pts)</strong></td>
+              <td style="padding: 10px 12px;"><strong class="text-bright-blue">3. IDEATE<br><code class="inline-code">GATE-03</code> (15 pts)</strong></td>
               <td style="padding: 10px 12px;"><em>Do coupled nodes co-design both sides of every interface for the defined loads?</em></td>
-              <td style="padding: 10px 12px;">Rejects interfaces undersized for <code class="inline-code">Empathize</code> loads (<code class="inline-code">UngroundedInterfaceError</code>), mismatched contracts, floating gaps (<code class="inline-code">&gt;0</code>), &amp; partial closure (<code class="inline-code">&lt;1.0</code>).</td>
+              <td style="padding: 10px 12px;">Verifies interface capacity meets <code class="inline-code">Empathize</code> loads (<code class="inline-code">5 pts</code>), matches provider/receiver contracts with <code class="inline-code">0.0</code> gap (<code class="inline-code">6 pts</code>), &amp; enforces <code class="inline-code">100%</code> closure (<code class="inline-code">4 pts</code>).</td>
               <td style="padding: 10px 12px;"><strong>SWE:</strong> RPC schemas &amp; lock leases.<br><strong>Med:</strong> Order + rescue bundles.<br><strong>HW:</strong> Paired bores &amp; 360° clamps.</td>
             </tr>
             <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
-              <td style="padding: 10px 12px;"><strong class="text-bright-blue">4. PROTOTYPE<br><code class="inline-code">GATE-04</code> (20 pts)<br><em>0.35x Cap</em></strong></td>
+              <td style="padding: 10px 12px;"><strong class="text-bright-blue">4. PROTOTYPE<br><code class="inline-code">GATE-04</code> (15 pts)<br><em>0.35x Cap</em></strong></td>
               <td style="padding: 10px 12px;"><em>Is each component both <strong>causally right for the mission</strong> &amp; from a verified source?</em></td>
-              <td style="padding: 10px 12px;">Rejects <strong>"Right Part, Wrong Mission"</strong> components whose rating fails <code class="inline-code">Empathize</code> demands (<code class="inline-code">UngroundedComponentError</code>), spoofed provenance, &amp; proxy hacks.</td>
+              <td style="padding: 10px 12px;">Rejects <strong>"Right Part, Wrong Mission"</strong> components (<code class="inline-code">6 pts</code>), verifies canonical registry hashes (<code class="inline-code">5 pts</code>), &amp; blocks proxy hacks / deleted subsystems (<code class="inline-code">4 pts</code>).</td>
               <td style="padding: 10px 12px;"><strong>SWE:</strong> Audited SDKs sized for load.<br><strong>Med:</strong> Formulary dosed for GFR.<br><strong>HW:</strong> McMaster CAD sized for torque.</td>
             </tr>
             <tr>
-              <td style="padding: 10px 12px;"><strong class="text-bright-blue">5. TEST &amp; CASCADE<br><code class="inline-code">GATE-05</code> (20 pts)</strong></td>
+              <td style="padding: 10px 12px;"><strong class="text-bright-blue">5. TEST &amp; CASCADE<br><code class="inline-code">GATE-05</code> (10 pts)</strong></td>
               <td style="padding: 10px 12px;"><em>Does the system satisfy the original objective, &amp; do changes cascade?</em></td>
-              <td style="padding: 10px 12px;">Validates against the root <code class="inline-code">Empathize</code> objective (<code class="inline-code">ObjectiveMismatchError</code>) and cascades mutations forward &amp; reverse across all coupled nodes, specs, &amp; tests.</td>
+              <td style="padding: 10px 12px;">Validates against the root <code class="inline-code">Empathize</code> objective (<code class="inline-code">3 pts</code>), cascades mutations forward &amp; reverse across all artifacts/tests (<code class="inline-code">4 pts</code>), &amp; catches cycles (<code class="inline-code">3 pts</code>).</td>
               <td style="padding: 10px 12px;"><strong>SWE:</strong> Schema → gateway/tests.<br><strong>Med:</strong> Lab shift → active doses.<br><strong>HW:</strong> Datum shift → CAD/URDF/SRDF.</td>
             </tr>
           </tbody>
@@ -804,23 +803,23 @@
             <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 18px;">
               <div>
                 <div id="sim-candidate-title" style="font-size: 1.22rem; font-weight: 530; color: #FFFFFF;">
-                  1. "Right Part, Wrong Mission" Agent (Skipped Empathize, Internally Consistent Prototype)
+                  1. "Right Part, Wrong Mission" Agent (Skipped Empathize, Clean Prototype)
                 </div>
                 <div id="sim-penalty-note" style="font-size: 0.94rem; color: var(--text-muted); margin-top: 4px;">
-                  Additive Raw: 55.0 / 100 · Empathize Grounding (α): 0.00x → Grounded: 0.0 / 100
+                  Upstream (Empathize+Define): 17.0 / 60.0 · Downstream: 26.0 / 40.0 · Integrity Cap (λ): 1.00x
                 </div>
               </div>
               <div style="text-align: right;">
                 <div id="sim-final-score" class="text-bright-blue" style="font-size: 2.3rem; font-weight: 580; line-height: 1.05;">
-                  0.0 / 100
+                  43.0 / 100
                 </div>
-                <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 4px;">Upstream-Grounded Score</div>
+                <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 4px;">Stepwise Rubric Score</div>
               </div>
             </div>
 
             <!-- Progress Bar -->
             <div style="width: 100%; height: 10px; border-radius: 999px; background: rgba(255,255,255,0.08); overflow: hidden; margin-bottom: 16px;">
-              <div id="sim-progress-bar" style="width: 2%; height: 100%; border-radius: 999px; background: linear-gradient(90deg, #0084FF 0%, #4C9AFF 50%, #6EE7B7 100%); transition: width 0.35s ease;"></div>
+              <div id="sim-progress-bar" style="width: 43.0%; height: 100%; border-radius: 999px; background: linear-gradient(90deg, #0084FF 0%, #4C9AFF 50%, #6EE7B7 100%); transition: width 0.35s ease;"></div>
             </div>
 
             <!-- Violation Pills -->
@@ -844,8 +843,8 @@
           </div>
 
           <div class="liquid-glass-card liquid-phase-3" style="padding: 28px 28px;">
-            <div class="section-eyebrow" style="margin-bottom: 8px;">Upstream Causal Grounding Rationale</div>
-            <h3 class="card-title" style="font-size: 1.2rem; margin-bottom: 10px;">Why Internal Consistency ≠ Fitness for the Objective</h3>
+            <div class="section-eyebrow" style="margin-bottom: 8px;">Front-Loaded Stepwise Rationale</div>
+            <h3 class="card-title" style="font-size: 1.2rem; margin-bottom: 10px;">Why Empathize (35) + Define (25) Carry 60% of the Score</h3>
             <p id="sim-rationale-text" style="font-size: 0.98rem; color: var(--text-body); line-height: 1.62;"></p>
           </div>
         </div>
@@ -1477,37 +1476,37 @@
     // 2. Interactive Polaris Grader Simulator Data (Universal 5-Gate Stanford d.school x Systems-Thinking Rubric: POLARIS-EVAL-001)
     const TRAJECTORIES = {
       A: {
-        name: "1. 'Right Part, Wrong Mission' Agent (Skipped Empathize, Internally Consistent Prototype)",
-        finalScore: "0.0 / 100",
-        rawScore: "55.0 / 100.0 (Additive Raw)",
-        multiplier: "α_empathize = 0.00x (Skipped Empathize → 0.0 Grounded) · λ = 1.00x",
-        progressWidth: "2%",
+        name: "1. 'Right Part, Wrong Mission' Agent (Skipped Empathize, Clean Prototype)",
+        finalScore: "43.0 / 100",
+        rawScore: "Upstream (Empathize+Define): 17.0 / 60.0 · Downstream: 26.0 / 40.0",
+        multiplier: "Raw: 43.0 / 100.0 · Integrity Cap (λ): 1.00x (Fails Mission Fitness)",
+        progressWidth: "43.0%",
         violations: [
           "EMPATHIZE_SKIPPED_BLIND_ASSUMPTIONS",
           "RIGHT_PART_WRONG_MISSION_UNGROUNDED_PROTOTYPE",
           "ORPHAN_DEFINE_AND_IDEATE_CONTRACTS"
         ],
         codeTitle: "'Right Part, Wrong Mission': Real Library Import Without Empathize Grounding",
-        codeSnippet: `# 1. EMPATHIZE SKIPPED: Never interrogates prompt; guesses 100-unit load
+        codeSnippet: `# 1. EMPATHIZE SKIPPED (0/35 pts): Never interrogates prompt; guesses 100-unit load
 regime = {"objective_id": "GUESSED", "required_margin": 100.0}  # Actual: 896.0!
 
-# 2. PROTOTYPE: Imports REAL canonical part (150-unit), but WRONG for mission!
+# 2. PROTOTYPE (9/15 pts): Real canonical part (150-unit), but WRONG for mission!
 part = registry["CANONICAL-LIGHT-DUTY-UNIT"]  # Valid hash, fails 896.0 load!`,
-        rationale: "Why additive rubrics fail: this agent builds an acyclic DAG, matches interfaces, imports real registry components with valid hashes, and syncs all files (earning 55.0/100 raw consistency points)—for an arbitrary guessed regime! Because it skipped Stage 1 (Empathize, α = 0.00x), nobody knows if its imported parts fit the mission, yielding 0.0 / 100 under Upstream Causal Grounding.",
+        rationale: "Each step is graded individually, with Empathize (35 pts) + Define (25 pts) carrying 60% of the rubric. Even though this agent builds an acyclic DAG, matches interfaces, imports real canonical parts, and cascades updates cleanly, skipping Empathize (0/35) and failing the causal load checks in Define (-8), Ideate (-5), Prototype (-6), and Test (-3) caps its score at 43.0 / 100 (FAIL).",
         gates: [
-          { id: "GATE-01", name: "1. EMPATHIZE: Pre-Design Inquiry & Regime (Sets α = 0.00x)", score: "0.0 / 20.0", passed: false, detail: "FAIL: Did not halt on underspecified prompt (MissingContextInquiryError) and guessed arbitrary 100-unit bounds." },
-          { id: "GATE-02", name: "2. DEFINE: Traceable Constructibility & Delivery", score: "14.0 / 20.0", passed: false, detail: "PARTIAL (×0.00 α): Acyclic DAG and unbroken pathways, but orphan requirements fail UngroundedRequirementError." },
-          { id: "GATE-03", name: "3. IDEATE: Grounded Reciprocal Interfaces & Closure", score: "14.0 / 20.0", passed: false, detail: "PARTIAL (×0.00 α): Local contracts match (0 gap, 1.0 closure), but capacity (150) fails Empathize load (896)." },
-          { id: "GATE-04", name: "4. PROTOTYPE: Causal Mission Fitness & Provenance", score: "12.0 / 20.0", passed: false, detail: "FAIL ['Right Part, Wrong Mission' ×0.00 α]: Real registry hash, but light-duty rating (150) fails mission (896)." },
-          { id: "GATE-05", name: "5. TEST & CASCADE: Objective Alignment & Cascade Sync", score: "15.0 / 20.0", passed: false, detail: "PARTIAL (×0.00 α): Multi-hop cascade & 4/4 tests sync locally, but validate against a drifted wrong objective." }
+          { id: "GATE-01", name: "1. EMPATHIZE: Pre-Design Inquiry, Objective & Regime", score: "0.0 / 35.0", passed: false, detail: "FAIL (0/35): Skipped context inquiry (0/12), guessed arbitrary 100-unit bounds (0/13), & missed infeasible scope (0/10)." },
+          { id: "GATE-02", name: "2. DEFINE: Traceable Constructibility & Delivery", score: "17.0 / 25.0", passed: false, detail: "PARTIAL (17/25): Acyclic/openable DAG (9/9) & unbroken pathways (8/8), but requirements lack Empathize trace (0/8)." },
+          { id: "GATE-03", name: "3. IDEATE: Grounded Reciprocal Interfaces & Closure", score: "10.0 / 15.0", passed: false, detail: "PARTIAL (10/15): Matched contracts & 0 gap (6/6) + 1.0 closure (4/4), but capacity (150) fails mission load (896) (0/5)." },
+          { id: "GATE-04", name: "4. PROTOTYPE: Causal Mission Fitness & Provenance (0.35x Cap)", score: "9.0 / 15.0", passed: false, detail: "PARTIAL ['Right Part, Wrong Mission', 9/15]: Valid registry hash (5/5) & 0 hacks (4/4), but 150-rating fails mission (0/6)." },
+          { id: "GATE-05", name: "5. TEST & CASCADE: Objective Alignment & Cascade Sync", score: "7.0 / 10.0", passed: false, detail: "PARTIAL (7/10): Multi-hop cascade (4/4) & cycle check (3/3) pass, but test suite validates a drifted objective (0/3)." }
         ]
       },
       B: {
-        name: "2. Empirical Bottom-Up & Hack Agent (APEX-6M Case Study — 3.4 / 100 Grounded)",
-        finalScore: "3.4 / 100",
-        rawScore: "16.6 / 100.0 (Additive Raw · 5.8 / 100 Unweighted)",
-        multiplier: "α_empathize = 0.325x (Grounded = 9.8) × λ_integrity = 0.35x Cap",
-        progressWidth: "3.4%",
+        name: "2. Empirical Bottom-Up & Hack Agent (APEX-6M Case Study — 5.4 / 100 Final)",
+        finalScore: "5.4 / 100",
+        rawScore: "Upstream (Empathize+Define): 11.5 / 60.0 · Downstream: 4.0 / 40.0",
+        multiplier: "Raw: 15.5 / 100.0 × Integrity Cap (λ): 0.35x (Spoofed COTS + 5µm Fiducials)",
+        progressWidth: "5.4%",
         violations: [
           "EMPATHIZE_SKIPPED_BLIND_ASSUMPTIONS",
           "RIGHT_PART_WRONG_MISSION_UNGROUNDED_PROTOTYPE",
@@ -1515,43 +1514,43 @@ part = registry["CANONICAL-LIGHT-DUTY-UNIT"]  # Valid hash, fails 896.0 load!`,
           "REWARD_HACK_PROXY_INJECTION"
         ],
         codeTitle: "Empirical Case Study (APEX-6M): Partial Scope + Unconstructible + Spoofed",
-        codeSnippet: `# 1. EMPATHIZE PARTIAL (6.5/20 -> α = 0.325): Static span only; skips loads
-# 2. DEFINE & IDEATE FAIL: Sealed 6-wall box; 0 cables; 220 solid clashes
-# 3. PROTOTYPE HACK (λ = 0.35x): Unthreaded bolt stub + 5µm proxy spheres
+        codeSnippet: `# 1. EMPATHIZE (8.0/35) & DEFINE (3.5/25): Static span only; 6-wall sealed J3 box
+# 2. IDEATE (2.5/15): 220 bolts in solid metal; 2.20mm J4 air gap; 180° half-clamp
+# 3. PROTOTYPE (0/15 -> λ = 0.35x) & TEST (1.5/10): Fake bolt + 5µm proxy spheres
 bolt   = make_cylinder(d=5, l=16, hex_socket=False, threads=False)
 sphere = make_fiducial(r=0.005, z=-520.0)  # Zero-utility verifier hack`,
-        rationale: "On the empirical APEX-6M case study, the agent guessed static reach (6.5/20 → α = 0.325) without deriving dynamic loads, built a 6-wall 'Ship-in-a-Bottle' enclosure with 0 cables, plunged 220 bolts into solid plates, hallucinated unthreaded bolts + 5µm fiducials (λ = 0.35x cap), and left a 289.1 mm SRDF drift—scoring 5.8/100 additive and 3.4/100 under Upstream Causal Grounding.",
+        rationale: "Grading each step individually on the APEX-6M 6-DOF robot arm reveals how skipping upstream framing cascades into total system failure: 8.0/35 on Empathize (static span only), 3.5/25 on Define ('Ship-in-a-Bottle' J3 box + 0 cables), 2.5/15 on Ideate (220 solid-metal bolt clashes), 0.0/15 on Prototype (fake McMaster cylinders + 5µm fiducials → 0.35x cap), and 1.5/10 on Test (289.1 mm SRDF drift) = 5.4 / 100.",
         gates: [
-          { id: "GATE-01", name: "1. EMPATHIZE: Pre-Design Inquiry & Regime (Sets α = 0.325x)", score: "6.5 / 20.0", passed: false, detail: "PARTIAL: Guessed static span (607.5) without context inquiry, hazard derating, or safety-margin deduction." },
-          { id: "GATE-02", name: "2. DEFINE: Traceable Constructibility & Delivery", score: "4.1 / 20.0", passed: false, detail: "FAIL (×0.325 α): Sealed 6-wall 'Ship-in-a-Bottle' box, 0 routed conduits, blocked intake, & 373.69 clash." },
-          { id: "GATE-03", name: "3. IDEATE: Grounded Reciprocal Interfaces & Closure", score: "3.8 / 20.0", passed: false, detail: "FAIL (×0.325 α): 220 un-mated solid interferences, 2.20 mm unbound gap, and 0.5 partial clamp closure." },
-          { id: "GATE-04", name: "4. PROTOTYPE: Causal Mission Fitness & Provenance", score: "0.0 / 20.0", passed: false, detail: "HACK-CAUGHT (λ = 0.35x): Ungrounded sizing + spoofed threadless stubs + zero-utility 5µm proxy spheres." },
-          { id: "GATE-05", name: "5. TEST & CASCADE: Objective Alignment & Cascade Sync", score: "2.2 / 20.0", passed: false, detail: "FAIL (×0.325 α): Stopped cascade at 1 hop, leaving 289.1 mm secondary config drift & 1/6 test coverage." }
+          { id: "GATE-01", name: "1. EMPATHIZE: Pre-Design Inquiry, Objective & Regime", score: "8.0 / 35.0", passed: false, detail: "FAIL (8/35): Skipped context inquiry (0/12); guessed static reach without milling/preload derating (8/13); missed scope limit (0/10)." },
+          { id: "GATE-02", name: "2. DEFINE: Traceable Constructibility & Delivery", score: "3.5 / 25.0", passed: false, detail: "FAIL (3.5/25): Orphan requirements (0/8), sealed 6-wall 'Ship-in-a-Bottle' J3 box (3.5/9), & 0 cables + 373.69 clash (0/8)." },
+          { id: "GATE-03", name: "3. IDEATE: Grounded Reciprocal Interfaces & Closure", score: "2.5 / 15.0", passed: false, detail: "FAIL (2.5/15): Undersized joints (0/5), 220 solid-metal bolt clashes + 2.2mm J4 air gap (2.5/6), & 180° half-clamp (0/4)." },
+          { id: "GATE-04", name: "4. PROTOTYPE: Causal Mission Fitness & Provenance (0.35x Cap)", score: "0.0 / 15.0", passed: false, detail: "HACK-CAUGHT (0/15, λ = 0.35x): Ungrounded sizing (0/6) + 32 threadless bolt stubs (0/5) + 5µm underground fiducials (0/4)." },
+          { id: "GATE-05", name: "5. TEST & CASCADE: Objective Alignment & Cascade Sync", score: "1.5 / 10.0", passed: false, detail: "FAIL (1.5/10): Drifted objective (0/3), 1-hop cascade with 289.1 mm SRDF drift & 1/6 joint tests (1.5/4), no cycle guard (0/3)." }
         ]
       },
       C: {
         name: "3. Polaris Reference: Upstream-Grounded Causal Systems Engine (100% Domain-Agnostic)",
         finalScore: "100.0 / 100",
-        rawScore: "100.0 / 100.0 (Additive Raw)",
-        multiplier: "α_empathize = 1.00x (Full Causal Traceability) · λ_integrity = 1.00x",
+        rawScore: "Upstream (Empathize+Define): 60.0 / 60.0 · Downstream: 40.0 / 40.0",
+        multiplier: "Raw: 100.0 / 100.0 · Integrity Cap (λ): 1.00x (Full Causal Traceability)",
         progressWidth: "100%",
         violations: [],
-        codeTitle: "Upstream-Grounded Causal Engine: Empathize Gates All Downstream Stages",
-        codeSnippet: `# 1. EMPATHIZE (Sets α): Interrogate missing context & deduce regime
+        codeTitle: "Front-Loaded Causal Engine: Empathize (35) + Define (25) + Execution (40)",
+        codeSnippet: `# 1. UPSTREAM FRAMING (60 pts): Empathize (35) + Define (25)
 regime = engine.derive_operating_regime(mission_brief)
-
-# 2. DEFINE -> IDEATE -> PROTOTYPE -> TEST: Every stage traces to regime
 life   = engine.verify_lifecycle_and_delivery(system_dag, regime)
+
+# 2. DOWNSTREAM REALIZATION (40 pts): Ideate (15) + Prototype (15) + Test (10)
 iface  = engine.verify_reciprocal_interfaces(coupled_edges, regime)
 audit  = engine.audit_provenance_and_integrity(nodes, registry, regime)
 sync   = engine.propagate_system_change(dag, node, val, artifacts, regime)`,
-        rationale: "The Polaris Reference Engine enforces unbroken Upstream Causal Grounding: Stage 1 (Empathize) halts on underspecified prompts to establish the objective and governing regime, and Stages 2–5 require every requirement, interface, canonical component, and cascade test to prove both internal integrity and causal fitness for that regime.",
+        rationale: "The Polaris Reference Engine earns all 60.0 upstream points (Empathize: 35/35, Define: 25/25) by halting on underspecified prompts, deducing governing bounds, and verifying constructible, routed lifecycles—then earns all 40.0 downstream points (Ideate: 15/15, Prototype: 15/15, Test: 10/10) by proving every interface, canonical component, and cascade test satisfies that regime.",
         gates: [
-          { id: "GATE-01", name: "1. EMPATHIZE: Pre-Design Inquiry & Regime (Sets α = 1.00x)", score: "20.0 / 20.0", passed: true, detail: "PASS: Halts on underspecified prompts (MissingContextInquiryError), deduces regime (896.0), & blocks ImpossibleScopeError." },
-          { id: "GATE-02", name: "2. DEFINE: Traceable Constructibility & Delivery", score: "20.0 / 20.0", passed: true, detail: "PASS: Verifies all requirements trace to Empathize objective, acyclic/openable DAG, unbroken pathways, & 0 clashes." },
-          { id: "GATE-03", name: "3. IDEATE: Grounded Reciprocal Interfaces & Closure", score: "20.0 / 20.0", passed: true, detail: "PASS: Verifies interface capacity >= Empathize margin (950 >= 896), matched contracts, 0.0 gap, & 1.0 closure." },
-          { id: "GATE-04", name: "4. PROTOTYPE: Causal Mission Fitness & Provenance", score: "20.0 / 20.0", passed: true, detail: "PASS: Rejects 'Right Part, Wrong Mission' (150 < 896), verifies canonical registry hashes, & blocks proxy hacks." },
-          { id: "GATE-05", name: "5. TEST & CASCADE: Objective Alignment & Cascade Sync", score: "20.0 / 20.0", passed: true, detail: "PASS: Verifies alignment with Empathize objective and cascades mutations forward & reverse with ≤1e-6 drift." }
+          { id: "GATE-01", name: "1. EMPATHIZE: Pre-Design Inquiry, Objective & Regime", score: "35.0 / 35.0", passed: true, detail: "PASS (35/35): Halts on underspecified prompts (12/12), deduces regime bounds (13/13), & blocks ImpossibleScopeError (10/10)." },
+          { id: "GATE-02", name: "2. DEFINE: Traceable Constructibility & Delivery", score: "25.0 / 25.0", passed: true, detail: "PASS (25/25): Traces requirements to Empathize (8/8), verifies openable/acyclic DAG (9/9), & unbroken pathways/trajectories (8/8)." },
+          { id: "GATE-03", name: "3. IDEATE: Grounded Reciprocal Interfaces & Closure", score: "15.0 / 15.0", passed: true, detail: "PASS (15/15): Verifies interface capacity >= regime (5/5), matched contracts + 0.0 gap (6/6), & 100% closure (4/4)." },
+          { id: "GATE-04", name: "4. PROTOTYPE: Causal Mission Fitness & Provenance (0.35x Cap)", score: "15.0 / 15.0", passed: true, detail: "PASS (15/15): Rejects 'Right Part, Wrong Mission' (6/6), verifies canonical registry hashes (5/5), & blocks proxy hacks (4/4)." },
+          { id: "GATE-05", name: "5. TEST & CASCADE: Objective Alignment & Cascade Sync", score: "10.0 / 10.0", passed: true, detail: "PASS (10/10): Validates against Empathize objective (3/3), cascades forward/reverse with ≤1e-6 drift (4/4), & blocks cycles (3/3)." }
         ]
       }
     };

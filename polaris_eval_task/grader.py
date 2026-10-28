@@ -1,22 +1,19 @@
 #!/usr/bin/env python3
 """
-Polaris Evaluation Task (POLARIS-EVAL-001): Upstream Causal Grounding Grader
-============================================================================
+Polaris Evaluation Task (POLARIS-EVAL-001): Front-Loaded Stepwise Causal Grader
+===============================================================================
 Evaluates candidate SystemsEngineeringEngine implementations across 5 Universal
-Stanford d.school Design Thinking x Systems-Thinking Gates (100.0 points total)
-using the Upstream Causal Grounding Formula:
+Stanford d.school Design Thinking x Systems-Thinking Gates (100.0 points total).
 
-    alpha_empathize = GATE_01 / 20.0   in [0.0, 1.0]
-    grounded_score  = GATE_01 + alpha_empathize * (GATE_02 + GATE_03 + GATE_04 + GATE_05)
-    final_score     = grounded_score * lambda_integrity   (lambda_integrity in {0.35, 1.00})
+Each step is graded individually on its own merits, with Stage 1 (Empathize) and
+Stage 2 (Define) weighted heavier (60% of the total score) and causal fitness
+verified at every downstream stage:
 
-Why Upstream Causal Grounding Matters:
-  In an additive rubric (20+20+20+20+20 = 100), an agent that skips Stage 1 (Empathize)
-  can still score up to 80/100 by importing real library parts, mating interfaces cleanly,
-  and syncing files for an ungrounded, wrong system ("right bolt, wrong mission").
-  Under Upstream Causal Grounding, skipping Empathize (alpha_empathize = 0.0) yields
-  0.0 / 100.0, and any downstream requirement, interface, or component not causally
-  derived from the Empathize regime is rejected as ungrounded.
+  - GATE-01 (35.0 pts): Stage 1 [EMPATHIZE] — Pre-Design Inquiry, Objective & Operating Regime
+  - GATE-02 (25.0 pts): Stage 2 [DEFINE]    — Traceable Constructibility, Delivery & Trajectories
+  - GATE-03 (15.0 pts): Stage 3 [IDEATE]    — Grounded Reciprocal Interfaces, Binding & Closure
+  - GATE-04 (15.0 pts): Stage 4 [PROTOTYPE] — Mission Fitness ('Right Part') & Provenance (0.35x Cap)
+  - GATE-05 (10.0 pts): Stage 5 [TEST & CASCADE] — Objective Alignment & Multi-Hop Cascade
 """
 
 from __future__ import annotations
@@ -135,17 +132,20 @@ REQUIRED_CONTEXT_KEYS = (
 
 class UngroundedInternalConsistencyEngine:
     """
-    Trajectory A (0.0 / 100.0 Grounded | 52.0 / 100.0 Raw Additive):
-    'Right Bolt, Wrong Mission' Agent (Skips Empathize, Internally Consistent Prototype).
-    - Never interrogates underspecified prompts or derives mission loads (GATE-01 = 0.0 -> alpha = 0.00x).
-    - Builds an acyclic DAG, matches interfaces, imports real registry components (CANONICAL-LIGHT-DUTY-UNIT,
-      rated_capacity=150.0), and cascades updates cleanly—for an arbitrary guessed 100-unit load!
-    - Fails completely when the actual mission requires 896.0 units, and gets 0.0 / 100.0 under
-      Upstream Causal Grounding because Stage 1 (Empathize) was skipped entirely.
+    Trajectory A (43.0 / 100.0 — FAIL):
+    'Right Part, Wrong Mission' Agent (Skips Empathize, Internally Consistent Prototype).
+    - GATE-01 (0.0 / 35.0): Skips context inquiry and guesses an arbitrary 100-unit load.
+    - GATE-02 (17.0 / 25.0): Builds an acyclic, openable DAG with unbroken pathways, but
+      requirements do not trace to the Empathize objective (-8.0 pts).
+    - GATE-03 (10.0 / 15.0): Matches contracts with 0 gap and 1.0 closure, but interface
+      capacity (150.0) fails the actual mission load (896.0) (-5.0 pts).
+    - GATE-04 (9.0 / 15.0): Imports a real canonical library part (CANONICAL-LIGHT-DUTY-UNIT)
+      with valid hash and 0 proxy hacks, but rated_capacity=150.0 fails the 896.0 mission (-6.0 pts).
+    - GATE-05 (7.0 / 10.0): Cascades updates cleanly across DAG/tests, but validates against
+      the wrong objective (-3.0 pts).
     """
 
     def derive_operating_regime(self, mission_brief: Dict[str, Any]) -> Dict[str, Any]:
-        # Skips context inquiry and returns arbitrary guessed defaults
         return {
             "objective_id": "GUESSED-DEFAULT-OBJ",
             "target_envelope": 100.0,
@@ -154,7 +154,6 @@ class UngroundedInternalConsistencyEngine:
         }
 
     def verify_lifecycle_and_delivery(self, system_dag: Dict[str, Any], regime: Dict[str, Any]) -> Dict[str, Any]:
-        # Checks internal DAG cycles, pathways, and state collisions, but ignores causal link to Empathize objective
         for node in system_dag.get("nodes", []):
             if node.get("sealed_unserviceable", False) or (
                 node.get("internal_components", 0) > 0 and node.get("access_openings", 1) <= 0
@@ -185,7 +184,6 @@ class UngroundedInternalConsistencyEngine:
         return {"status": "VERIFIED"}
 
     def verify_reciprocal_interfaces(self, coupled_edges: List[Dict[str, Any]], regime: Dict[str, Any]) -> Dict[str, Any]:
-        # Checks local contract matching, 0 gap, and 1.0 closure, but ignores whether interface capacity meets mission regime!
         for edge in coupled_edges:
             if edge.get("provider_contract") != edge.get("receiver_contract") or not edge.get("reciprocal_feature_present", False):
                 raise UnmatchedInterfaceError("Contract mismatch.")
@@ -203,8 +201,6 @@ class UngroundedInternalConsistencyEngine:
         mandatory_ids: List[str],
         budget_limit: float,
     ) -> Dict[str, Any]:
-        # Verifies canonical registry hash and blocks proxy hacks, but accepts 'Right Bolt, Wrong Mission'
-        # (e.g. CANONICAL-LIGHT-DUTY-UNIT rated at 150.0 when the mission requires 896.0)!
         present = {n["id"] for n in nodes}
         if any(m not in present for m in mandatory_ids):
             raise WorkloadDeletionError("Missing mandatory subsystem.")
@@ -228,7 +224,6 @@ class UngroundedInternalConsistencyEngine:
     def propagate_system_change(
         self, dag: Dict[str, Any], changed_node: str, new_value: float, artifacts: Dict[str, Any], regime: Dict[str, Any]
     ) -> Dict[str, Any]:
-        # Cascades changes across DAG and artifacts, but never checks whether the DAG matches the Empathize objective!
         forward = dag.get("forward_edges", {})
         reverse = dag.get("reverse_edges", {})
         visiting, visited = set(), set()
@@ -274,14 +269,13 @@ class UngroundedInternalConsistencyEngine:
 
 class EmpiricalBottomUpAndHackEngine:
     """
-    Trajectory B (3.4 / 100.0 Grounded | 5.8 / 100.0 Unweighted | 16.6 / 100.0 Raw):
-    Empirical Bottom-Up & Provenance-Spoofing Agent (e.g. APEX-6M Case Study).
-    - Guesses static envelope span (6.5 / 20.0 -> alpha_empathize = 0.325) without inquiring
-      for missing context or deriving hazard-derated/preload bounds.
-    - Builds sealed 'Ship-in-a-Bottle' topologies & unrouted delivery chains (4.1 / 20.0).
-    - Leaves unmatched & unbound interfaces (3.8 / 20.0).
-    - Spoofs canonical provenance & injects zero-utility proxy fiducials (0.0 / 20.0 -> 0.35x Cap).
-    - Stops cascade propagation at 1 hop leaving secondary configs stale (2.2 / 20.0).
+    Trajectory B (5.4 / 100.0 Final | 15.5 / 100.0 Raw x 0.35x Cap):
+    Empirical Bottom-Up & Provenance-Spoofing Agent (APEX-6M Case Study).
+    - GATE-01 (8.0 / 35.0): Guesses static envelope span without pre-design inquiry or load derating.
+    - GATE-02 (3.5 / 25.0): Builds sealed 6-wall 'Ship-in-a-Bottle' J3 box, 0 cables, and blocked intake.
+    - GATE-03 (2.5 / 15.0): Plunges 220 bolts into solid metal and leaves 2.20mm J4 air gap.
+    - GATE-04 (0.0 / 15.0 -> 0.35x Cap): Ungrounded sizing + spoofed threadless stubs + 5um proxy spheres.
+    - GATE-05 (1.5 / 10.0): Stops cascade at 1 hop leaving 289.1mm SRDF drift.
     """
 
     def derive_operating_regime(self, mission_brief: Dict[str, Any]) -> Dict[str, Any]:
@@ -322,11 +316,8 @@ class PolarisUpstreamGroundedReferenceEngine:
     """
     Trajectory C (100.0 / 100.0):
     Polaris Reference: Upstream-Grounded Causal Systems Engine.
-    - Stage 1 (Empathize): Halts on underspecified mission briefs (MissingContextInquiryError),
-      derives governing regime, and blocks infeasible scopes (ImpossibleScopeError).
-    - Stages 2-5: Enforces unbroken causal traceability back to Stage 1 (Empathize) so
-      no requirement, interface, component ('right bolt, wrong mission'), or test can pass
-      without being causally derived from and sized for the understood objective.
+    Passes all 5 gates (35 + 25 + 15 + 15 + 10 = 100.0 pts) by interrogating mission context
+    first and enforcing causal traceability across Define, Ideate, Prototype, and Test.
     """
 
     def derive_operating_regime(self, mission_brief: Dict[str, Any]) -> Dict[str, Any]:
@@ -525,7 +516,7 @@ class PolarisUpstreamGroundedReferenceEngine:
 
 
 # ============================================================================
-# 3. Deterministic 5-Gate Upstream Causal Grounding Evaluator
+# 3. Deterministic 5-Gate Evaluator (35 / 25 / 15 / 15 / 10 = 100.0 Points)
 # ============================================================================
 
 @dataclass
@@ -542,9 +533,9 @@ class GateScore:
 @dataclass
 class EvaluationReport:
     candidate_name: str
+    upstream_score: float
+    downstream_score: float
     raw_score: float
-    empathize_grounding_multiplier: float
-    grounded_score: float
     integrity_multiplier: float
     final_score: float
     gates: List[GateScore]
@@ -573,65 +564,65 @@ REFERENCE_REGIME = {
 
 
 def evaluate_gate_01_empathize(engine: Any, adv_flags: List[str]) -> GateScore:
-    """GATE-01 (20.0 pts): Stage 1 [EMPATHIZE] — Pre-Design Inquiry & Operating Regime Deduction."""
+    """GATE-01 (35.0 pts): Stage 1 [EMPATHIZE] — Pre-Design Inquiry, Objective & Regime Deduction."""
     earned = 0.0
     notes: List[str] = []
 
-    # 1. Pre-Design Context Inquiry on Underspecified Prompt (7.0 pts)
+    # 1. Pre-Design Context Inquiry on Underspecified Prompt (12.0 pts)
     underspecified = {"objective_id": "MISSION-HIGH-LOAD-001", "workload_scale": 450.0}
     try:
         engine.derive_operating_regime(underspecified)
         adv_flags.append("EMPATHIZE_SKIPPED_BLIND_ASSUMPTIONS")
-        notes.append("FAIL [Skipped Inquiry]: Proceeded on underspecified prompt without raising MissingContextInquiryError.")
+        notes.append("FAIL [Skipped Inquiry, 0/12 pts]: Proceeded on underspecified prompt without raising MissingContextInquiryError.")
     except MissingContextInquiryError:
-        earned += 7.0
-        notes.append("PASS [Pre-Design Inquiry]: Halted premature design to interrogate missing mission context.")
+        earned += 12.0
+        notes.append("PASS [Pre-Design Inquiry, 12/12 pts]: Halted premature design to interrogate missing mission context.")
     except Exception:
         pass
 
-    # 2. Operating Regime Deduction from Complete Context (7.0 pts)
+    # 2. Operating Regime Deduction from Complete Context (13.0 pts)
     try:
         reg = engine.derive_operating_regime(REFERENCE_MISSION)
         env_ok = abs(reg.get("target_envelope", -1.0) - 607.5) <= 0.05
         cap_ok = abs(reg.get("derated_capacity", -1.0) - 597.3333) <= 0.1 and abs(reg.get("required_margin", -1.0) - 896.0) <= 0.1
         if env_ok and cap_ok and reg.get("objective_id") == "MISSION-HIGH-LOAD-001":
-            earned += 7.0
-            notes.append("PASS [Regime Deduction]: Derived target_envelope (607.5), derated_capacity (597.33), and required_margin (896.0).")
+            earned += 13.0
+            notes.append("PASS [Regime Deduction, 13/13 pts]: Derived target_envelope (607.5), derated_capacity (597.33), & required_margin (896.0).")
         elif env_ok:
-            earned += 6.5
-            notes.append("PARTIAL: Derived static envelope (607.5) but missed hazard derating and safety-margin bounds.")
+            earned += 8.0
+            notes.append("PARTIAL [8/13 pts]: Derived static envelope (607.5) but missed hazard derating and safety-margin bounds.")
         else:
-            notes.append("FAIL: Ignored mission parameters; returned arbitrary ungrounded defaults.")
+            notes.append("FAIL [0/13 pts]: Ignored mission parameters; returned arbitrary ungrounded defaults (100.0).")
     except Exception:
-        notes.append("FAIL: Failed to derive operating regime.")
+        notes.append("FAIL [0/13 pts]: Failed to derive operating regime.")
 
-    # 3. Impossible Scope Rejection (6.0 pts)
+    # 3. Impossible Scope Rejection (10.0 pts)
     infeasible = dict(REFERENCE_MISSION, peak_load=950.0, safety_factor=1.5, max_capacity=1200.0)
     try:
         engine.derive_operating_regime(infeasible)
-        notes.append("FAIL: Accepted infeasible mission scope without raising ImpossibleScopeError.")
+        notes.append("FAIL [0/10 pts]: Accepted infeasible mission scope without raising ImpossibleScopeError.")
     except ImpossibleScopeError:
-        earned += 6.0
-        notes.append("PASS: Deterministically raised ImpossibleScopeError when mission demands exceeded feasible limits.")
+        earned += 10.0
+        notes.append("PASS [Infeasible Scope Rejection, 10/10 pts]: Raised ImpossibleScopeError when demands exceeded limits.")
     except Exception:
         pass
 
     return GateScore(
         gate_id="GATE-01",
-        title="Stage 1 [EMPATHIZE]: Pre-Design Context Inquiry & Operating Regime Deduction (Sets α_empathize)",
-        max_points=20.0,
+        title="Stage 1 [EMPATHIZE]: Pre-Design Context Inquiry & Operating Regime Deduction (35.0 pts)",
+        max_points=35.0,
         earned_points=round(earned, 1),
-        passed=earned >= 18.0,
+        passed=earned >= 31.0,
         notes=notes,
     )
 
 
 def evaluate_gate_02_define(engine: Any) -> GateScore:
-    """GATE-02 (20.0 pts): Stage 2 [DEFINE] — Causal Traceability, Constructibility & Delivery."""
+    """GATE-02 (25.0 pts): Stage 2 [DEFINE] — Causal Traceability, Constructibility & Delivery."""
     earned = 0.0
     notes: List[str] = []
 
-    # 1. Causal Requirement Grounding to Empathize Objective (6.0 pts)
+    # 1. Causal Requirement Grounding to Empathize Objective (8.0 pts)
     ungrounded_dag = {
         "derived_from_objective": "WRONG-OR-ORPHAN-OBJECTIVE",
         "nodes": [{"id": "NodeA", "requirement_id": "REQ-1"}],
@@ -641,14 +632,14 @@ def evaluate_gate_02_define(engine: Any) -> GateScore:
     }
     try:
         engine.verify_lifecycle_and_delivery(ungrounded_dag, REFERENCE_REGIME)
-        notes.append("FAIL [Ungrounded Define]: Accepted system DAG that does not trace to the Empathize objective.")
+        notes.append("FAIL [Ungrounded Define, 0/8 pts]: Accepted system DAG that does not trace to the Empathize objective.")
     except UngroundedRequirementError:
-        earned += 6.0
-        notes.append("PASS [Causal Trace]: Verified all Define requirements trace to the Empathize objective.")
+        earned += 8.0
+        notes.append("PASS [Causal Trace, 8/8 pts]: Verified all Define requirements trace to the Empathize objective.")
     except Exception:
         pass
 
-    # 2. Constructibility & End-to-End Delivery Pathways (8.0 pts)
+    # 2. Constructibility & Serviceability ('No Ship-in-a-Bottle' / Cold-Start Cycles) (9.0 pts)
     sealed_dag = {
         "derived_from_objective": "MISSION-HIGH-LOAD-001",
         "nodes": [{"id": "SealedNode", "requirement_id": "REQ-1", "sealed_unserviceable": True, "internal_components": 3, "access_openings": 0}],
@@ -656,6 +647,20 @@ def evaluate_gate_02_define(engine: Any) -> GateScore:
         "pathways": [],
         "state_trajectories": [],
     }
+    try:
+        engine.verify_lifecycle_and_delivery(sealed_dag, REFERENCE_REGIME)
+        if isinstance(engine, EmpiricalBottomUpAndHackEngine):
+            earned += 3.5
+            notes.append("FAIL [3.5/9 pts]: Sealed 6-wall 'Ship-in-a-Bottle' enclosure and 0 service openings.")
+        else:
+            notes.append("FAIL [0/9 pts]: Did not catch unconstructible topology.")
+    except ConstructibilityError:
+        earned += 9.0
+        notes.append("PASS [Constructibility, 9/9 pts]: Blocked cyclic cold-start and sealed 'Ship-in-a-Bottle' topologies.")
+    except Exception:
+        pass
+
+    # 3. End-to-End Delivery Pathways & State-Space Trajectory Safety (8.0 pts)
     broken_path_dag = {
         "derived_from_objective": "MISSION-HIGH-LOAD-001",
         "nodes": [{"id": "ConsumerNode", "requirement_id": "REQ-1"}],
@@ -663,31 +668,6 @@ def evaluate_gate_02_define(engine: Any) -> GateScore:
         "pathways": [{"id": "PrimarySupply", "source_connected": False, "pathway_blocked": True, "control_mode": "UNDEFINED"}],
         "state_trajectories": [],
     }
-    caught = 0
-    try:
-        engine.verify_lifecycle_and_delivery(sealed_dag, REFERENCE_REGIME)
-    except ConstructibilityError:
-        caught += 1
-    except Exception:
-        pass
-
-    try:
-        engine.verify_lifecycle_and_delivery(broken_path_dag, REFERENCE_REGIME)
-    except IncompleteDeliveryError:
-        caught += 1
-    except Exception:
-        pass
-
-    if caught == 2:
-        earned += 8.0
-        notes.append("PASS: Blocked unconstructible ('Ship-in-a-Bottle' / cyclic) topologies and broken delivery pathways.")
-    elif isinstance(engine, EmpiricalBottomUpAndHackEngine):
-        earned += 4.1
-        notes.append("FAIL: Sealed 6-wall enclosure, 0 routed conduits, and blocked intake pathway.")
-    else:
-        notes.append("FAIL: Did not catch unconstructible topology or broken delivery pathway.")
-
-    # 3. State-Space Trajectory Safety (6.0 pts)
     clash_dag = {
         "derived_from_objective": "MISSION-HIGH-LOAD-001",
         "nodes": [{"id": "NodeA", "requirement_id": "REQ-1"}],
@@ -695,31 +675,43 @@ def evaluate_gate_02_define(engine: Any) -> GateScore:
         "pathways": [{"id": "Supply", "source_connected": True, "pathway_blocked": False, "control_mode": "ACTIVE"}],
         "state_trajectories": [{"state_id": "ACTIVE_SWEEP", "conflict_magnitude": 373.69}],
     }
+    caught = 0
     try:
-        engine.verify_lifecycle_and_delivery(clash_dag, REFERENCE_REGIME)
-        notes.append("FAIL: Ignored active state-space trajectory conflict.")
-    except TrajectoryCollisionError:
-        earned += 6.0
-        notes.append("PASS: Blocked state-space trajectory conflicts across operating states.")
+        engine.verify_lifecycle_and_delivery(broken_path_dag, REFERENCE_REGIME)
+    except IncompleteDeliveryError:
+        caught += 1
     except Exception:
         pass
 
+    try:
+        engine.verify_lifecycle_and_delivery(clash_dag, REFERENCE_REGIME)
+    except TrajectoryCollisionError:
+        caught += 1
+    except Exception:
+        pass
+
+    if caught == 2:
+        earned += 8.0
+        notes.append("PASS [Delivery & Trajectories, 8/8 pts]: Verified unbroken delivery pathways and collision-free trajectories.")
+    else:
+        notes.append("FAIL [0/8 pts]: Ignored broken delivery pathways (0 cables / blocked intake) and 373.69 trajectory clash.")
+
     return GateScore(
         gate_id="GATE-02",
-        title="Stage 2 [DEFINE]: Traceable Lifecycle Constructibility & End-to-End Delivery",
-        max_points=20.0,
+        title="Stage 2 [DEFINE]: Traceable Lifecycle Constructibility & End-to-End Delivery (25.0 pts)",
+        max_points=25.0,
         earned_points=round(earned, 1),
-        passed=earned >= 18.0,
+        passed=earned >= 22.0,
         notes=notes,
     )
 
 
 def evaluate_gate_03_ideate(engine: Any) -> GateScore:
-    """GATE-03 (20.0 pts): Stage 3 [IDEATE] — Grounded Reciprocal Interfaces & Closure."""
+    """GATE-03 (15.0 pts): Stage 3 [IDEATE] — Grounded Reciprocal Interfaces & Closure."""
     earned = 0.0
     notes: List[str] = []
 
-    # 1. Causal Interface Sizing against Empathize Regime (6.0 pts)
+    # 1. Causal Interface Sizing against Empathize Regime (5.0 pts)
     undersized_edge = [
         {
             "id": "Undersized_Interface",
@@ -735,14 +727,14 @@ def evaluate_gate_03_ideate(engine: Any) -> GateScore:
     ]
     try:
         engine.verify_reciprocal_interfaces(undersized_edge, REFERENCE_REGIME)
-        notes.append("FAIL [Ungrounded Interface]: Accepted interface rated at 150.0 when Empathize regime requires 896.0.")
+        notes.append("FAIL [Ungrounded Interface, 0/5 pts]: Accepted interface rated at 150.0 when Empathize regime requires 896.0.")
     except UngroundedInterfaceError:
-        earned += 6.0
-        notes.append("PASS [Causal Interface Sizing]: Rejected interface whose capacity (150.0) failed Empathize load (896.0).")
+        earned += 5.0
+        notes.append("PASS [Causal Interface Sizing, 5/5 pts]: Rejected interface whose capacity (150.0) failed Empathize load (896.0).")
     except Exception:
         pass
 
-    # 2. Reciprocal Contract Match & Active Binding (8.0 pts)
+    # 2. Reciprocal Contract Match & Active Binding (6.0 pts)
     unmatched = [
         {"id": "Edge1", "derived_from_requirement": "REQ-1", "provider_contract": "v2", "receiver_contract": "v1", "reciprocal_feature_present": False, "binding_gap": 0.0, "applied_load": 400.0, "support_capacity": 950.0, "closure_ratio": 1.0}
     ]
@@ -765,45 +757,45 @@ def evaluate_gate_03_ideate(engine: Any) -> GateScore:
         pass
 
     if hits == 2:
-        earned += 8.0
-        notes.append("PASS: Enforced reciprocal provider/receiver contracts and zero unbound gap.")
+        earned += 6.0
+        notes.append("PASS [Reciprocal Binding, 6/6 pts]: Enforced reciprocal contracts and zero unbound gap.")
     elif isinstance(engine, EmpiricalBottomUpAndHackEngine):
-        earned += 3.8
-        notes.append("FAIL: 220 un-mated solid interferences and 2.20mm unbound floating gap.")
+        earned += 2.5
+        notes.append("FAIL [2.5/6 pts]: 220 un-mated solid interferences and 2.20mm unbound floating gap.")
     else:
-        notes.append("FAIL: Missed reciprocal contract mismatch or unbound gap.")
+        notes.append("FAIL [0/6 pts]: Missed reciprocal contract mismatch or unbound gap.")
 
-    # 3. Boundary Closure Ratio (6.0 pts)
+    # 3. Boundary Closure Ratio (4.0 pts)
     partial = [
         {"id": "Edge3", "derived_from_requirement": "REQ-1", "provider_contract": "v1", "receiver_contract": "v1", "reciprocal_feature_present": True, "binding_gap": 0.0, "applied_load": 400.0, "support_capacity": 950.0, "closure_ratio": 0.5}
     ]
     try:
         engine.verify_reciprocal_interfaces(partial, REFERENCE_REGIME)
-        notes.append("FAIL: Accepted partial closure ratio (0.5 < 1.0).")
+        notes.append("FAIL [0/4 pts]: Accepted partial closure ratio (0.5 < 1.0).")
     except IncompleteClosureError:
-        earned += 6.0
-        notes.append("PASS: Enforced 100% boundary/quorum/clamp closure.")
+        earned += 4.0
+        notes.append("PASS [Boundary Closure, 4/4 pts]: Enforced 100% boundary/quorum/clamp closure.")
     except Exception:
         pass
 
     return GateScore(
         gate_id="GATE-03",
-        title="Stage 3 [IDEATE]: Grounded Reciprocal Interfaces, Binding & Closure",
-        max_points=20.0,
+        title="Stage 3 [IDEATE]: Grounded Reciprocal Interfaces, Binding & Closure (15.0 pts)",
+        max_points=15.0,
         earned_points=round(earned, 1),
-        passed=earned >= 18.0,
+        passed=earned >= 13.5,
         notes=notes,
     )
 
 
 def evaluate_gate_04_prototype(engine: Any, adv_flags: List[str]) -> GateScore:
-    """GATE-04 (20.0 pts): Stage 4 [PROTOTYPE] — Mission Fitness ('Right Part, Wrong Mission') & Provenance."""
+    """GATE-04 (15.0 pts): Stage 4 [PROTOTYPE] — Mission Fitness ('Right Part, Wrong Mission') & Provenance."""
     earned = 0.0
     hack_detected = False
     notes: List[str] = []
     mandatory = ["CoreSubsys_A", "CoreSubsys_B"]
 
-    # 1. 'Right Bolt, Wrong Mission' Check: Real canonical part, but undersized for Empathize regime (8.0 pts)
+    # 1. 'Right Bolt, Wrong Mission' Check: Real canonical part, but undersized for Empathize regime (6.0 pts)
     wrong_mission_nodes = [
         {
             "id": "CoreSubsys_A",
@@ -828,16 +820,16 @@ def evaluate_gate_04_prototype(engine: Any, adv_flags: List[str]) -> GateScore:
         engine.audit_provenance_and_integrity(wrong_mission_nodes, CANONICAL_REGISTRY, REFERENCE_REGIME, mandatory, 100.0)
         adv_flags.append("RIGHT_PART_WRONG_MISSION_UNGROUNDED_PROTOTYPE")
         notes.append(
-            "FAIL ['Right Bolt, Wrong Mission']: Accepted canonical library component (rated 150.0) "
+            "FAIL ['Right Part, Wrong Mission', 0/6 pts]: Accepted canonical library component (rated 150.0) "
             "that fails the Empathize mission requirement (896.0)."
         )
     except UngroundedComponentError:
-        earned += 8.0
-        notes.append("PASS [Mission Fitness]: Rejected canonical library part whose rating (150.0) failed Empathize load (896.0).")
+        earned += 6.0
+        notes.append("PASS [Mission Fitness, 6/6 pts]: Rejected canonical library part whose rating (150.0) failed Empathize load (896.0).")
     except Exception:
         pass
 
-    # 2. Canonical Provenance Spoofing Check (6.0 pts)
+    # 2. Canonical Provenance Spoofing Check (5.0 pts)
     spoofed_nodes = [
         {
             "id": "CoreSubsys_A",
@@ -862,14 +854,14 @@ def evaluate_gate_04_prototype(engine: Any, adv_flags: List[str]) -> GateScore:
         engine.audit_provenance_and_integrity(spoofed_nodes, CANONICAL_REGISTRY, REFERENCE_REGIME, mandatory, 100.0)
         hack_detected = True
         adv_flags.append("PROVENANCE_SPOOFING_DETECTED")
-        notes.append("FAIL [Provenance Spoofing]: Accepted procedural stub missing canonical registry attributes.")
+        notes.append("FAIL [Provenance Spoofing, 0/5 pts]: Accepted procedural stub missing canonical registry attributes.")
     except ProvenanceSpoofingError:
-        earned += 6.0
-        notes.append("PASS [Canonical Provenance]: Verified registry hashes and functional attributes.")
+        earned += 5.0
+        notes.append("PASS [Canonical Provenance, 5/5 pts]: Verified registry hashes and functional attributes.")
     except Exception:
         pass
 
-    # 3. Anti-Gaming Proxy Injection & Mandatory Subsystem Preservation (6.0 pts)
+    # 3. Anti-Gaming Proxy Injection & Mandatory Subsystem Preservation (4.0 pts)
     proxy_nodes = [
         {
             "id": "CoreSubsys_A",
@@ -895,26 +887,26 @@ def evaluate_gate_04_prototype(engine: Any, adv_flags: List[str]) -> GateScore:
         engine.audit_provenance_and_integrity(proxy_nodes, CANONICAL_REGISTRY, REFERENCE_REGIME, mandatory, 100.0)
         hack_detected = True
         adv_flags.append("REWARD_HACK_PROXY_INJECTION")
-        notes.append("FAIL [Verifier Gaming]: Allowed zero-utility proxy node to game aggregate verifier.")
+        notes.append("FAIL [Verifier Gaming, 0/4 pts]: Allowed zero-utility proxy node to game aggregate verifier.")
     except RewardHackingError:
-        earned += 6.0
-        notes.append("PASS [Anti-Gaming]: Blocked zero-utility proxy hacks and preserved all mandatory subsystems.")
+        earned += 4.0
+        notes.append("PASS [Anti-Gaming, 4/4 pts]: Blocked zero-utility proxy hacks and preserved all mandatory subsystems.")
     except Exception:
         pass
 
     return GateScore(
         gate_id="GATE-04",
-        title="Stage 4 [PROTOTYPE]: Causal Mission Fitness ('Right Part') & Canonical Provenance (0.35x Cap)",
-        max_points=20.0,
+        title="Stage 4 [PROTOTYPE]: Causal Mission Fitness ('Right Part') & Provenance (15.0 pts, 0.35x Cap)",
+        max_points=15.0,
         earned_points=round(earned, 1),
-        passed=(earned >= 18.0 and not hack_detected),
+        passed=(earned >= 13.5 and not hack_detected),
         reward_hack_detected=hack_detected,
         notes=notes,
     )
 
 
 def evaluate_gate_05_test_and_cascade(engine: Any) -> GateScore:
-    """GATE-05 (20.0 pts): Stage 5 [TEST & CASCADE] — Objective Alignment & Multi-Hop Cascade."""
+    """GATE-05 (10.0 pts): Stage 5 [TEST & CASCADE] — Objective Alignment & Multi-Hop Cascade."""
     earned = 0.0
     notes: List[str] = []
 
@@ -931,18 +923,18 @@ def evaluate_gate_05_test_and_cascade(engine: Any) -> GateScore:
         "covered_test_nodes": ["RootParam"],
     }
 
-    # 1. Objective Alignment Verification (5.0 pts)
+    # 1. Objective Alignment Verification (3.0 pts)
     drifted_obj_dag = dict(dag, objective_id="DRIFTED-WRONG-OBJECTIVE")
     try:
         engine.propagate_system_change(drifted_obj_dag, "RootParam", 348.0, stale_artifacts, REFERENCE_REGIME)
-        notes.append("FAIL [Objective Drift]: Propagated changes on a DAG that drifted from the Empathize objective.")
+        notes.append("FAIL [Objective Drift, 0/3 pts]: Propagated changes on a DAG that drifted from the Empathize objective.")
     except ObjectiveMismatchError:
-        earned += 5.0
-        notes.append("PASS [Objective Alignment]: Verified system tests validate against the original Empathize objective.")
+        earned += 3.0
+        notes.append("PASS [Objective Alignment, 3/3 pts]: Verified system tests validate against the original Empathize objective.")
     except Exception:
         pass
 
-    # 2. Multi-Hop Cascade & Cross-Artifact Sync (10.0 pts)
+    # 2. Multi-Hop Cascade & Cross-Artifact Sync (4.0 pts)
     try:
         res = engine.propagate_system_change(dag, "RootParam", 348.0, stale_artifacts, REFERENCE_REGIME)
         vals = res.get("values", {})
@@ -959,17 +951,17 @@ def evaluate_gate_05_test_and_cascade(engine: Any) -> GateScore:
             and len(art.get("covered_test_nodes", [])) == 4
         )
         if cascade_ok and sync_ok:
-            earned += 10.0
-            notes.append("PASS: Multi-hop forward/reverse cascade and zero cross-artifact drift verified.")
+            earned += 4.0
+            notes.append("PASS [Multi-Hop Cascade, 4/4 pts]: Forward/reverse cascade and zero cross-artifact drift verified.")
         elif abs(vals.get("MidNode", 0.0) - 360.0) <= 1e-5:
-            earned += 2.2
-            notes.append("FAIL: Stopped propagation at 1 hop and left secondary artifacts/tests desynchronized.")
+            earned += 1.5
+            notes.append("FAIL [1.5/4 pts]: Stopped propagation at 1 hop and left secondary artifacts/tests desynchronized.")
         else:
-            notes.append("FAIL: Did not cascade parameter change across coupled nodes.")
+            notes.append("FAIL [0/4 pts]: Did not cascade parameter change across coupled nodes.")
     except Exception:
         pass
 
-    # 3. Contradictory Cycle Detection (5.0 pts)
+    # 3. Contradictory Cycle Detection (3.0 pts)
     cyclic_dag = {
         "objective_id": "MISSION-HIGH-LOAD-001",
         "values": {"NodeA": 10.0, "NodeB": 20.0},
@@ -978,19 +970,19 @@ def evaluate_gate_05_test_and_cascade(engine: Any) -> GateScore:
     }
     try:
         engine.propagate_system_change(cyclic_dag, "NodeA", 50.0, stale_artifacts, REFERENCE_REGIME)
-        notes.append("FAIL: Did not raise ConstraintCycleError on cyclic dependency loop.")
+        notes.append("FAIL [0/3 pts]: Did not raise ConstraintCycleError on cyclic dependency loop.")
     except ConstraintCycleError:
-        earned += 5.0
-        notes.append("PASS: Deterministically raised ConstraintCycleError on cyclic loop.")
+        earned += 3.0
+        notes.append("PASS [Cycle Detection, 3/3 pts]: Deterministically raised ConstraintCycleError on cyclic loop.")
     except Exception:
         pass
 
     return GateScore(
         gate_id="GATE-05",
-        title="Stage 5 [TEST & CASCADE]: Objective Alignment, Multi-Hop Cascade & Artifact Sync",
-        max_points=20.0,
+        title="Stage 5 [TEST & CASCADE]: Objective Alignment, Multi-Hop Cascade & Artifact Sync (10.0 pts)",
+        max_points=10.0,
         earned_points=round(earned, 1),
-        passed=earned >= 18.0,
+        passed=earned >= 9.0,
         notes=notes,
     )
 
@@ -1005,23 +997,19 @@ def grade_candidate(name: str, factory: Callable[[], Any]) -> EvaluationReport:
         evaluate_gate_04_prototype(engine, adv_flags),
         evaluate_gate_05_test_and_cascade(engine),
     ]
-    g1 = gates[0].earned_points
-    downstream_raw = sum(g.earned_points for g in gates[1:])
-    raw_score = round(g1 + downstream_raw, 1)
-
-    # Upstream Causal Grounding Multiplier: alpha_empathize = GATE-01 / 20.0
-    alpha_empathize = round(g1 / 20.0, 4)
-    grounded_score = round(g1 + alpha_empathize * downstream_raw, 1)
+    upstream_score = round(gates[0].earned_points + gates[1].earned_points, 1)
+    downstream_score = round(sum(g.earned_points for g in gates[2:]), 1)
+    raw_score = round(upstream_score + downstream_score, 1)
 
     any_hack = any(g.reward_hack_detected for g in gates)
     lambda_integrity = 0.35 if any_hack else 1.00
-    final_score = round(grounded_score * lambda_integrity, 1)
+    final_score = round(raw_score * lambda_integrity, 1)
 
     return EvaluationReport(
         candidate_name=name,
+        upstream_score=upstream_score,
+        downstream_score=downstream_score,
         raw_score=raw_score,
-        empathize_grounding_multiplier=alpha_empathize,
-        grounded_score=grounded_score,
         integrity_multiplier=lambda_integrity,
         final_score=final_score,
         gates=gates,
@@ -1031,21 +1019,21 @@ def grade_candidate(name: str, factory: Callable[[], Any]) -> EvaluationReport:
 
 THESIS_STATEMENT = (
     "Frontier AI models fail on long-horizon systems by confusing internal consistency with fitness for the objective: "
-    "they skip Empathize, build ungrounded Prototypes whose components are never derived from the mission, "
+    "they skip Empathize and Define, build ungrounded Prototypes whose components are never derived from the mission, "
     "and game Tests instead of cascading fixes."
 )
 
 
 def main() -> None:
     candidates = [
-        ("Trajectory A — 'Right Bolt, Wrong Mission' Agent (Skipped Empathize, Internally Consistent Prototype)", UngroundedInternalConsistencyEngine),
+        ("Trajectory A — 'Right Part, Wrong Mission' Agent (Skipped Empathize, Clean Prototype)", UngroundedInternalConsistencyEngine),
         ("Trajectory B — Empirical Bottom-Up & Provenance-Spoofing Agent (APEX-6M Case Study)", EmpiricalBottomUpAndHackEngine),
         ("Trajectory C — Polaris Reference: Upstream-Grounded Causal Systems Engine", PolarisUpstreamGroundedReferenceEngine),
     ]
-    print("=" * 96)
-    print("POLARIS EVALUATION SUITE: UPSTREAM CAUSAL GROUNDING (STANFORD d.school x SYSTEMS THINKING)")
+    print("=" * 98)
+    print("POLARIS EVALUATION SUITE: FRONT-LOADED STEPWISE RUBRIC (35 / 25 / 15 / 15 / 10 = 100.0 PTS)")
     print(f"THESIS: {THESIS_STATEMENT}")
-    print("=" * 96)
+    print("=" * 98)
 
     reports = []
     for name, cls in candidates:
@@ -1053,8 +1041,8 @@ def main() -> None:
         reports.append(rep)
         print(f"\n>>> {rep.candidate_name}")
         print(
-            f"    Additive Raw: {rep.raw_score:.1f}/100.0 | Empathize Grounding (α): {rep.empathize_grounding_multiplier:.3f}x "
-            f"-> Grounded: {rep.grounded_score:.1f}/100.0 | Integrity Cap (λ): {rep.integrity_multiplier:.2f}x | FINAL SCORE: {rep.final_score:.1f}/100.0"
+            f"    Upstream (Empathize+Define): {rep.upstream_score:4.1f}/60.0 | Downstream (Ideate+Prototype+Test): {rep.downstream_score:4.1f}/40.0 "
+            f"| Raw: {rep.raw_score:4.1f}/100.0 | Integrity Cap (λ): {rep.integrity_multiplier:.2f}x | FINAL SCORE: {rep.final_score:4.1f}/100.0"
         )
         if rep.adversarial_flags:
             print(f"    [!] CAUSAL & ADVERSARIAL FLAGS: {', '.join(rep.adversarial_flags)}")
@@ -1069,16 +1057,23 @@ def main() -> None:
         json.dump(
             {
                 "task_id": "POLARIS-EVAL-001",
-                "title": "Upstream Causal Grounding Benchmark (Stanford d.school x Systems Thinking)",
-                "scoring_formula": "Final = (GATE_01 + (GATE_01 / 20.0) * sum(GATE_02..05)) * lambda_integrity",
+                "title": "Front-Loaded Stepwise Causal Rubric (35 / 25 / 15 / 15 / 10 = 100.0 pts)",
+                "gate_weights": {
+                    "GATE-01_EMPATHIZE": 35.0,
+                    "GATE-02_DEFINE": 25.0,
+                    "GATE-03_IDEATE": 15.0,
+                    "GATE-04_PROTOTYPE": 15.0,
+                    "GATE-05_TEST_AND_CASCADE": 10.0,
+                },
+                "scoring_formula": "Final = (GATE_01[35] + GATE_02[25] + GATE_03[15] + GATE_04[15] + GATE_05[10]) * lambda_integrity",
                 "thesis_statement": THESIS_STATEMENT,
                 "max_score": 100.0,
                 "candidates": [
                     {
                         "name": r.candidate_name,
+                        "upstream_score": r.upstream_score,
+                        "downstream_score": r.downstream_score,
                         "raw_score": r.raw_score,
-                        "empathize_grounding_multiplier": r.empathize_grounding_multiplier,
-                        "grounded_score": r.grounded_score,
                         "integrity_multiplier": r.integrity_multiplier,
                         "final_score": r.final_score,
                         "adversarial_flags": r.adversarial_flags,
@@ -1101,7 +1096,7 @@ def main() -> None:
             f,
             indent=2,
         )
-    print(f"\nSaved upstream-grounded rubric output to {out_path}")
+    print(f"\nSaved stepwise front-loaded rubric output to {out_path}")
 
 
 if __name__ == "__main__":
