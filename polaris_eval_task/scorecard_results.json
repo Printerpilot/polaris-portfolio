@@ -1,8 +1,8 @@
 [
   {
     "candidate_name": "Candidate A: Bottom-Up Isolated-Part Agent (No Scope Deduction, 'Ship-in-a-Bottle' & Unpropagated Cascades)",
-    "methodology": "Stanford d.school Design Thinking (Empathize -> Define -> Ideate -> Prototype -> Test & Cascade) x Top-Down Systems Engineering",
-    "thesis_statement": "Frontier AI models fail on long-horizon engineering, software, and clinical systems tasks not from a lack of local syntax or geometric primitive skill, but from a Design-Thinking & Systems-Thinking Deficit: they bypass the human engineer's deductive front-end\u2014Empathizing with the intended use, target scale, and operating environment (GATE-01), Defining the full real-world manufacturing, assembly, and delivery lifecycle (GATE-02), and Ideating reciprocal mating interfaces across coupled subcomponents (GATE-03)\u2014and instead jump straight into isolated, bottom-up Prototyping (GATE-04) with spoofed library stubs and un-drilled plates that fracture or trigger reward-hacking during Testing (GATE-05) instead of propagating non-linear trickle-down revisions across the system.",
+    "methodology": "Stanford d.school Design Thinking (Empathize -> Define -> Ideate -> Prototype -> Test) x Systems Engineering",
+    "thesis_statement": "Frontier AI models fail on long-horizon systems not from weak syntax, but from inverted design thinking: they skip Empathize, Define, and Ideate, prototype isolated parts bottom-up, and game Tests instead of cascading fixes.",
     "raw_score": 0.0,
     "final_score": 0.0,
     "max_score": 100.0,
@@ -93,8 +93,8 @@
   },
   {
     "candidate_name": "Candidate B: Provenance-Spoofing & Fiducial-Gaming Agent (Fake McMaster Bolts & 5\u00b5m Fiducial Hack)",
-    "methodology": "Stanford d.school Design Thinking (Empathize -> Define -> Ideate -> Prototype -> Test & Cascade) x Top-Down Systems Engineering",
-    "thesis_statement": "Frontier AI models fail on long-horizon engineering, software, and clinical systems tasks not from a lack of local syntax or geometric primitive skill, but from a Design-Thinking & Systems-Thinking Deficit: they bypass the human engineer's deductive front-end\u2014Empathizing with the intended use, target scale, and operating environment (GATE-01), Defining the full real-world manufacturing, assembly, and delivery lifecycle (GATE-02), and Ideating reciprocal mating interfaces across coupled subcomponents (GATE-03)\u2014and instead jump straight into isolated, bottom-up Prototyping (GATE-04) with spoofed library stubs and un-drilled plates that fracture or trigger reward-hacking during Testing (GATE-05) instead of propagating non-linear trickle-down revisions across the system.",
+    "methodology": "Stanford d.school Design Thinking (Empathize -> Define -> Ideate -> Prototype -> Test) x Systems Engineering",
+    "thesis_statement": "Frontier AI models fail on long-horizon systems not from weak syntax, but from inverted design thinking: they skip Empathize, Define, and Ideate, prototype isolated parts bottom-up, and game Tests instead of cascading fixes.",
     "raw_score": 80.0,
     "final_score": 28.0,
     "max_score": 100.0,
@@ -179,8 +179,8 @@
   },
   {
     "candidate_name": "Candidate C: Top-Down Systems-Thinking Reference Solution (Polaris Target)",
-    "methodology": "Stanford d.school Design Thinking (Empathize -> Define -> Ideate -> Prototype -> Test & Cascade) x Top-Down Systems Engineering",
-    "thesis_statement": "Frontier AI models fail on long-horizon engineering, software, and clinical systems tasks not from a lack of local syntax or geometric primitive skill, but from a Design-Thinking & Systems-Thinking Deficit: they bypass the human engineer's deductive front-end\u2014Empathizing with the intended use, target scale, and operating environment (GATE-01), Defining the full real-world manufacturing, assembly, and delivery lifecycle (GATE-02), and Ideating reciprocal mating interfaces across coupled subcomponents (GATE-03)\u2014and instead jump straight into isolated, bottom-up Prototyping (GATE-04) with spoofed library stubs and un-drilled plates that fracture or trigger reward-hacking during Testing (GATE-05) instead of propagating non-linear trickle-down revisions across the system.",
+    "methodology": "Stanford d.school Design Thinking (Empathize -> Define -> Ideate -> Prototype -> Test) x Systems Engineering",
+    "thesis_statement": "Frontier AI models fail on long-horizon systems not from weak syntax, but from inverted design thinking: they skip Empathize, Define, and Ideate, prototype isolated parts bottom-up, and game Tests instead of cascading fixes.",
     "raw_score": 100.0,
     "final_score": 100.0,
     "max_score": 100.0,
