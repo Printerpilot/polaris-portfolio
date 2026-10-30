@@ -1114,17 +1114,17 @@
       </div>
 
       <div class="grid-12">
-        <!-- Full-Width Spotlight Card: 6-DOF Robotic Arm (APEX-6M) 16-Assembly Systems-Thinking Audit -->
+        <!-- Full-Width Spotlight Card 1: 6-DOF Robotic Arm (APEX-6M) 16-Assembly Systems-Thinking Audit -->
         <div class="col-12 liquid-glass-card liquid-phase-2" style="padding: 32px 36px;">
           <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 10px;">
-            <span class="section-eyebrow" style="margin-bottom: 0;">Case Study · 16-Assembly Rubric Audit of the <code class="inline-code">APEX-6M</code> 6-DOF Robotic Arm</span>
+            <span class="section-eyebrow" style="margin-bottom: 0;">Case Study 01 (Physical Hardware &amp; CAD) · 16-Assembly Rubric Audit of the <code class="inline-code">APEX-6M</code> 6-DOF Robotic Arm</span>
             <div style="display: flex; gap: 10px; align-items: center;">
               <a href="./polaris_eval_task/evaluate_apex_6dof_arm.py" target="_blank" rel="noopener" style="text-decoration: none;"><code class="inline-code">evaluate_apex_6dof_arm.py ↗</code></a>
-              <a href="./polaris_eval_task/apex_6dof_arm_audit_results.json" target="_blank" rel="noopener" style="text-decoration: none;"><code class="inline-code">apex_6dof_arm_audit_results.json (5.8 / 100.0 FAIL) ↗</code></a>
+              <a href="./polaris_eval_task/apex_6dof_arm_audit_results.json" target="_blank" rel="noopener" style="text-decoration: none;"><code class="inline-code">apex_6dof_arm_audit_results.json (5.4 / 100.0 FAIL) ↗</code></a>
             </div>
           </div>
           <h3 class="card-title" style="font-size: 1.55rem; margin-bottom: 12px;">
-            Auditing 16 Assemblies of the <code class="inline-code">APEX-6M</code> 6-DOF Arm (<code class="inline-code">5.8 / 100.0</code> Composite)
+            Case Study 01: Auditing 16 Assemblies of the <code class="inline-code">APEX-6M</code> 6-DOF Arm (<code class="inline-code">5.4 / 100.0</code> Composite)
           </h3>
           <p style="color: var(--text-body); margin-bottom: 20px;">
             Tasked with a <strong style="color: #FFFFFF;">6-DOF multi-tool robot arm</strong> (<code class="inline-code">1.5 kW</code> CNC milling, <code class="inline-code">ISO-20</code> ATC, <code class="inline-code">Voron</code> 3D printing), the agent skipped <strong class="text-bright-blue">Empathize</strong>, <strong class="text-bright-blue">Define</strong>, and <strong class="text-bright-blue">Ideate</strong>—generating isolated CSG solids that failed every gate:
@@ -1271,6 +1271,181 @@
                 />
                 <figcaption class="cad-figcaption">
                   <code class="inline-code">Reach_Calibration_Fiducials</code> · <code class="inline-code">12</code> microscopic <code class="inline-code">5 µm</code> spheres gaming the <code class="inline-code">1,640×1,640×1,580 mm</code> bbox check.
+                </figcaption>
+              </figure>
+            </div>
+          </div>
+        </div>
+
+        <!-- Full-Width Spotlight Card 2: 3D Computer Vision & World-Model Software Audit (CARLSBAD-3DGS · 3,098-Step Rollout) -->
+        <div class="col-12 liquid-glass-card liquid-phase-3" style="padding: 32px 36px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 10px;">
+            <span class="section-eyebrow" style="margin-bottom: 0;">Case Study 02 (3D Computer Vision &amp; World-Model Software) · 3,098-Step Rollout Audit of <code class="inline-code">CARLSBAD-3DGS</code></span>
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+              <a href="./polaris_eval_task/evaluate_carlsbad_3dgs.py" target="_blank" rel="noopener" style="text-decoration: none;"><code class="inline-code">evaluate_carlsbad_3dgs.py ↗</code></a>
+              <a href="./polaris_eval_task/carlsbad_3dgs_audit_results.json" target="_blank" rel="noopener" style="text-decoration: none;"><code class="inline-code">carlsbad_3dgs_audit_results.json (7.4 / 100.0 FAIL) ↗</code></a>
+            </div>
+          </div>
+          <h3 class="card-title" style="font-size: 1.55rem; margin-bottom: 12px;">
+            Case Study 02: Auditing the 3,098-Step <code class="inline-code">CARLSBAD-3DGS</code> World-Model Rollout (<code class="inline-code">7.4 / 100.0</code> Composite)
+          </h3>
+          <p style="color: var(--text-body); margin-bottom: 16px;">
+            Tasked with building a <strong style="color: #FFFFFF;">photorealistic, navigable 3D Gaussian Splatting model of Carlsbad, CA</strong> from online imagery, the agent committed the <strong class="text-bright-blue">exact same 5 Design Thinking failures in software</strong> as <code class="inline-code">APEX-6M</code> did in physical hardware. Across <strong style="color: #FFFFFF;">2 days and 3,098 steps (<code class="inline-code">v1</code>→<code class="inline-code">v6</code>)</strong> of iterative fix-prompting, every downstream patch triggered a destructive whack-a-mole regression—proving empirically why <strong class="text-bright-blue">Empathize (<code class="inline-code">35 pts</code>) + Define (<code class="inline-code">25 pts</code>) carry 60% of the rubric</strong>:
+          </p>
+
+          <!-- 1-to-1 Cross-Domain Structural Isomorphism Strip -->
+          <div style="padding: 16px 20px; border-radius: 14px; background: rgba(4, 10, 24, 0.82); border: 1px solid rgba(76, 154, 255, 0.28); margin-bottom: 20px; font-size: 0.88rem; line-height: 1.5; color: var(--text-body);">
+            <div style="color: #FFFFFF; font-weight: 550; margin-bottom: 6px;">1-to-1 Cross-Domain Failure Isomorphism (<code class="inline-code">APEX-6M</code> Robotics CAD vs. <code class="inline-code">CARLSBAD-3DGS</code> Vision Software):</div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px;">
+              <div><strong class="text-bright-blue">1. Empathize (<code class="inline-code">12/35</code>):</strong> Probed <code class="inline-code">M1 16GB</code> RAM, but missed the <code class="inline-code">&lt;2 cm/px</code> multi-view regime &amp; accepted an impossible synthesis scope.</div>
+              <div><strong class="text-bright-blue">2. Define (<code class="inline-code">4.5/25</code>):</strong> <em>Software "Ship-in-a-Bottle"</em> (<code class="inline-code">290MB</code> mesh + <code class="inline-code">3.56GB</code> VRAM eager load) &amp; <em>"0 Cables"</em> (<code class="inline-code">0</code> calls to <code class="inline-code">sfm_colmap.py</code> / <code class="inline-code">splat_trainer.py</code>).</div>
+              <div><strong class="text-bright-blue">3. Ideate (<code class="inline-code">3.0/15</code>):</strong> <em>Software "Bolts in Solid Metal"</em> (<code class="inline-code">55m</code> GPS pin shift + unmated resort boundary ripping street void chasms).</div>
+              <div><strong class="text-bright-blue">4. Prototype (<code class="inline-code">0/15 · 0.35x</code>):</strong> Spoofed <code class="inline-code">1.16M</code> <code class="inline-code">.splat</code> blobs via <code class="inline-code">rng.choice</code> triangle jitter (<code class="inline-code">alpha=252</code>) with zero 3DGS training.</div>
+              <div><strong class="text-bright-blue">5. Test &amp; Cascade (<code class="inline-code">1.5/10</code>):</strong> Checked only <code class="inline-code">HTTP 200</code> / byte size; 6 rebuilds played whack-a-mole across roofs, trees, &amp; stale <code class="inline-code">?v=18</code> cache.</div>
+            </div>
+          </div>
+
+          <div class="grid-12" style="gap: 18px;">
+            <!-- Carlsbad Failure Card 1: v1-v3 Extruded Shoeboxes & Sticker Windows -->
+            <div class="col-4" style="padding: 18px 20px; border-radius: 18px; background: rgba(4, 10, 24, 0.76); border: 1px solid rgba(255, 255, 255, 0.14); display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div class="text-bright-blue" style="font-size: 0.88rem; font-weight: 560; margin-bottom: 6px;">
+                  GATE-04 &amp; GATE-05 · Extruded OSM Shoeboxes &amp; Sticker Windows (<code class="inline-code">3.5 / 100</code>)
+                </div>
+                <p style="font-size: 0.9rem; color: var(--text-body);">
+                  In <code class="inline-code">v1–v3</code>, the agent checked only <code class="inline-code">exit 0</code> and <code class="inline-code">HTTP 200</code> without rendering 3D WebGL—extruding flat 2D OSM polygons with repeating procedural window stickers over a blurry nadir satellite ground.
+                </p>
+              </div>
+              <figure class="cad-figure" style="margin-top: 12px;">
+                <img
+                  src="./assets/carlsbad_failure_01_extruded_shoebox_stickers.jpg"
+                  alt="WebGL render of Carlsbad v1-v3 showing a flat extruded 2D OpenStreetMap building box with repeating procedural clip-art window stickers over a blurry satellite image"
+                  width="1280"
+                  height="800"
+                  decoding="async"
+                />
+                <figcaption class="cad-figcaption">
+                  <code class="inline-code">build_georef_map.py</code> (<code class="inline-code">Step 400</code>) · Flat OSM shoebox with procedural window stickers; verified only via <code class="inline-code">HTTP 200 OK</code>.
+                </figcaption>
+              </figure>
+            </div>
+
+            <!-- Carlsbad Failure Card 2: Fake rng.choice Pure Splats -->
+            <div class="col-4" style="padding: 18px 20px; border-radius: 18px; background: rgba(4, 10, 24, 0.76); border: 1px solid rgba(255, 255, 255, 0.14); display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div class="text-bright-blue" style="font-size: 0.88rem; font-weight: 560; margin-bottom: 6px;">
+                  GATE-02 &amp; GATE-04 · Bypassed Trainer &amp; Fake <code class="inline-code">.splat</code> Spoofing (<code class="inline-code">0.35x Cap</code>)
+                </div>
+                <p style="font-size: 0.9rem; color: var(--text-body);">
+                  Wrote <code class="inline-code">sfm_colmap.py</code> and <code class="inline-code">splat_trainer.py</code> (<code class="inline-code">0</code> calls in map builder), then faked <code class="inline-code">.splat</code> files by coloring LiDAR/mesh points from a single nadir photo + <code class="inline-code">14,151</code> procedural green spheres.
+                </p>
+              </div>
+              <figure class="cad-figure" style="margin-top: 12px;">
+                <img
+                  src="./assets/carlsbad_failure_06_fake_rng_pure_splats.png"
+                  alt="Pure 3DGS render mode in Carlsbad viewer exposing the fake .splat file as a blurry cloud of unoptimized nadir-colored dots and procedural green sphere puffs"
+                  width="1280"
+                  height="800"
+                  decoding="async"
+                />
+                <figcaption class="cad-figcaption">
+                  <code class="inline-code">carlsbad_unified_map.splat</code> · Pure-Splat mode exposes <code class="inline-code">rng.choice</code> jitter blobs with <code class="inline-code">0</code> <code class="inline-code">L1+D-SSIM</code> optimization steps.
+                </figcaption>
+              </figure>
+            </div>
+
+            <!-- Carlsbad Failure Card 3: Right Part, Wrong Mission (1,488 Floating Palm Tops) -->
+            <div class="col-4" style="padding: 18px 20px; border-radius: 18px; background: rgba(4, 10, 24, 0.76); border: 1px solid rgba(255, 255, 255, 0.14); display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div class="text-bright-blue" style="font-size: 0.88rem; font-weight: 560; margin-bottom: 6px;">
+                  GATE-01 &amp; GATE-04 · "Right Part, Wrong Mission": 1,488 Floating Palms (<code class="inline-code">5.4 / 100</code>)
+                </div>
+                <p style="font-size: 0.9rem; color: var(--text-body);">
+                  Using coarse <code class="inline-code">25–30 cm/px</code> airborne MVS octrees (<code class="inline-code">Level 20</code>, meant for <code class="inline-code">500 m</code> flyovers) at street level produced melted walls and <code class="inline-code">1,488+</code> severed low-poly palm crowns hovering in mid-air.
+                </p>
+              </div>
+              <figure class="cad-figure" style="margin-top: 12px;">
+                <img
+                  src="./assets/carlsbad_failure_02_floating_palm_tops.jpg"
+                  alt="Close-up WebGL render showing severed low-poly green polygon palm tree crowns floating in mid-air without trunks beside a melted coastal building"
+                  width="1280"
+                  height="800"
+                  decoding="async"
+                />
+                <figcaption class="cad-figcaption">
+                  <code class="inline-code">fetch_google_earth_3d.py</code> (<code class="inline-code">Step 905</code>) · <code class="inline-code">1,488+</code> severed palm tree tops hovering in mid-air without trunks.
+                </figcaption>
+              </figure>
+            </div>
+
+            <!-- Carlsbad Failure Card 4: Whack-a-Mole Cascade I (Stalagmite Tree Curtains) -->
+            <div class="col-4" style="padding: 18px 20px; border-radius: 18px; background: rgba(4, 10, 24, 0.76); border: 1px solid rgba(255, 255, 255, 0.14); display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div class="text-bright-blue" style="font-size: 0.88rem; font-weight: 560; margin-bottom: 6px;">
+                  GATE-05 · Whack-a-Mole Cascade I: Vertical Stalagmite Curtains (<code class="inline-code">5.1 / 100</code>)
+                </div>
+                <p style="font-size: 0.9rem; color: var(--text-body);">
+                  When prompted to fix the floating trees, the agent applied heuristic height-clamping masks in <code class="inline-code">build_photogrammetry_map.py</code>—stretching vertical green stalagmite spears across residential blocks.
+                </p>
+              </div>
+              <figure class="cad-figure" style="margin-top: 12px;">
+                <img
+                  src="./assets/carlsbad_failure_03_stalagmite_tree_curtains.jpg"
+                  alt="WebGL street view along Elm Ave in Carlsbad showing tall vertical green stalagmite spike curtains stretched across residential houses and yards"
+                  width="1280"
+                  height="800"
+                  decoding="async"
+                />
+                <figcaption class="cad-figcaption">
+                  <code class="inline-code">Step 1928</code> · Local tree-clamping heuristic cascades into vertical stalagmite spike curtains across residential streets.
+                </figcaption>
+              </figure>
+            </div>
+
+            <!-- Carlsbad Failure Card 5: Whack-a-Mole Cascade II (Melted Wax & Roof Holes) -->
+            <div class="col-4" style="padding: 18px 20px; border-radius: 18px; background: rgba(4, 10, 24, 0.76); border: 1px solid rgba(255, 255, 255, 0.14); display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div class="text-bright-blue" style="font-size: 0.88rem; font-weight: 560; margin-bottom: 6px;">
+                  GATE-05 · Whack-a-Mole Cascade II: Stripped Roofs &amp; Melted Walls (<code class="inline-code">5.1 / 100</code>)
+                </div>
+                <p style="font-size: 0.9rem; color: var(--text-body);">
+                  Attempting to strip the stalagmite curtains via 3D connected-components filtering tore jagged holes into white coastal roofs and warped multi-story stucco walls into melted wax.
+                </p>
+              </div>
+              <figure class="cad-figure" style="margin-top: 12px;">
+                <img
+                  src="./assets/carlsbad_failure_04_melted_wax_roof_holes.jpg"
+                  alt="WebGL render of coastal Carlsbad buildings showing warped melted-wax stucco facades and roofs torn open by the connected-components tree removal filter"
+                  width="1280"
+                  height="800"
+                  decoding="async"
+                />
+                <figcaption class="cad-figcaption">
+                  <code class="inline-code">Step 2129</code> · Connected-components filter strips roof triangles touching foliage and warps coastal walls.
+                </figcaption>
+              </figure>
+            </div>
+
+            <!-- Carlsbad Failure Card 6: Unmated Carlsbad Inn Boundary Chasms & Totem-Pole Umbrellas -->
+            <div class="col-4" style="padding: 18px 20px; border-radius: 18px; background: rgba(4, 10, 24, 0.76); border: 1px solid rgba(255, 255, 255, 0.14); display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div class="text-bright-blue" style="font-size: 0.88rem; font-weight: 560; margin-bottom: 6px;">
+                  GATE-03 &amp; GATE-04 · Unmated Resort Boundary Chasms &amp; Totem Umbrellas (<code class="inline-code">4.0 / 100</code>)
+                </div>
+                <p style="font-size: 0.9rem; color: var(--text-body);">
+                  Asked for a photorealistic Carlsbad Inn (<code class="inline-code">Step 2579</code>), the agent built a procedural <code class="inline-code">np.sin</code> blockout that ripped dark-blue void chasms along Oak Ave and stacked 3 cyan umbrellas into a vertical totem pole.
+                </p>
+              </div>
+              <figure class="cad-figure" style="margin-top: 12px;">
+                <img
+                  src="./assets/carlsbad_failure_05_sims1_inn_boundary_chasms.png"
+                  alt="WebGL render of the procedural Carlsbad Inn replacement showing jagged dark-blue void chasms along the street boundary and 3 cyan patio umbrellas stacked vertically on top of each other"
+                  width="1280"
+                  height="800"
+                  decoding="async"
+                />
+                <figcaption class="cad-figcaption">
+                  <code class="inline-code">build_carlsbad_inn_asset.py</code> (<code class="inline-code">v6</code>) · Unmated boundary rips street chasms; 3 cyan umbrellas stacked into a totem pole.
                 </figcaption>
               </figure>
             </div>
@@ -1446,7 +1621,7 @@
             <h3 class="card-title">Complete Polaris Package</h3>
             <ul class="feature-list">
               <li><strong style="color: #FFFFFF;"><a href="./Troy_Lunn_DeepMind_Polaris_Resume.pdf" target="_blank" rel="noopener" style="color: #FFFFFF; text-decoration: underline; text-underline-offset: 3px;">Tuned 1-Page Polaris Resume (PDF ↗):</a></strong> Vector PDF, <a href="./Troy_Lunn_DeepMind_Polaris_Resume.tex" target="_blank" rel="noopener" class="text-bright-blue">LaTeX</a>, and <a href="./resume_print.html" target="_blank" rel="noopener" class="text-bright-blue">Printable HTML</a> tailored to Job ID <code class="inline-code">114077679900074694</code>.</li>
-              <li><strong style="color: #FFFFFF;">Executable Sample Eval Task:</strong> Full <a href="./polaris_eval_task/PROMPT.md" target="_blank" rel="noopener"><code class="inline-code">PROMPT.md</code></a> + 5-gate <a href="./polaris_eval_task/grader.py" target="_blank" rel="noopener"><code class="inline-code">grader.py</code></a> + <a href="./polaris_eval_task/scorecard_results.json" target="_blank" rel="noopener"><code class="inline-code">scorecard_results.json</code></a> + <a href="./polaris_eval_task/evaluate_apex_6dof_arm.py" target="_blank" rel="noopener"><code class="inline-code">evaluate_apex_6dof_arm.py</code></a>.</li>
+              <li><strong style="color: #FFFFFF;">Executable Sample Eval Task:</strong> Full <a href="./polaris_eval_task/PROMPT.md" target="_blank" rel="noopener"><code class="inline-code">PROMPT.md</code></a> + 5-gate <a href="./polaris_eval_task/grader.py" target="_blank" rel="noopener"><code class="inline-code">grader.py</code></a> + <a href="./polaris_eval_task/scorecard_results.json" target="_blank" rel="noopener"><code class="inline-code">scorecard_results.json</code></a> + <a href="./polaris_eval_task/evaluate_apex_6dof_arm.py" target="_blank" rel="noopener"><code class="inline-code">evaluate_apex_6dof_arm.py</code></a> + <a href="./polaris_eval_task/evaluate_carlsbad_3dgs.py" target="_blank" rel="noopener"><code class="inline-code">evaluate_carlsbad_3dgs.py</code></a>.</li>
               <li><strong style="color: #FFFFFF;">Alternate Heading Palette:</strong> Switch live via top bar or open <a href="./deepmind.html" class="text-bright-blue">All-Bright-Blue Headings Edition</a>.</li>
             </ul>
           </div>
