@@ -85,15 +85,15 @@
     }
 
     body {
-      background-color: #01081e;
-      /* Exact CSS fallback matching deepmind.google "argon-dark" 4-corner + 7-lobe field */
+      background-color: #010512;
+      /* Deepened "argon-dark" 4-corner + 7-lobe field for high-contrast readability */
       background-image:
-        radial-gradient(ellipse 42% 45% at 94.5% 14.4%, rgba(116, 207, 255, 0.72) 0%, rgba(116, 207, 255, 0) 70%),
-        radial-gradient(ellipse 35% 82% at 108% 88%, rgba(84, 209, 255, 0.85) 0%, rgba(84, 209, 255, 0) 72%),
-        radial-gradient(ellipse 55% 72% at 85.3% 69.3%, rgba(0, 66, 252, 0.42) 0%, rgba(0, 66, 252, 0) 72%),
-        radial-gradient(ellipse 42% 62% at 21% 82.5%, rgba(1, 2, 10, 0.88) 0%, rgba(1, 2, 10, 0) 75%),
-        radial-gradient(ellipse 50% 42% at 65.8% 94.1%, rgba(0, 8, 32, 0.78) 0%, rgba(0, 8, 32, 0) 75%),
-        linear-gradient(125deg var(--in-oklab), #2045a1 0%, #0a213d 32%, #01081e 56%, #002188 78%, #81dafc 100%);
+        radial-gradient(ellipse 42% 45% at 94.5% 14.4%, rgba(36, 92, 168, 0.42) 0%, rgba(36, 92, 168, 0) 70%),
+        radial-gradient(ellipse 35% 82% at 108% 88%, rgba(28, 84, 158, 0.45) 0%, rgba(28, 84, 158, 0) 72%),
+        radial-gradient(ellipse 55% 72% at 85.3% 69.3%, rgba(0, 38, 145, 0.32) 0%, rgba(0, 38, 145, 0) 72%),
+        radial-gradient(ellipse 42% 62% at 21% 82.5%, rgba(1, 2, 8, 0.94) 0%, rgba(1, 2, 8, 0) 75%),
+        radial-gradient(ellipse 50% 42% at 65.8% 94.1%, rgba(0, 5, 20, 0.88) 0%, rgba(0, 5, 20, 0) 75%),
+        linear-gradient(125deg var(--in-oklab), #0b1c48 0%, #051026 32%, #010512 56%, #041342 78%, #163a78 100%);
       background-attachment: fixed;
       color: var(--text-white);
       font-family: "Google Sans Flex", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -335,34 +335,33 @@
       position: relative;
       background:
         /* Top specular glass reflection sheen */
-        linear-gradient(180deg, rgba(255, 255, 255, 0.085) 0%, rgba(255, 255, 255, 0.0) 36%) padding-box,
-        /* Screenshot 2 left emerald-teal glow */
-        radial-gradient(65% 70% at 16% 32%, rgba(18, 114, 102, 0.44) 0%, rgba(14, 58, 54, 0.15) 52%, rgba(10, 14, 18, 0) 82%) padding-box,
-        /* Screenshot 2 bottom-right warm amber-russet glow */
-        radial-gradient(65% 70% at 86% 84%, rgba(138, 48, 25, 0.40) 0%, rgba(72, 24, 14, 0.15) 52%, rgba(10, 14, 18, 0) 82%) padding-box,
-        /* Deep obsidian charcoal base (Screenshot 2) */
-        linear-gradient(145deg var(--in-oklab), rgba(9, 12, 17, 0.90) 0%, rgba(11, 18, 22, 0.88) 50%, rgba(16, 12, 15, 0.91) 100%) padding-box,
-        /* Liquid Glass Refractive Gemini-Spectrum Border (border-box) */
+        linear-gradient(180deg, rgba(255, 255, 255, 0.065) 0%, rgba(255, 255, 255, 0.0) 36%) padding-box,
+        /* Subtle deep teal & warm russet ambient accents */
+        radial-gradient(65% 70% at 16% 32%, rgba(12, 72, 66, 0.24) 0%, rgba(10, 38, 36, 0.08) 52%, rgba(5, 8, 14, 0) 82%) padding-box,
+        radial-gradient(65% 70% at 86% 84%, rgba(88, 30, 16, 0.22) 0%, rgba(46, 16, 10, 0.08) 52%, rgba(5, 8, 14, 0) 82%) padding-box,
+        /* Deep high-contrast obsidian-navy base */
+        linear-gradient(145deg var(--in-oklab), rgba(4, 7, 15, 0.95) 0%, rgba(6, 11, 20, 0.94) 50%, rgba(8, 8, 14, 0.96) 100%) padding-box,
+        /* Liquid Glass Refractive Spectrum Border (border-box) */
         linear-gradient(
           var(--grad-angle, 135deg) var(--in-oklab),
-          rgba(255, 255, 255, 0.94) 0%,
-          rgba(76, 154, 255, 0.88) 18%,
-          rgba(68, 214, 152, 0.80) 36%,
-          rgba(235, 248, 255, 0.88) 50%,
-          rgba(251, 191, 36, 0.82) 68%,
-          rgba(244, 108, 108, 0.84) 84%,
-          rgba(255, 255, 255, 0.94) 100%
+          rgba(255, 255, 255, 0.90) 0%,
+          rgba(76, 154, 255, 0.85) 18%,
+          rgba(68, 214, 152, 0.76) 36%,
+          rgba(235, 248, 255, 0.85) 50%,
+          rgba(251, 191, 36, 0.78) 68%,
+          rgba(244, 108, 108, 0.80) 84%,
+          rgba(255, 255, 255, 0.90) 100%
         ) border-box;
       background-size: 100% 100%, 165% 165%, 165% 165%, 100% 100%, 100% 100%;
       border: 2px solid transparent;
       border-radius: 26px;
-      backdrop-filter: blur(32px) saturate(175%);
-      -webkit-backdrop-filter: blur(32px) saturate(175%);
+      backdrop-filter: blur(32px) saturate(165%);
+      -webkit-backdrop-filter: blur(32px) saturate(165%);
       box-shadow:
-        inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.48),
-        inset 0 -1px 1.5px 0 rgba(76, 154, 255, 0.24),
-        inset 0 0 34px rgba(255, 255, 255, 0.03),
-        0 22px 48px -12px rgba(1, 5, 18, 0.76);
+        inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.42),
+        inset 0 -1px 1.5px 0 rgba(76, 154, 255, 0.22),
+        inset 0 0 34px rgba(255, 255, 255, 0.02),
+        0 22px 48px -12px rgba(1, 4, 14, 0.86);
       animation: liquidGlassFlow 14s linear infinite, ambientCardDrift 20s ease-in-out infinite;
     }
 
@@ -373,7 +372,7 @@
     .liquid-phase-4 { --grad-angle: 275deg; animation-duration: 18s, 23s; }
 
     /* ==========================================================================
-       LAYOUT & TYPOGRAPHY SYSTEM (Screenshots 3, 4, 5)
+       LAYOUT & TYPOGRAPHY SYSTEM
        ========================================================================== */
     .main-container {
       position: relative;
@@ -427,13 +426,6 @@
     }
 
     .text-bright-blue {
-      color: var(--bright-blue);
-    }
-
-    /* Optional Toggle Mode: Primary Headings in Screenshot-3 Bright Blue */
-    body.mode-blue-headings .section-title,
-    body.mode-blue-headings .card-title,
-    body.mode-blue-headings .gdm-hero__title {
       color: var(--bright-blue);
     }
 
@@ -561,7 +553,7 @@
       line-height: 1.65;
       padding: 20px;
       border-radius: 18px;
-      background: rgba(4, 7, 14, 0.88);
+      background: rgba(3, 6, 12, 0.94);
       border: 1px solid rgba(255, 255, 255, 0.14);
       color: #E2E8F0;
       overflow-x: auto;
@@ -598,9 +590,6 @@
     </div>
 
     <div class="gdm-header__right">
-      <button id="toggleTextModeBtn" onclick="toggleHeadingColorMode()" class="gdm-pill-btn" type="button">
-        Text: White + Bright Blue
-      </button>
       <a href="https://github.com/Printerpilot" target="_blank" rel="noopener" class="gdm-pill-btn">
         github.com/Printerpilot
       </a>
@@ -1629,7 +1618,6 @@
             <ul class="feature-list">
               <li><strong style="color: #FFFFFF;"><a href="./Troy_Lunn_DeepMind_Polaris_Resume.pdf" target="_blank" rel="noopener" style="color: #FFFFFF; text-decoration: underline; text-underline-offset: 3px;">Tuned 1-Page Polaris Resume (PDF ↗):</a></strong> Vector PDF, <a href="./Troy_Lunn_DeepMind_Polaris_Resume.tex" target="_blank" rel="noopener" class="text-bright-blue">LaTeX</a>, and <a href="./resume_print.html" target="_blank" rel="noopener" class="text-bright-blue">Printable HTML</a> tailored to Job ID <code class="inline-code">114077679900074694</code>.</li>
               <li><strong style="color: #FFFFFF;">Executable Sample Eval Task:</strong> Full <a href="./polaris_eval_task/PROMPT.md" target="_blank" rel="noopener"><code class="inline-code">PROMPT.md</code></a> + 5-gate <a href="./polaris_eval_task/grader.py" target="_blank" rel="noopener"><code class="inline-code">grader.py</code></a> + <a href="./polaris_eval_task/scorecard_results.json" target="_blank" rel="noopener"><code class="inline-code">scorecard_results.json</code></a> + <a href="./polaris_eval_task/evaluate_apex_6dof_arm.py" target="_blank" rel="noopener"><code class="inline-code">evaluate_apex_6dof_arm.py</code></a> + <a href="./polaris_eval_task/evaluate_carlsbad_3dgs.py" target="_blank" rel="noopener"><code class="inline-code">evaluate_carlsbad_3dgs.py</code></a>.</li>
-              <li><strong style="color: #FFFFFF;">Alternate Heading Palette:</strong> Switch live via top bar or open <a href="./deepmind.html" class="text-bright-blue">All-Bright-Blue Headings Edition</a>.</li>
             </ul>
           </div>
           <div style="padding-top: 18px; margin-top: 18px; border-top: 1px solid rgba(255,255,255,0.12); display: flex; justify-content: space-between; font-size: 0.9rem; color: var(--text-muted);">
@@ -1643,23 +1631,11 @@
   </main>
 
   <!-- ==========================================================================
-       SCRIPTS: (1) Exact deepmind.google WebGL2 "argon-dark" Background Shader
-                (2) Interactive Polaris Grader Simulator
+       SCRIPTS: (1) Interactive Polaris Grader Simulator
+                (2) DeepMind WebGL2 "argon-dark" Background Shader
        ========================================================================== -->
   <script>
-    // 1. Toggle between White Headings + Bright Blue Accents vs. All Bright Blue Headings
-    function toggleHeadingColorMode() {
-      const body = document.body;
-      const btn = document.getElementById("toggleTextModeBtn");
-      body.classList.toggle("mode-blue-headings");
-      if (body.classList.contains("mode-blue-headings")) {
-        btn.textContent = "Text: All Bright Blue Headings";
-      } else {
-        btn.textContent = "Text: White + Bright Blue";
-      }
-    }
-
-    // 2. Interactive Polaris Grader Simulator Data (Universal 5-Gate Stanford d.school x Systems-Thinking Rubric: POLARIS-EVAL-001)
+    // 1. Interactive Polaris Grader Simulator Data (Universal 5-Gate Stanford d.school x Systems-Thinking Rubric: POLARIS-EVAL-001)
     const TRAJECTORIES = {
       A: {
         name: "1. 'Right Part, Wrong Mission' Agent (Skipped Empathize, Clean Prototype)",
@@ -1869,29 +1845,29 @@ sync   = engine.propagate_system_change(dag, node, val, artifacts, regime)`,
         float rayDrift = sin(a + diagCoord * 2.6) * 0.018;
         vec2 pWave = p + vec2(rayDrift, -rayDrift * 0.75);
 
-        // Exact "argon-dark" 4-corner colors tuned to Screenshot 1's deep black-navy left & ice-white/blue right
-        vec3 topLeft     = vec3(6.0, 20.0, 62.0) / 255.0;
-        vec3 topRight    = vec3(145.0, 224.0, 255.0) / 255.0;
-        vec3 bottomLeft  = vec3(1.0, 3.0, 12.0) / 255.0;
-        vec3 bottomRight = vec3(0.0, 38.0, 148.0) / 255.0;
+        // Deepened "argon-dark" 4-corner colors (several shades darker for effortless text readability)
+        vec3 topLeft     = vec3(3.0, 10.0, 34.0) / 255.0;
+        vec3 topRight    = vec3(32.0, 78.0, 148.0) / 255.0;
+        vec3 bottomLeft  = vec3(1.0, 2.0, 8.0) / 255.0;
+        vec3 bottomRight = vec3(0.0, 20.0, 82.0) / 255.0;
 
         vec3 topRow = mix(topLeft, topRight, clamp(pWave.x, 0.0, 1.0));
         vec3 botRow = mix(bottomLeft, bottomRight, clamp(pWave.x, 0.0, 1.0));
         vec3 col = mix(topRow, botRow, clamp(pWave.y, 0.0, 1.0));
 
-        float effSoft = 0.88;
-        float effBeam = 1.15;
+        float effSoft = 0.90;
+        float effBeam = 0.72;
 
-        // Exact 7 rotated Gaussian volumetric lobes from deepmind.google "argon-dark"
-        col = mix(col, vec3(10.4, 67.5, 162.0)/255.0,  clamp(rotBell(pWave, vec2(0.681, 0.203), 1.0/(vec2(0.329, 0.349)*effSoft), vec2(cos(1.117), sin(1.117))) * 0.662 * effBeam, 0.0, 0.96));
-        col = mix(col, vec3(135.0, 216.0, 255.0)/255.0, clamp(rotBell(pWave, vec2(0.945, 0.144), 1.0/(vec2(0.388, 0.420)*effSoft), vec2(cos(0.033), sin(0.033))) * 0.780 * effBeam, 0.0, 0.96));
-        col = mix(col, vec3(0.0, 66.2, 252.1)/255.0,   clamp(rotBell(pWave, vec2(0.853, 0.693), 1.0/(vec2(0.550, 0.729)*effSoft), vec2(cos(-0.437), sin(-0.437))) * 0.380 * effBeam, 0.0, 0.96));
-        col = mix(col, vec3(0.0, 18.0, 68.0)/255.0,    clamp(rotBell(pWave, vec2(0.308, 0.570), 1.0/(vec2(0.444, 0.414)*effSoft), vec2(cos(-0.062), sin(-0.062))) * 0.900, 0.0, 0.96));
-        col = mix(col, vec3(0.2, 0.0, 6.1)/255.0,      clamp(rotBell(pWave, vec2(0.210, 0.825), 1.0/(vec2(0.440, 0.650)*effSoft), vec2(cos(-0.689), sin(-0.689))) * 0.920, 0.0, 0.96));
-        col = mix(col, vec3(0.0, 6.0, 24.0)/255.0,     clamp(rotBell(pWave, vec2(0.580, 0.941), 1.0/(vec2(0.491, 0.395)*effSoft), vec2(cos(-0.359), sin(-0.359))) * 0.780, 0.0, 0.96));
-        col = mix(col, vec3(110.0, 218.0, 255.0)/255.0, clamp(rotBell(pWave, vec2(1.120, 0.820), 1.0/(vec2(0.280, 0.808)*effSoft), vec2(cos(0.033), sin(0.033))) * 0.960 * effBeam, 0.0, 0.96));
+        // Deepened 7 rotated Gaussian volumetric lobes from deepmind.google "argon-dark"
+        col = mix(col, vec3(6.0, 38.0, 98.0)/255.0,    clamp(rotBell(pWave, vec2(0.681, 0.203), 1.0/(vec2(0.329, 0.349)*effSoft), vec2(cos(1.117), sin(1.117))) * 0.662 * effBeam, 0.0, 0.96));
+        col = mix(col, vec3(38.0, 92.0, 168.0)/255.0,  clamp(rotBell(pWave, vec2(0.945, 0.144), 1.0/(vec2(0.388, 0.420)*effSoft), vec2(cos(0.033), sin(0.033))) * 0.780 * effBeam, 0.0, 0.96));
+        col = mix(col, vec3(0.0, 36.0, 142.0)/255.0,   clamp(rotBell(pWave, vec2(0.853, 0.693), 1.0/(vec2(0.550, 0.729)*effSoft), vec2(cos(-0.437), sin(-0.437))) * 0.380 * effBeam, 0.0, 0.96));
+        col = mix(col, vec3(0.0, 10.0, 42.0)/255.0,    clamp(rotBell(pWave, vec2(0.308, 0.570), 1.0/(vec2(0.444, 0.414)*effSoft), vec2(cos(-0.062), sin(-0.062))) * 0.900, 0.0, 0.96));
+        col = mix(col, vec3(0.2, 0.0, 4.0)/255.0,      clamp(rotBell(pWave, vec2(0.210, 0.825), 1.0/(vec2(0.440, 0.650)*effSoft), vec2(cos(-0.689), sin(-0.689))) * 0.920, 0.0, 0.96));
+        col = mix(col, vec3(0.0, 4.0, 16.0)/255.0,     clamp(rotBell(pWave, vec2(0.580, 0.941), 1.0/(vec2(0.491, 0.395)*effSoft), vec2(cos(-0.359), sin(-0.359))) * 0.780, 0.0, 0.96));
+        col = mix(col, vec3(32.0, 86.0, 160.0)/255.0,  clamp(rotBell(pWave, vec2(1.120, 0.820), 1.0/(vec2(0.280, 0.808)*effSoft), vec2(cos(0.033), sin(0.033))) * 0.960 * effBeam, 0.0, 0.96));
 
-        fragColor = vec4(clamp(col + dither, 0.0, 1.0), 1.0);
+        fragColor = vec4(clamp(col * 0.78 + dither, 0.0, 1.0), 1.0);
       }`;
 
       function compile(type, src) {
